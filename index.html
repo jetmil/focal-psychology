@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фокальная психология — Искусство управления вниманием</title>
+    <meta name="description" content="Практическое руководство по самопознанию и саморазвитию. Синтез психотерапевтических техник с авторской топологией сознания.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --gradient-1: linear-gradient(135deg, #7c5cff 0%, #ff6b9d 100%);
+            --gradient-2: linear-gradient(135deg, #00d4aa 0%, #7c5cff 100%);
+            --gradient-3: linear-gradient(180deg, rgba(124, 92, 255, 0.15) 0%, transparent 50%);
+            --shadow-glow: 0 0 60px rgba(124, 92, 255, 0.15);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-primary);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-secondary);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -7s;
+        }
+
+        .bg-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-tertiary);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.02); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        nav.scrolled {
+            padding: 0.7rem 2rem;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(124, 92, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 92, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-primary);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--text-muted);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--gradient-3);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .about-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(124, 92, 255, 0.3);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .about-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Topology Section */
+        #topology {
+            background: var(--bg-secondary);
+        }
+
+        .topology-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .layer-diagram {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .layer-ring {
+            position: absolute;
+            border: 2px solid;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .layer-ring:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px currentColor;
+        }
+
+        .layer-0 {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--accent-gold);
+        }
+
+        .layer-1 {
+            width: 150px;
+            height: 150px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-color: var(--accent-primary);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .layer-2 {
+            width: 220px;
+            height: 220px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-color: var(--accent-secondary);
+            animation: pulse 3s ease-in-out infinite 0.5s;
+        }
+
+        .layer-3 {
+            width: 290px;
+            height: 290px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-color: var(--accent-tertiary);
+            animation: pulse 3s ease-in-out infinite 1s;
+        }
+
+        .layer-4 {
+            width: 360px;
+            height: 360px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-color: #ff9500;
+            animation: pulse 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .layer-labels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .layer-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .layer-item:hover {
+            border-color: var(--accent-primary);
+            background: rgba(124, 92, 255, 0.05);
+        }
+
+        .layer-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .layer-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .layer-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Parts/Chapters Section */
+        #parts {
+            background: var(--bg-primary);
+        }
+
+        .parts-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .part-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.4s var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .part-card:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .part-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .part-card:hover .part-number {
+            opacity: 1;
+        }
+
+        .part-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .part-content p {
+            color: var(--text-secondary);
+        }
+
+        .part-meta {
+            text-align: right;
+        }
+
+        .part-chapters {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .part-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Chapters Accordion */
+        .chapters-accordion {
+            margin-top: 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .part-card.expanded .chapters-accordion {
+            max-height: 2000px;
+        }
+
+        .chapter-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 2rem;
+        }
+
+        .chapter-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-item:hover {
+            background: rgba(124, 92, 255, 0.1);
+        }
+
+        .chapter-num {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            flex-shrink: 0;
+        }
+
+        .chapter-title {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Principles Section */
+        #principles {
+            background: var(--bg-secondary);
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .principle-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .principle-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+            opacity: 0.05;
+            transition: opacity 0.3s ease;
+        }
+
+        .principle-card:hover::after {
+            opacity: 0.15;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+        }
+
+        .principle-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .principle-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .principle-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Techniques Preview */
+        #techniques {
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .techniques-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .technique-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover {
+            border-color: var(--accent-tertiary);
+            background: rgba(0, 212, 170, 0.05);
+        }
+
+        .technique-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent-tertiary);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .technique-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .technique-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: var(--gradient-1);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40rem;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-tertiary);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .part-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .part-number {
+                font-size: 2.5rem;
+            }
+
+            .part-meta {
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .layer-diagram {
+                transform: scale(0.7);
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations on scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Orbs -->
+    <div class="bg-gradient">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <div class="logo">Фокальная психология</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">О книге</a></li>
+                <li><a href="#topology">Топология</a></li>
+                <li><a href="#parts">Содержание</a></li>
+                <li><a href="#principles">Принципы</a></li>
+                <li><a href="#techniques">Техники</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Практическое руководство по самопознанию</div>
+            <h1><span>Фокальная</span> психология</h1>
+            <p class="hero-subtitle">Искусство управления вниманием. Синтез психотерапевтических техник с авторской топологией сознания.</p>
+            <div class="hero-cta">
+                <a href="#parts" class="btn btn-primary">Начать чтение</a>
+                <a href="#about" class="btn btn-secondary">Узнать больше</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">О книге</div>
+                <h2 class="section-title">Что такое фокальная психология?</h2>
+                <p class="section-description">Внимание — это не функция психики, а сама суть человека. Всё остальное — наросты на чистом восприятии.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card animate-on-scroll">
+                    <div class="about-icon">🎯</div>
+                    <h3>Центральный тезис</h3>
+                    <p>Управляя вниманием, человек управляет собой на глубинном уровне. Ты становишься тем, на что смотришь — это не метафора, а механизм.</p>
+                </div>
+                <div class="about-card animate-on-scroll">
+                    <div class="about-icon">🧭</div>
+                    <h3>Карта сознания</h3>
+                    <p>Пять слоёв + Колыбель — рабочая модель для навигации по внутреннему миру. Не теория для созерцания, а практический инструмент.</p>
+                </div>
+                <div class="about-card animate-on-scroll">
+                    <div class="about-icon">⚡</div>
+                    <h3>Практика важнее теории</h3>
+                    <p>250+ техник с пошаговыми инструкциями. Каждая глава — это практические инструменты с объяснением механизмов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topology Section -->
+    <section id="topology">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Топология сознания</div>
+                <h2 class="section-title">Пять слоёв + Колыбель</h2>
+                <p class="section-description">Сознание имеет структуру. Не хаос, а территория с разными зонами.</p>
+            </div>
+            <div class="topology-visual animate-on-scroll">
+                <div class="layer-diagram">
+                    <div class="layer-ring layer-4" title="Междумирье"></div>
+                    <div class="layer-ring layer-3" title="Театр масок"></div>
+                    <div class="layer-ring layer-2" title="Граница сна"></div>
+                    <div class="layer-ring layer-1" title="Театр внутри"></div>
+                    <div class="layer-ring layer-0" title="Колыбель">✧</div>
+                </div>
+            </div>
+            <div class="layer-labels">
+                <div class="layer-item animate-on-scroll">
+                    <div class="layer-dot" style="background: var(--accent-gold)"></div>
+                    <div>
+                        <h4>Колыбель (точка 0)</h4>
+                        <p>Чистое присутствие, восстановление. Единственное безопасное место при любом состоянии.</p>
+                    </div>
+                </div>
+                <div class="layer-item animate-on-scroll">
+                    <div class="layer-dot" style="background: var(--accent-primary)"></div>
+                    <div>
+                        <h4>Театр внутри (слой 1)</h4>
+                        <p>Наблюдение субличностей как режиссёр. Здесь работает сказкотерапия.</p>
+                    </div>
+                </div>
+                <div class="layer-item animate-on-scroll">
+                    <div class="layer-dot" style="background: var(--accent-secondary)"></div>
+                    <div>
+                        <h4>Граница сна (слой 2)</h4>
+                        <p>Проживание изнутри, максимальная видимость связей. Диагностический слой.</p>
+                    </div>
+                </div>
+                <div class="layer-item animate-on-scroll">
+                    <div class="layer-dot" style="background: var(--accent-tertiary)"></div>
+                    <div>
+                        <h4>Театр масок (слой 3)</h4>
+                        <p>Социальный интерфейс. Маски как фильтры, калейдоскоп ролей.</p>
+                    </div>
+                </div>
+                <div class="layer-item animate-on-scroll">
+                    <div class="layer-dot" style="background: #ff9500"></div>
+                    <div>
+                        <h4>Междумирье (слой 4)</h4>
+                        <p>Стратегический обзор, мультивселенная выбора. Взгляд орла на жизнь.</p>
+                    </div>
+                </div>
+                <div class="layer-item animate-on-scroll">
+                    <div class="layer-dot" style="background: #00d4ff"></div>
+                    <div>
+                        <h4>Лимб / Мастерская (слой 5)</h4>
+                        <p>Пространство интеграции. Техника двух рук, работа с противоположностями.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parts Section -->
+    <section id="parts">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Содержание</div>
+                <h2 class="section-title">Пять частей, 50 глав</h2>
+                <p class="section-description">От природы внимания — к мастерству и границам метода</p>
+            </div>
+            <div class="parts-grid">
+                <!-- Part I -->
+                <div class="part-card animate-on-scroll" onclick="togglePart(this)">
+                    <div class="part-number">I</div>
+                    <div class="part-content">
+                        <h3>Природа внимания</h3>
+                        <p>Кто смотрит и как это работает</p>
+                    </div>
+                    <div class="part-meta">
+                        <div class="part-chapters">10</div>
+                        <div class="part-label">глав</div>
+                    </div>
+                    <div class="chapters-accordion">
+                        <div class="chapter-list">
+                            <div class="chapter-item"><span class="chapter-num">1</span><span class="chapter-title">Что остаётся, когда снять все маски</span></div>
+                            <div class="chapter-item"><span class="chapter-num">2</span><span class="chapter-title">Наблюдатель и наблюдаемое</span></div>
+                            <div class="chapter-item"><span class="chapter-num">3</span><span class="chapter-title">Откуда ты смотришь</span></div>
+                            <div class="chapter-item"><span class="chapter-num">4</span><span class="chapter-title">Ширина и глубина луча</span></div>
+                            <div class="chapter-item"><span class="chapter-num">5</span><span class="chapter-title">Магниты внимания</span></div>
+                            <div class="chapter-item"><span class="chapter-num">6</span><span class="chapter-title">Закон подобия</span></div>
+                            <div class="chapter-item"><span class="chapter-num">7</span><span class="chapter-title">Внимание к вниманию</span></div>
+                            <div class="chapter-item"><span class="chapter-num">8</span><span class="chapter-title">Энергетическая экономика</span></div>
+                            <div class="chapter-item"><span class="chapter-num">9</span><span class="chapter-title">Скорость и инерция</span></div>
+                            <div class="chapter-item"><span class="chapter-num">10</span><span class="chapter-title">Калибровка нуля</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part II -->
+                <div class="part-card animate-on-scroll" onclick="togglePart(this)">
+                    <div class="part-number">II</div>
+                    <div class="part-content">
+                        <h3>Механика выбора</h3>
+                        <p>Суперпозиция, коллапс и действие</p>
+                    </div>
+                    <div class="part-meta">
+                        <div class="part-chapters">10</div>
+                        <div class="part-label">глав</div>
+                    </div>
+                    <div class="chapters-accordion">
+                        <div class="chapter-list">
+                            <div class="chapter-item"><span class="chapter-num">11</span><span class="chapter-title">Состояние неопределённости</span></div>
+                            <div class="chapter-item"><span class="chapter-num">12</span><span class="chapter-title">Хоровод советчиков</span></div>
+                            <div class="chapter-item"><span class="chapter-num">13</span><span class="chapter-title">Коллапс в решение</span></div>
+                            <div class="chapter-item"><span class="chapter-num">14</span><span class="chapter-title">Цена выбора</span></div>
+                            <div class="chapter-item"><span class="chapter-num">15</span><span class="chapter-title">Откат и перевыбор</span></div>
+                            <div class="chapter-item"><span class="chapter-num">16</span><span class="chapter-title">Петля обратной связи</span></div>
+                            <div class="chapter-item"><span class="chapter-num">17</span><span class="chapter-title">Пробой паттерна</span></div>
+                            <div class="chapter-item"><span class="chapter-num">18</span><span class="chapter-title">Создание нового аттрактора</span></div>
+                            <div class="chapter-item"><span class="chapter-num">19</span><span class="chapter-title">Информационная диета</span></div>
+                            <div class="chapter-item"><span class="chapter-num">20</span><span class="chapter-title">Якорение решений</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part III -->
+                <div class="part-card animate-on-scroll" onclick="togglePart(this)">
+                    <div class="part-number">III</div>
+                    <div class="part-content">
+                        <h3>Топография сознания</h3>
+                        <p>Пять слоёв + Колыбель</p>
+                    </div>
+                    <div class="part-meta">
+                        <div class="part-chapters">10</div>
+                        <div class="part-label">глав</div>
+                    </div>
+                    <div class="chapters-accordion">
+                        <div class="chapter-list">
+                            <div class="chapter-item"><span class="chapter-num">21</span><span class="chapter-title">Карта территорий: обзор</span></div>
+                            <div class="chapter-item"><span class="chapter-num">22</span><span class="chapter-title">Колыбель — точка ноль</span></div>
+                            <div class="chapter-item"><span class="chapter-num">23</span><span class="chapter-title">Театр внутри — осознанная суперпозиция</span></div>
+                            <div class="chapter-item"><span class="chapter-num">24</span><span class="chapter-title">Граница сна — погружение</span></div>
+                            <div class="chapter-item"><span class="chapter-num">25</span><span class="chapter-title">Театр масок — калейдоскоп</span></div>
+                            <div class="chapter-item"><span class="chapter-num">26</span><span class="chapter-title">Междумирье — взгляд орла</span></div>
+                            <div class="chapter-item"><span class="chapter-num">27</span><span class="chapter-title">Лимб — внутренняя мастерская</span></div>
+                            <div class="chapter-item"><span class="chapter-num">28</span><span class="chapter-title">Поворот калейдоскопа</span></div>
+                            <div class="chapter-item"><span class="chapter-num">29</span><span class="chapter-title">Фазовые переходы и буферы</span></div>
+                            <div class="chapter-item"><span class="chapter-num">30</span><span class="chapter-title">Критерий здоровья</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part IV -->
+                <div class="part-card animate-on-scroll" onclick="togglePart(this)">
+                    <div class="part-number">IV</div>
+                    <div class="part-content">
+                        <h3>Инструментарий</h3>
+                        <p>Техники с разбором механизмов</p>
+                    </div>
+                    <div class="part-meta">
+                        <div class="part-chapters">10</div>
+                        <div class="part-label">глав</div>
+                    </div>
+                    <div class="chapters-accordion">
+                        <div class="chapter-list">
+                            <div class="chapter-item"><span class="chapter-num">31</span><span class="chapter-title">Принцип разделения тела и образа</span></div>
+                            <div class="chapter-item"><span class="chapter-num">32</span><span class="chapter-title">Горячий стул (соло-версия)</span></div>
+                            <div class="chapter-item"><span class="chapter-num">33</span><span class="chapter-title">Работа с образом в теле</span></div>
+                            <div class="chapter-item"><span class="chapter-num">34</span><span class="chapter-title">Перерисовка карты (переписывание импринтинга)</span></div>
+                            <div class="chapter-item"><span class="chapter-num">35</span><span class="chapter-title">Передача контроля подсознанию</span></div>
+                            <div class="chapter-item"><span class="chapter-num">36</span><span class="chapter-title">Расстановка на столе</span></div>
+                            <div class="chapter-item"><span class="chapter-num">37</span><span class="chapter-title">Сказка как диагностика</span></div>
+                            <div class="chapter-item"><span class="chapter-num">38</span><span class="chapter-title">Диалог с симптомом</span></div>
+                            <div class="chapter-item"><span class="chapter-num">39</span><span class="chapter-title">Техника «как будто»</span></div>
+                            <div class="chapter-item"><span class="chapter-num">40</span><span class="chapter-title">Перенос в тело (психодрама)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part V -->
+                <div class="part-card animate-on-scroll" onclick="togglePart(this)">
+                    <div class="part-number">V</div>
+                    <div class="part-content">
+                        <h3>Мастерство и границы</h3>
+                        <p>Этика, работа с другими, защита себя</p>
+                    </div>
+                    <div class="part-meta">
+                        <div class="part-chapters">10</div>
+                        <div class="part-label">глав</div>
+                    </div>
+                    <div class="chapters-accordion">
+                        <div class="chapter-list">
+                            <div class="chapter-item"><span class="chapter-num">41</span><span class="chapter-title">Границы метода</span></div>
+                            <div class="chapter-item"><span class="chapter-num">42</span><span class="chapter-title">Где заканчивается помощь</span></div>
+                            <div class="chapter-item"><span class="chapter-num">43</span><span class="chapter-title">Контролируемая провокация</span></div>
+                            <div class="chapter-item"><span class="chapter-num">44</span><span class="chapter-title">Удержание пространства</span></div>
+                            <div class="chapter-item"><span class="chapter-num">45</span><span class="chapter-title">Чистый язык</span></div>
+                            <div class="chapter-item"><span class="chapter-num">46</span><span class="chapter-title">Работа с сопротивлением</span></div>
+                            <div class="chapter-item"><span class="chapter-num">47</span><span class="chapter-title">Распознавание переноса</span></div>
+                            <div class="chapter-item"><span class="chapter-num">48</span><span class="chapter-title">Экология изменений</span></div>
+                            <div class="chapter-item"><span class="chapter-num">49</span><span class="chapter-title">Завершение и выход</span></div>
+                            <div class="chapter-item"><span class="chapter-num">50</span><span class="chapter-title">Возвращение в Колыбель</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section id="principles">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Философский фундамент</div>
+                <h2 class="section-title">Пять ключевых принципов</h2>
+            </div>
+            <div class="principles-grid">
+                <div class="principle-card animate-on-scroll">
+                    <div class="principle-num">01</div>
+                    <h3>Закон подобия</h3>
+                    <p>Ты становишься тем, на что смотришь. Информационная диета формирует личность так же, как физическая пища формирует тело.</p>
+                </div>
+                <div class="principle-card animate-on-scroll">
+                    <div class="principle-num">02</div>
+                    <h3>Суперпозиция и коллапс</h3>
+                    <p>Пока решение не принято — все варианты существуют одновременно. Застревание в суперпозиции — болезнь современности.</p>
+                </div>
+                <div class="principle-card animate-on-scroll">
+                    <div class="principle-num">03</div>
+                    <h3>Поворот калейдоскопа</h3>
+                    <p>Переход между состояниями — не линейный путь, а изменение угла обзора в многомерном пространстве. Один материал, разные проекции.</p>
+                </div>
+                <div class="principle-card animate-on-scroll">
+                    <div class="principle-num">04</div>
+                    <h3>Разделение тела и образа</h3>
+                    <p>Во внутреннем мире тело НЕ подключаем — иначе соматическая паника. Тело включаем только при переносе нового паттерна в реальность.</p>
+                </div>
+                <div class="principle-card animate-on-scroll">
+                    <div class="principle-num">05</div>
+                    <h3>Фазовые переходы</h3>
+                    <p>Нельзя пропускать стадии при переходе между глубокими состояниями. Из Колыбели в реальность без буфера — творческая уязвимость.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Techniques Preview -->
+    <section id="techniques">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Практический инструментарий</div>
+                <h2 class="section-title">250+ техник</h2>
+                <p class="section-description">Очищенные от религиозного контекста, с объяснением механизмов</p>
+            </div>
+            <div class="techniques-showcase">
+                <div class="technique-card animate-on-scroll">
+                    <div class="technique-tag">Гештальт</div>
+                    <h4>Горячий стул (соло)</h4>
+                    <p>Диалог с частью себя без терапевта. Экстернализация внутреннего конфликта.</p>
+                </div>
+                <div class="technique-card animate-on-scroll">
+                    <div class="technique-tag">НЛП</div>
+                    <h4>Якорение состояний</h4>
+                    <p>Создание телесного триггера для нужного состояния. Павловский рефлекс осознанно.</p>
+                </div>
+                <div class="technique-card animate-on-scroll">
+                    <div class="technique-tag">Авторское</div>
+                    <h4>Техника двух рук</h4>
+                    <p>Два конфликтующих состояния как шары в руках. Тело показывает баланс и путь к интеграции.</p>
+                </div>
+                <div class="technique-card animate-on-scroll">
+                    <div class="technique-tag">Сказкотерапия</div>
+                    <h4>Сказка о проблеме</h4>
+                    <p>Проективный нарратив. Подсознание говорит символами, сказка умнее рассказчика.</p>
+                </div>
+                <div class="technique-card animate-on-scroll">
+                    <div class="technique-tag">Телесная</div>
+                    <h4>Работа с образом в теле</h4>
+                    <p>Локализация эмоции, придание формы, трансформация через внимание.</p>
+                </div>
+                <div class="technique-card animate-on-scroll">
+                    <div class="technique-tag">Расстановки</div>
+                    <h4>Констелляция на столе</h4>
+                    <p>Системные расстановки в миниатюре. Фигурки показывают скрытую динамику.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="container">
+            <p class="quote-text animate-on-scroll">«Ты — не твои мысли, не твои роли, не твой характер. Ты — тот, кто смотрит.»</p>
+            <p class="quote-author animate-on-scroll">— Центральный тезис фокальной психологии</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Фокальная психология</h3>
+                <p>Практическое руководство по самопознанию и саморазвитию. Синтез психотерапевтических техник с авторской топологией сознания.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="#about">О книге</a></li>
+                    <li><a href="#topology">Топология</a></li>
+                    <li><a href="#parts">Содержание</a></li>
+                    <li><a href="#principles">Принципы</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Источники</h4>
+                <ul>
+                    <li><a href="#">Гештальт-терапия</a></li>
+                    <li><a href="#">НЛП</a></li>
+                    <li><a href="#">Сказкотерапия</a></li>
+                    <li><a href="#">Системные расстановки</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Фокальная психология. Все техники — инструменты. Все слои — карта. Ты — не инструменты и не карта.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Part card toggle
+        function togglePart(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
