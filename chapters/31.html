@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 31: Принцип разделения тела и образа | Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #12141a;
+            --color-surface: rgba(28, 32, 42, 0.88);
+            --color-primary: #f59e0b;
+            --color-secondary: #d97706;
+            --color-accent: #fbbf24;
+            --color-text: #fef3e2;
+            --color-text-muted: #c9b89a;
+            --color-glow: rgba(245, 158, 11, 0.35);
+            --color-cool: #60a5fa;
+            --color-danger: #ef4444;
+            --color-safe: #22c55e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Part IV Header */
+        .part-header {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.08));
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 16px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .part-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+        }
+
+        /* Animated background with body/mind duality */
+        .duality-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .duality-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 25% 40%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 60%, rgba(96, 165, 250, 0.06) 0%, transparent 45%);
+        }
+
+        /* Body-Mind separation visualization */
+        .separation-visual {
+            position: fixed;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .visual-mind {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--color-cool);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            animation: mindFloat 4s ease-in-out infinite;
+        }
+
+        .visual-divider {
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(180deg, var(--color-cool), transparent, var(--color-primary));
+        }
+
+        .visual-body {
+            width: 60px;
+            height: 80px;
+            border: 3px solid var(--color-primary);
+            border-radius: 30px 30px 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            animation: bodyGround 3s ease-in-out infinite;
+        }
+
+        @keyframes mindFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes bodyGround {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(5px);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        .chapter-number {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--color-primary);
+            text-shadow: 0 0 40px var(--color-glow);
+        }
+
+        .chapter-subtitle {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        .section {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(245, 158, 11, 0.12);
+            box-shadow:
+                0 4px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(245, 158, 11, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+        }
+
+        .story-text {
+            font-size: 19px;
+            font-style: italic;
+            color: var(--color-text);
+            border-left: 3px solid var(--color-danger);
+            padding-left: 24px;
+            margin: 24px 0;
+            line-height: 1.9;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: var(--color-primary);
+            margin: 48px 0 24px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 22px;
+            color: var(--color-accent);
+            margin: 36px 0 18px 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: var(--color-text);
+        }
+
+        .concept {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.1) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Key principle block */
+        .key-principle {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.04));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 32px 0;
+        }
+
+        .key-principle-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .key-principle-icon {
+            font-size: 28px;
+        }
+
+        .key-principle-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-danger);
+            letter-spacing: 1px;
+        }
+
+        .key-principle p {
+            color: var(--color-text);
+            margin: 0;
+        }
+
+        /* Safe zone block */
+        .safe-zone {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.04));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 32px 0;
+        }
+
+        .safe-zone-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .safe-zone-icon {
+            font-size: 28px;
+        }
+
+        .safe-zone-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-safe);
+        }
+
+        .technique {
+            background: linear-gradient(135deg, rgba(28, 32, 42, 0.9), rgba(20, 24, 32, 0.95));
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-danger), var(--color-primary), var(--color-safe));
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .technique-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px var(--color-glow);
+        }
+
+        .technique-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .technique-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+
+        .technique-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .steps {
+            background: rgba(15, 18, 24, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-bg);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            padding-top: 3px;
+        }
+
+        .observation {
+            background: rgba(96, 165, 250, 0.1);
+            border-left: 3px solid var(--color-cool);
+            padding: 16px 20px;
+            margin-top: 16px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .observation-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-cool);
+            margin-bottom: 8px;
+        }
+
+        .observation-text {
+            color: var(--color-text-muted);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .key-insight::before {
+            content: '⚡';
+            position: absolute;
+            top: -12px;
+            left: 28px;
+            background: var(--color-bg);
+            padding: 0 12px;
+            color: var(--color-primary);
+            font-size: 18px;
+        }
+
+        .key-insight p {
+            color: var(--color-text);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 20px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .homework-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .homework-list {
+            list-style: none;
+        }
+
+        .homework-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--color-text);
+        }
+
+        .homework-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 10px;
+            top: 7px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(245, 158, 11, 0.15);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+            padding: 12px 24px;
+            background: var(--color-surface);
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.12);
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 16px 50px;
+            }
+
+            .section {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            .technique {
+                padding: 24px 18px;
+            }
+
+            .separation-visual {
+                display: none;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="part-header">
+        <div class="part-label">Часть IV: Инструментарий</div>
+    </div>
+
+    <div class="duality-bg">
+        <div class="separation-visual">
+            <div class="visual-mind">💭</div>
+            <div class="visual-divider"></div>
+            <div class="visual-body">🧘</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="chapter-header">
+            <span class="chapter-number">Глава тридцать первая</span>
+            <h1 class="chapter-title">Принцип разделения тела и образа</h1>
+            <p class="chapter-subtitle">Ключевое правило безопасности внутренней работы</p>
+        </header>
+
+        <section class="section">
+            <div class="section-title">Открывающая история</div>
+            <div class="story-text">
+                <p>Он пришёл с паническими атаками, которые начались «ни с того ни с сего». Здоровый мужчина, успешный бизнесмен — и вдруг: сердце выскакивает, руки трясутся, ощущение, что умирает. Врачи ничего не нашли.</p>
+                <p>Расспросы показали интересное: за месяц до первой атаки он начал практиковать «визуализацию победы». Коуч научил его «ярко представлять битву с препятствиями» — и он представлял. Драконов. Монстров. Огненные сражения. С полным погружением.</p>
+                <p>Тело реагировало честно: сердцебиение, потливость, выброс адреналина. Мозг не различает реальную угрозу и воображаемую — для него дракон в визуализации так же опасен, как тигр в кустах. После нескольких недель таких «тренировок» система аварийной защиты сломалась. Паника стала включаться сама, без повода.</p>
+                <p>Он делал всё «правильно» — но нарушил ключевой принцип, о котором никто не предупредил. Принцип, который объясняет, почему одни медитации исцеляют, а другие — калечат.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Теоретический блок</div>
+
+            <h2>Почему тело реагирует на образы</h2>
+            <p>Это не метафора и не эзотерика — это нейрофизиология. Когда вы ярко представляете угрозу, активируются те же отделы мозга, что и при реальной опасности. Миндалина не различает воображаемого льва и настоящего. Для неё оба — угроза, на которую нужно реагировать.</p>
+
+            <p>Проблема усиливается спецификой внутреннего мира. Там всё <span class="highlight">гипертрофировано</span>: опасность — супер-опасность, радость — супер-радость, монстр — чудовищный монстр. В реальности таких интенсивностей не бывает. А тело получает сигналы такой силы, с которыми не справляется.</p>
+
+            <div class="key-principle">
+                <div class="key-principle-header">
+                    <span class="key-principle-icon">⚠️</span>
+                    <span class="key-principle-title">Ключевой принцип</span>
+                </div>
+                <p>Во время внутренней работы (визуализации, исследования образов, работы с субличностями) <strong>тело должно быть расслаблено и отключено</strong>. Тело включаем только на этапе переноса нового паттерна в реальность — когда опасных образов уже нет.</p>
+            </div>
+
+            <h3>Два режима работы</h3>
+            <p><span class="concept">Внутренняя работа</span> (визуализация, анализ, Театр внутри, Граница сна):</p>
+            <p>• Тело расслаблено, как при просмотре фильма</p>
+            <p>• Дыхание ровное, мышцы не напряжены</p>
+            <p>• Вы — наблюдатель, не участник</p>
+            <p>• Образы — на экране, не в теле</p>
+
+            <p><span class="concept">Перенос в реальность</span> (психодрама, якорение, отработка поведения):</p>
+            <p>• Тело активно включается</p>
+            <p>• Новый паттерн уже сформирован и безопасен</p>
+            <p>• Тело «записывает» готовое решение</p>
+            <p>• Угроз в образе уже нет</p>
+
+            <h3>Почему это важно</h3>
+            <p>Нарушение этого принципа объясняет многие проблемы:</p>
+            <p>• Почему некоторые медитации вызывают тревогу вместо покоя</p>
+            <p>• Почему «позитивные визуализации» иногда ухудшают состояние</p>
+            <p>• Почему глубокая работа с травмой без подготовки ретравматизирует</p>
+            <p>• Почему чувствительные люди «перегорают» от интенсивных практик</p>
+
+            <div class="key-insight">
+                <p>Это не про то, что образы опасны. Это про то, что тело должно оставаться в безопасности, пока вы исследуете любые — даже пугающие — образы. Расслабленное тело = безопасный контейнер.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Практический блок</div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🔍</div>
+                    <div class="technique-title">Техника 31.1: Проверка телесного включения</div>
+                </div>
+                <div class="technique-content">
+                    <p>Перед любой внутренней работой — обязательное сканирование тела. Это ваш «чек-лист готовности».</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Сядьте удобно. Закройте глаза.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Просканируйте тело сверху вниз: лицо, шея, плечи, руки, грудь, живот, таз, ноги.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Найдите напряжение. Где зажато? Где не расслаблено?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Направьте в эти места дыхание. На выдохе — отпускайте.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Повторяйте, пока тело не станет расслабленным. Только после этого — к практике.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Время</div>
+                        <p class="observation-text">2-5 минут. Это инвестиция в безопасность всей последующей работы.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🎬</div>
+                    <div class="technique-title">Техника 31.2: Работа с образом БЕЗ тела</div>
+                </div>
+                <div class="technique-content">
+                    <p>Как исследовать даже пугающие образы, сохраняя тело в безопасности.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">После расслабления (техника 31.1) — визуализируйте сложную сцену: конфликт, страх, угрозу.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Намеренно держите тело «выключенным»: дышите ровно, мышцы расслаблены.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Наблюдайте образ как кино на экране. Вы — в зале, не на экране.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Если чувствуете, что тело начинает реагировать — сделайте образ меньше, дальше, бледнее.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Исследуйте образ с интересом наблюдателя, не с вовлечённостью участника.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Ключ</div>
+                        <p class="observation-text">Представьте, что смотрите фильм о ком-то другом. Интересно, но не опасно.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🚨</div>
+                    <div class="technique-title">Техника 31.3: Сигнал тревоги</div>
+                </div>
+                <div class="technique-content">
+                    <p>Что делать, если тело «включилось» во время визуализации.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text"><strong>Признаки включения:</strong> учащённое сердцебиение, потливость, напряжение мышц, поверхностное дыхание, дрожь.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text"><strong>Немедленно:</strong> остановите визуализацию. Не пытайтесь «дотерпеть».</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text"><strong>Заземление:</strong> откройте глаза. Ноги на полу. Назовите 5 предметов вокруг.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text"><strong>Дыхание:</strong> медленный вдох на 4 счёта, выдох на 6-8. Повторите 5-10 раз.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text"><strong>Возврат:</strong> продолжайте практику только после полного успокоения. Или отложите на другой день.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Важно</div>
+                        <p class="observation-text">Это не провал — это система безопасности сработала правильно. Вы научились замечать границу.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🛡️</div>
+                    <div class="technique-title">Техника 31.4: Безопасная рамка</div>
+                </div>
+                <div class="technique-content">
+                    <p>Создание защитной дистанции перед работой с пугающими образами.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Перед началом скажите себе: «Я смотрю это как фильм.»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Визуализируйте экран или рамку между собой и образом.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Представьте, что между вами и образом — стеклянная стена. Видно, но не достаёт.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Напомните себе: «Я могу остановить в любой момент. У меня есть пульт.»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Только после создания рамки — начинайте исследование.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Подсказка</div>
+                        <p class="observation-text">Чем страшнее предстоящий образ, тем прочнее должна быть рамка. Для травматического материала — тройная защита.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">✅</div>
+                    <div class="technique-title">Техника 31.5: Когда включать тело</div>
+                </div>
+                <div class="technique-content">
+                    <p>Тело включается только на этапе переноса — когда новый паттерн уже безопасен.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text"><strong>Проверка готовности:</strong> новый паттерн сформирован? Угрозы в образе нет?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text"><strong>Пример:</strong> вы визуализировали уверенность, нашли её образ, он приятный.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text"><strong>Теперь:</strong> можно включить тело — принять позу уверенности, почувствовать её в теле.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text"><strong>Отработка:</strong> тело «записывает» то, что уже безопасно и полезно.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text"><strong>Критерий:</strong> образ вызывает положительные или нейтральные эмоции — можно включать тело.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Последовательность</div>
+                        <p class="observation-text">Сначала — работа с образом (тело расслаблено). Потом — перенос в тело (тело активно). Не смешивать.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">📈</div>
+                    <div class="technique-title">Техника 31.6: Градуальное включение</div>
+                </div>
+                <div class="technique-content">
+                    <p>Постепенное подключение тела к безопасному образу.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text"><strong>Шаг 1:</strong> только дыхание. Свяжите образ с определённым ритмом дыхания.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text"><strong>Шаг 2:</strong> мелкие движения. Пальцы, мимика. Как лицо реагирует на образ?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text"><strong>Шаг 3:</strong> поза. Какое положение тела соответствует образу?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text"><strong>Шаг 4:</strong> движение. Как двигается человек в этом состоянии?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text"><strong>Шаг 5:</strong> полное включение. Весь паттерн «записан» в теле.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Темп</div>
+                        <p class="observation-text">Не торопитесь. Каждый шаг — отдельная сессия. Лучше медленно и безопасно, чем быстро и с откатом.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">📋</div>
+                    <div class="technique-title">Техника 31.7: Различение практик</div>
+                </div>
+                <div class="technique-content">
+                    <p>Чёткое разделение: какие практики без тела, какие с телом.</p>
+                    <div class="safe-zone">
+                        <div class="safe-zone-header">
+                            <span class="safe-zone-icon">💭</span>
+                            <span class="safe-zone-title">БЕЗ тела (тело расслаблено)</span>
+                        </div>
+                        <p>• Внутренний театр, работа с субличностями</p>
+                        <p>• Анализ сновидений</p>
+                        <p>• Визуализация проблемных ситуаций</p>
+                        <p>• Исследование страхов и травм</p>
+                        <p>• Работа на Границе сна</p>
+                        <p>• Междумирье (стратегические визуализации)</p>
+                    </div>
+                    <div class="key-principle">
+                        <div class="key-principle-header">
+                            <span class="key-principle-icon">🏃</span>
+                            <span class="key-principle-title">С телом (тело активно)</span>
+                        </div>
+                        <p>• Психодрама, ролевые игры</p>
+                        <p>• Перенос нового поведения</p>
+                        <p>• Якорение ресурсных состояний</p>
+                        <p>• Репетиция разговоров</p>
+                        <p>• Работа в Лимбе (интеграция)</p>
+                        <p>• Телесные практики осознанности</p>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Правило</div>
+                        <p class="observation-text">Если в образе есть угроза, конфликт, боль — тело выключено. Если образ безопасен и ресурсен — тело можно включить.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Интеграция</div>
+
+            <h2>Ключ к безопасной глубине</h2>
+            <p>Этот принцип — <span class="concept">фундамент всего инструментария</span>. Без него любая техника может стать опасной. С ним — даже работа с самым пугающим материалом становится безопасной.</p>
+
+            <p>Нарушение этого правила — причина большинства проблем с «медитациями», «визуализациями» и «работой с подсознанием». Люди погружаются в интенсивные образы <span class="highlight">с полным телесным включением</span> — и получают панические атаки, тревожные расстройства, соматические симптомы.</p>
+
+            <div class="key-insight">
+                <p>Расслабленное тело — не пассивность. Это контейнер безопасности, позволяющий исследовать любую глубину. Чем глубже хотите погрузиться — тем важнее расслабленность тела.</p>
+            </div>
+
+            <p>В следующих главах мы будем использовать этот принцип как базу. Горячий стул, работа с образом в теле, расстановки — все эти техники предполагают, что вы умеете разделять образ и тело.</p>
+
+            <div class="homework">
+                <div class="homework-title">
+                    <span>◆</span> Домашнее задание
+                </div>
+                <ul class="homework-list">
+                    <li>Проведите визуализацию умеренно стрессовой ситуации (не травмы!) с полностью расслабленным телом</li>
+                    <li>Заметьте моменты, когда тело пытается «включиться» — и верните расслабление</li>
+                    <li>Составьте свой список практик: какие у вас «без тела», какие «с телом»</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="30.html" class="nav-link">← Глава 30: Критерий здоровья</a>
+            <a href="32.html" class="nav-link">Глава 32: Горячий стул →</a>
+        </nav>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

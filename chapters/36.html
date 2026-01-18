@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 36: Расстановка на столе | Фокальная психология</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        :root {
+            --chapter-color: #16a085;
+            --chapter-color-light: #a3e4d7;
+            --chapter-color-dark: #0e6655;
+            --chapter-gradient: linear-gradient(135deg, #16a085 0%, #1abc9c 50%, #0e6655 100%);
+        }
+
+        .chapter-header {
+            background: var(--chapter-gradient);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.15) 0%, transparent 40%);
+        }
+
+        .part-banner {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Table constellation visualization */
+        .table-visual {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .table-surface {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background: rgba(139, 90, 43, 0.4);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .figure {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            animation: floatFigure 4s ease-in-out infinite;
+        }
+
+        .figure-1 { background: #e74c3c; bottom: 35%; left: 35%; animation-delay: 0s; }
+        .figure-2 { background: #3498db; bottom: 38%; left: 50%; animation-delay: 0.5s; }
+        .figure-3 { background: #f1c40f; bottom: 32%; left: 60%; animation-delay: 1s; }
+        .figure-4 { background: #9b59b6; bottom: 40%; left: 45%; animation-delay: 1.5s; }
+
+        @keyframes floatFigure {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Connection lines */
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            transform-origin: left center;
+        }
+
+        .connection-line:nth-child(5) {
+            width: 60px;
+            bottom: 36%;
+            left: 38%;
+            transform: rotate(15deg);
+        }
+
+        .connection-line:nth-child(6) {
+            width: 50px;
+            bottom: 37%;
+            left: 52%;
+            transform: rotate(-10deg);
+        }
+
+        .chapter-title-container {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .chapter-number {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 300;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-block {
+            background: linear-gradient(135deg, rgba(22, 160, 133, 0.08) 0%, rgba(26, 188, 156, 0.05) 100%);
+            border-left: 4px solid var(--chapter-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            line-height: 1.9;
+        }
+
+        .story-block p:first-child::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            color: var(--chapter-color);
+            font-weight: bold;
+        }
+
+        h2 {
+            color: var(--chapter-color-dark);
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--chapter-color-light);
+        }
+
+        h3 {
+            color: var(--chapter-color);
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .concept-block {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(22, 160, 133, 0.1);
+        }
+
+        .concept-block h3 {
+            margin-top: 0;
+        }
+
+        /* Figure types */
+        .figure-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .figure-type {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s;
+        }
+
+        .figure-type:hover {
+            transform: translateY(-5px);
+        }
+
+        .figure-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .figure-name {
+            font-weight: 600;
+            color: var(--chapter-color-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .figure-desc {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .technique-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(22, 160, 133, 0.1);
+            border: 1px solid rgba(22, 160, 133, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(22, 160, 133, 0.15);
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .technique-number {
+            width: 48px;
+            height: 48px;
+            background: var(--chapter-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .technique-title {
+            font-size: 1.4rem;
+            color: var(--chapter-color-dark);
+            margin: 0;
+        }
+
+        .technique-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(22, 160, 133, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--chapter-color-dark);
+        }
+
+        .steps-list {
+            background: rgba(22, 160, 133, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(22, 160, 133, 0.2);
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--chapter-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--chapter-color-dark);
+        }
+
+        /* Question list */
+        .question-list {
+            background: linear-gradient(135deg, #f0faf8 0%, #e8f8f5 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .question-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed rgba(22, 160, 133, 0.2);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-item::before {
+            content: '?';
+            width: 24px;
+            height: 24px;
+            background: var(--chapter-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .observation-block {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+            border-left: 4px solid #f1c40f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .observation-block h4 {
+            color: #d68910;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(22, 160, 133, 0.1) 0%, rgba(26, 188, 156, 0.05) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .highlight-box .big-text {
+            font-size: 1.4rem;
+            color: var(--chapter-color-dark);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Reading patterns */
+        .reading-patterns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .pattern-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--chapter-color);
+        }
+
+        .pattern-title {
+            font-weight: 600;
+            color: var(--chapter-color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-meaning {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Materials grid */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .material-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .material-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .material-name {
+            font-weight: 600;
+            color: var(--chapter-color-dark);
+            font-size: 0.9rem;
+        }
+
+        .material-use {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.3rem;
+        }
+
+        .integration-section {
+            background: linear-gradient(135deg, #f8f4ff 0%, #f0e8ff 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .integration-section h2 {
+            color: #6b5b95;
+            border-bottom-color: #c9b8e8;
+        }
+
+        .homework-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .homework-section h2 {
+            color: #2e7d32;
+            border-bottom-color: #a5d6a7;
+        }
+
+        .homework-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .homework-list li {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .homework-list li::before {
+            content: '🎲';
+            font-size: 1.2rem;
+        }
+
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--chapter-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background: rgba(22, 160, 133, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--chapter-color);
+            color: white;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="part-banner">Часть IV: Инструментарий</div>
+
+        <div class="table-visual">
+            <div class="table-surface"></div>
+            <div class="figure figure-1"></div>
+            <div class="figure figure-2"></div>
+            <div class="figure figure-3"></div>
+            <div class="figure figure-4"></div>
+            <div class="connection-line"></div>
+            <div class="connection-line"></div>
+        </div>
+
+        <div class="chapter-title-container">
+            <div class="chapter-number">Глава тридцать шестая</div>
+            <h1 class="chapter-title">Расстановка на столе</h1>
+            <p class="chapter-subtitle">Миниатюрный мир внутренних отношений</p>
+        </div>
+    </header>
+
+    <main class="content-section">
+        <div class="story-block fade-in">
+            <p>Елена долго пыталась понять, почему у неё не складываются отношения с коллегами. Мы много говорили, но картина оставалась размытой — слишком много людей, слишком сложные связи. Тогда я предложил эксперимент.</p>
+            <p>«Возьмите эти фигурки, — я выложил на стол несколько небольших предметов. — Выберите одну для себя, и по одной для каждого значимого коллеги. Расставьте их на столе так, как чувствуете».</p>
+            <p>Елена задумалась на секунду, а затем начала расставлять. Через минуту картина была готова — и сказала больше, чем все наши разговоры. Её фигурка стояла на краю, спиной к группе. Два коллеги смотрели друг на друга, игнорируя остальных. Начальник возвышался над всеми, но смотрел в сторону двери.</p>
+            <p>«Теперь я понимаю, — прошептала Елена, глядя на эту маленькую сцену. — Проблема не в них. Проблема в том, что я сама отвернулась».</p>
+        </div>
+
+        <h2 class="fade-in">Что такое расстановка</h2>
+
+        <div class="concept-block fade-in">
+            <h3>Пространственная репрезентация отношений</h3>
+            <p>Расстановка — это способ вынести внутренний мир наружу. Мы берём абстрактные отношения, чувства, конфликты — и превращаем их в видимую, осязаемую картину. Пространство становится языком подсознания.</p>
+            <p>Традиционные расстановки (по Хеллингеру) используют живых людей-заместителей. Настольная расстановка использует предметы — более доступный, но не менее мощный метод для индивидуальной работы.</p>
+        </div>
+
+        <h2 class="fade-in">Почему это работает</h2>
+
+        <p class="fade-in">Когда мы рассказываем о проблеме словами, мы используем левое полушарие — логику, последовательность, причинно-следственные связи. Но отношения — это не линейная история. Это <strong>система</strong>, где всё связано со всем.</p>
+
+        <p class="fade-in">Расстановка активирует правое полушарие — пространственное мышление, образы, интуицию. Мы видим систему целиком, замечаем паттерны, которые не видны в словах. Подсознание «узнаёт» расстановку и показывает правду через расположение фигур.</p>
+
+        <div class="highlight-box fade-in">
+            <div class="big-text">«Расстановка делает невидимое видимым»</div>
+            <p>То, что скрыто в словах, проявляется в пространстве</p>
+        </div>
+
+        <h2 class="fade-in">Материалы для работы</h2>
+
+        <p class="fade-in">Для настольной расстановки можно использовать практически любые предметы. Главное — чтобы они были достаточно разными для различения:</p>
+
+        <div class="materials-grid fade-in">
+            <div class="material-item">
+                <div class="material-icon">🪆</div>
+                <div class="material-name">Фигурки людей</div>
+                <div class="material-use">Идеально для отношений</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon">🔵</div>
+                <div class="material-name">Камни/галька</div>
+                <div class="material-use">Нейтральны, разных размеров</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon">🎲</div>
+                <div class="material-name">Кубики/кости</div>
+                <div class="material-use">Разные цвета и формы</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon">🪙</div>
+                <div class="material-name">Монеты</div>
+                <div class="material-use">Разные номиналы = статусы</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon">🧸</div>
+                <div class="material-name">Мелкие игрушки</div>
+                <div class="material-use">Животные, персонажи</div>
+            </div>
+            <div class="material-item">
+                <div class="material-icon">📎</div>
+                <div class="material-name">Канцелярия</div>
+                <div class="material-use">Скрепки, ластики, колпачки</div>
+            </div>
+        </div>
+
+        <h2 class="fade-in">Что можно расставлять</h2>
+
+        <div class="figure-types fade-in">
+            <div class="figure-type">
+                <div class="figure-icon">👨‍👩‍👧</div>
+                <div class="figure-name">Семья</div>
+                <div class="figure-desc">Родители, дети, родственники</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">💼</div>
+                <div class="figure-name">Коллеги</div>
+                <div class="figure-desc">Команда, начальство</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">💕</div>
+                <div class="figure-name">Отношения</div>
+                <div class="figure-desc">Партнёры, друзья</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">🎭</div>
+                <div class="figure-name">Субличности</div>
+                <div class="figure-desc">Внутренние части себя</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">🎯</div>
+                <div class="figure-name">Цели</div>
+                <div class="figure-desc">Желания, проекты</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">😰</div>
+                <div class="figure-name">Проблемы</div>
+                <div class="figure-desc">Страхи, препятствия</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">⏳</div>
+                <div class="figure-name">Время</div>
+                <div class="figure-desc">Прошлое, настоящее, будущее</div>
+            </div>
+            <div class="figure-type">
+                <div class="figure-icon">💎</div>
+                <div class="figure-name">Ценности</div>
+                <div class="figure-desc">То, что важно</div>
+            </div>
+        </div>
+
+        <!-- Technique 1 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">1</div>
+                <h3 class="technique-title">Базовая расстановка отношений</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 20-30 минут</span>
+                <span class="meta-badge">🎯 Понимание динамики</span>
+                <span class="meta-badge">📊 Простой уровень</span>
+            </div>
+
+            <p>Начните с простой расстановки межличностных отношений — с семьёй или коллегами.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Подготовка пространства:</strong> Освободите стол. Соберите 5-10 небольших предметов разного вида. Сядьте удобно, чтобы видеть всю поверхность.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Определите участников:</strong> Кого вы хотите расставить? Назовите имена или роли. Выберите для каждого предмет — не думайте долго, берите интуитивно.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Выберите себя:</strong> Какой предмет — вы? Возьмите его в руки, почувствуйте.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Расстановка:</strong> Ставьте фигуры на стол одну за другой. Не думайте — ставьте туда, куда «хочется». Позвольте руке найти место.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Направление:</strong> Важно не только где стоит фигура, но и куда смотрит. Поверните каждую так, чтобы было «правильно».</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Наблюдение:</strong> Отойдите на шаг и посмотрите. Что вы видите? Кто рядом, кто далеко? Кто смотрит на кого? Есть ли группы, изоляты?</div>
+                </div>
+            </div>
+
+            <div class="question-list">
+                <div class="question-item">Что вас удивляет в этой картине?</div>
+                <div class="question-item">Где стоите вы — в центре или на периферии?</div>
+                <div class="question-item">Кто смотрит на вас? На кого смотрите вы?</div>
+                <div class="question-item">Есть ли кто-то, кто стоит спиной?</div>
+                <div class="question-item">Какие чувства вызывает эта картина?</div>
+            </div>
+        </div>
+
+        <!-- Technique 2 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">2</div>
+                <h3 class="technique-title">Чтение расстановки</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 10-15 минут</span>
+                <span class="meta-badge">🎯 Интерпретация</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Каждый элемент расстановки несёт смысл. Вот ключи к «чтению» картины:</p>
+
+            <div class="reading-patterns">
+                <div class="pattern-card">
+                    <div class="pattern-title">Близость</div>
+                    <div class="pattern-meaning">Чем ближе фигуры, тем сильнее связь (позитивная или негативная).</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Дистанция</div>
+                    <div class="pattern-meaning">Большое расстояние — отчуждённость, разрыв, «холодные» отношения.</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Направление взгляда</div>
+                    <div class="pattern-meaning">Куда смотрит фигура — туда направлено внимание, интерес, фокус.</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Спина</div>
+                    <div class="pattern-meaning">Повёрнутая спина — отвержение, игнорирование, обида.</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Центр/край</div>
+                    <div class="pattern-meaning">Центральная позиция — влияние, важность. Край — изоляция, маргинальность.</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Кластеры</div>
+                    <div class="pattern-meaning">Группы фигур — коалиции, подсистемы, «свои» и «чужие».</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Высота</div>
+                    <div class="pattern-meaning">Если можно варьировать высоту — это иерархия, власть, статус.</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Линии</div>
+                    <div class="pattern-meaning">Фигуры в линию — очередь, иерархия, поколенческая структура.</div>
+                </div>
+            </div>
+
+            <div class="observation-block">
+                <h4>💡 Наблюдение</h4>
+                <p>Не спешите интерпретировать логически. Спросите себя: какое <em>ощущение</em> вызывает эта картина? Первое чувство обычно самое точное.</p>
+            </div>
+        </div>
+
+        <!-- Technique 3 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">3</div>
+                <h3 class="technique-title">Движение к решению</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 15-20 минут</span>
+                <span class="meta-badge">🎯 Поиск выхода</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>После диагностики — терапия. Мы двигаем фигуры к более здоровой конфигурации.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Зафиксируйте исходную картину:</strong> Сфотографируйте или запомните. Это «как есть».</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Определите проблему:</strong> Что не так в этой системе? Что вызывает напряжение, страдание, застой?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Экспериментируйте:</strong> Начните двигать фигуры. Что если эту приблизить? Эту развернуть? Эту убрать?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Чувствуйте изменения:</strong> После каждого движения остановитесь. Как изменилось ощущение? Стало легче или тяжелее?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Найдите «хорошую» конфигурацию:</strong> Двигайте, пока не найдёте расположение, которое чувствуется правильным, облегчающим, гармоничным.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Осознайте изменение:</strong> Что пришлось изменить? Это — подсказка для реальной жизни. Что вам нужно сделать?</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technique 4 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">4</div>
+                <h3 class="technique-title">Расстановка субличностей</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 25-35 минут</span>
+                <span class="meta-badge">🎯 Интеграция частей</span>
+                <span class="meta-badge">📊 Продвинутый уровень</span>
+            </div>
+
+            <p>Мы можем расставить не других людей, а части себя — внутренние голоса, субличности, конфликтующие желания.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Определите части:</strong> Какие части себя вы чувствуете? «Критик», «Ребёнок», «Защитник», «Мечтатель»? Назовите 4-7 частей.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Выберите фигуры:</strong> Для каждой части — свой предмет. Интуитивно. Маленькая часть — маленький предмет? Или наоборот?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Добавьте «Я»:</strong> Выберите фигуру для вашего ядра, вашего подлинного Я. Это наблюдатель, интегратор.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Расставьте:</strong> Где эти части относительно друг друга? Кто с кем в союзе? Кто конфликтует? Кто изолирован?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Найдите напряжение:</strong> Где в этой системе напряжение? Какие части тянут в разные стороны?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Переговоры:</strong> Двигая фигуры, ищите конфигурацию, где все части «довольны». Возможно, кому-то нужно больше пространства, кому-то — внимания.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <div class="step-content"><strong>Интеграция:</strong> В финале все части должны быть в контакте с «Я» — пусть не вплотную, но связаны, видимы, признаны.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technique 5 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">5</div>
+                <h3 class="technique-title">Расстановка проблемы и ресурса</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 20-30 минут</span>
+                <span class="meta-badge">🎯 Работа с трудностями</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Полезно расставить не людей, а элементы проблемной ситуации: саму проблему, препятствия, ресурсы, цель.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Определите элементы:</strong> Я, Проблема, Цель — три обязательных. Добавьте: Препятствия, Ресурсы, Страх, Поддержка — по необходимости.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Выберите фигуры:</strong> Для проблемы — что-то, что вызывает неприятные ощущения. Для цели — что-то привлекательное.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Расставьте «как есть»:</strong> Где вы относительно проблемы? Где цель? Проблема между вами и целью? Или в стороне?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Добавьте ресурсы:</strong> Поставьте фигуры ресурсов. Где они? Доступны вам или далеко?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Найдите путь:</strong> Двигая фигуры, найдите путь от себя к цели. Можно ли обойти проблему? Использовать ресурсы?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Проверьте размеры:</strong> Проблема больше вас или меньше? Если больше — может, это оценка завышена? Попробуйте уменьшить фигуру проблемы.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technique 6 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">6</div>
+                <h3 class="technique-title">Расстановка во времени</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 20-25 минут</span>
+                <span class="meta-badge">🎯 Прошлое-настоящее-будущее</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Стол становится временной линией. Слева — прошлое, справа — будущее, центр — настоящее.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Разметьте время:</strong> Мысленно разделите стол на три зоны: левая — прошлое, центр — настоящее, правая — будущее.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Поставьте себя-сейчас:</strong> Фигура «Я» в центре. Куда вы смотрите — в прошлое или в будущее?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Добавьте прошлое:</strong> Поставьте фигуры событий, людей, травм, достижений прошлого. Они близко или далеко?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Добавьте будущее:</strong> Поставьте цели, мечты, страхи, возможности. На каком расстоянии? Какого размера?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Заметьте притяжение:</strong> Что тянет вас назад? Что манит вперёд? Что держит на месте?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Переориентация:</strong> Если нужно — поверните свою фигуру к будущему. Отодвиньте прошлое подальше. Приблизьте желаемое будущее.</div>
+                </div>
+            </div>
+
+            <div class="observation-block">
+                <h4>💡 Наблюдение</h4>
+                <p>Часто люди обнаруживают, что их фигура смотрит назад — в прошлое. Или что цель стоит где-то сбоку, вне поля зрения. Расстановка показывает ориентацию сознания.</p>
+            </div>
+        </div>
+
+        <!-- Technique 7 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">7</div>
+                <h3 class="technique-title">Ресурсная расстановка</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 15-20 минут</span>
+                <span class="meta-badge">🎯 Усиление ресурсов</span>
+                <span class="meta-badge">📊 Простой уровень</span>
+            </div>
+
+            <p>Не всегда нужно работать с проблемами. Иногда полезнее расставить и усилить ресурсы.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Список ресурсов:</strong> Что помогает вам в жизни? Люди, качества, навыки, места, практики. Напишите 5-10 пунктов.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Выберите фигуры:</strong> Для каждого ресурса — отдельный предмет. Большие, красивые, приятные на ощупь.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Расставьте вокруг себя:</strong> Поставьте свою фигуру в центр, а ресурсы — вокруг. На каком расстоянии? В каком порядке?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Заметьте «дыры»:</strong> Есть ли направления, где пусто? Где нет ресурсов? Это зона развития.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Приблизьте нужное:</strong> Какие ресурсы вы хотели бы приблизить? Двигайте их ближе к себе.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Запечатлейте картину:</strong> Посмотрите на это «поле ресурсов». Запомните это ощущение поддержки. Вы можете вызвать его в трудные моменты.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="integration-section fade-in">
+            <h2>Интеграция главы</h2>
+
+            <p>Расстановка на столе — это мост между внутренним и внешним миром. Она позволяет:</p>
+
+            <ul>
+                <li>Увидеть систему отношений целиком, а не по частям</li>
+                <li>Обойти защиты — подсознание «проговаривается» через расположение</li>
+                <li>Экспериментировать безопасно — двигать фигуры дешевле, чем менять реальность</li>
+                <li>Найти решение через пространство, минуя логику</li>
+                <li>Интегрировать части себя через их физическое соотнесение</li>
+            </ul>
+
+            <p>Главное правило: <strong>доверяйте первому импульсу</strong>. Когда ставите фигуру — не думайте, куда «правильно». Рука знает лучше головы.</p>
+        </div>
+
+        <div class="homework-section fade-in">
+            <h2>Домашнее задание</h2>
+
+            <ul class="homework-list">
+                <li>Соберите набор из 10-15 мелких предметов для расстановок. Храните их вместе как «инструмент».</li>
+                <li>Расставьте свою семью. Что вы увидели? Сфотографируйте для размышления.</li>
+                <li>Расставьте свои субличности: Критик, Ребёнок, Взрослый, и другие, которые чувствуете. Как они расположены?</li>
+                <li>Попробуйте расстановку во времени. Куда смотрит ваша фигура — в прошлое или будущее?</li>
+            </ul>
+        </div>
+    </main>
+
+    <nav class="nav-footer">
+        <a href="35.html" class="nav-link">← Глава 35: Передача контроля подсознанию</a>
+        <a href="../index.html" class="nav-link">Содержание</a>
+        <a href="37.html" class="nav-link">Глава 37: Сказка как диагностика →</a>
+    </nav>
+
+    <script>
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

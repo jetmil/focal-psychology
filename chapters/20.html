@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 20: Якорение решений — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6366f1; --secondary: #a855f7; --accent: #06b6d4; --bg-dark: #0f0f1a; --bg-card: rgba(255, 255, 255, 0.03); --text-primary: #e2e8f0; --text-secondary: #94a3b8; --text-accent: #c4b5fd; --border: rgba(255, 255, 255, 0.08); --glow: rgba(99, 102, 241, 0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08), transparent), radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent); pointer-events: none; z-index: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+        header { text-align: center; padding: 4rem 0 3rem; }
+        .part-label { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); background: rgba(168, 85, 247, 0.1); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(168, 85, 247, 0.2); }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 600; color: var(--primary); line-height: 1; margin-bottom: 1rem; text-shadow: 0 0 40px var(--glow); }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.75rem; font-weight: 600; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text-primary), var(--text-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { font-size: 1.125rem; color: var(--text-secondary); font-style: italic; }
+        .decoration-line { width: 150px; height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent); margin: 2rem auto; }
+        section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1.5rem; padding: 3rem; margin-bottom: 2rem; backdrop-filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        section.visible { opacity: 1; transform: translateY(0); }
+        .story-section { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05)); border-color: rgba(99, 102, 241, 0.2); position: relative; }
+        .story-section::before { content: '"'; position: absolute; top: 1rem; left: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: rgba(99, 102, 241, 0.2); line-height: 1; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+        h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-accent); margin: 2rem 0 1rem; }
+        h4 { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .lead { font-size: 1.125rem; color: var(--text-primary); margin-bottom: 1.5rem; }
+        .highlight-box { background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(99, 102, 241, 0.05)); border-left: 3px solid var(--accent); padding: 1.5rem; border-radius: 0 1rem 1rem 0; margin: 1.5rem 0; }
+        .highlight-box p { margin-bottom: 0; color: var(--text-primary); }
+        .technique-card { background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 1rem; padding: 2rem; margin: 1.5rem 0; position: relative; transition: all 0.3s ease; }
+        .technique-card:hover { border-color: rgba(99, 102, 241, 0.3); box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1); }
+        .technique-number { position: absolute; top: -0.75rem; left: 1.5rem; background: var(--primary); color: white; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 1rem; }
+        .technique-title { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
+        .steps { list-style: none; margin: 1rem 0; }
+        .steps li { position: relative; padding-left: 2rem; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        .steps li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 8px; height: 8px; background: var(--secondary); border-radius: 50%; }
+        .meta-info { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .meta-tag { font-size: 0.8rem; color: var(--text-secondary); background: rgba(255, 255, 255, 0.03); padding: 0.25rem 0.75rem; border-radius: 1rem; }
+        .observation { background: rgba(168, 85, 247, 0.08); border-left: 3px solid var(--secondary); padding: 1rem 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); }
+        .observation strong { color: var(--secondary); }
+        .integration-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+        .integration-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; }
+        .integration-item h4 { color: var(--primary); margin-top: 0; }
+        .anchor-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .anchor-type { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 0.75rem; padding: 1rem; text-align: center; }
+        .anchor-type .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .anchor-type .label { font-size: 0.9rem; color: var(--text-accent); }
+        .part-summary { background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(99, 102, 241, 0.1)); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 1.5rem; padding: 2.5rem; margin: 2rem 0; }
+        .part-summary h3 { color: var(--secondary); margin-top: 0; font-size: 1.5rem; text-align: center; margin-bottom: 1.5rem; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .summary-item { background: rgba(0, 0, 0, 0.2); border-radius: 0.75rem; padding: 1rem; }
+        .summary-item .chapter-num { font-size: 0.75rem; color: var(--accent); font-weight: 600; margin-bottom: 0.25rem; }
+        .summary-item .chapter-title { font-size: 0.9rem; color: var(--text-primary); }
+        .homework { background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05)); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 1rem; padding: 2rem; margin-top: 2rem; }
+        .homework h3 { color: var(--secondary); margin-top: 0; }
+        .task-list { list-style: none; }
+        .task-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        .task-list li::before { content: '[ ]'; color: var(--secondary); font-family: monospace; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; margin-top: 2rem; border-top: 1px solid var(--border); }
+        nav a { color: var(--text-accent); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        nav a:hover { color: var(--primary); }
+        @media (max-width: 768px) { .container { padding: 1rem; } section { padding: 2rem 1.5rem; } .chapter-number { font-size: 3.5rem; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="part-label">Часть II: Механика выбора</div>
+            <div class="chapter-number">20</div>
+            <h1>Якорение решений</h1>
+            <p class="subtitle">Закрепить выбор в теле и реальности</p>
+            <div class="decoration-line"></div>
+        </header>
+
+        <section class="story-section visible">
+            <h2>История</h2>
+            <p class="lead">Олимпийский пловец Майкл Фелпс перед каждым заплывом делал одно и то же: три взмаха руками, прыжок, хлопок по бёдрам. Этот ритуал выглядел странно для зрителей, но для него был критически важен.</p>
+
+            <p>«Это не суеверие, — объяснял его тренер. — Это якорь. Тело помнит: после этой последовательности — я плыву на максимуме».</p>
+
+            <p>Однажды на Олимпиаде в Пекине очки Фелпса наполнились водой. Он не видел ни дорожек, ни стены. Но его тело знало: сколько гребков до поворота, сколько до финиша. Он выиграл — вслепую — потому что тысячи раз закреплял состояние через один и тот же ритуал.</p>
+
+            <p>Якорь — это не магия. Это нейрофизиология. Когда вы связываете состояние с конкретным стимулом, мозг создаёт ассоциацию. Потом достаточно стимула — и состояние активируется автоматически.</p>
+
+            <p>Решения работают так же. Мысленное решение — хрупко. Оно может размыться, забыться, пересмотреться. Заякоренное решение — в теле, в ритуале, в физической реальности — устойчиво.</p>
+        </section>
+
+        <section>
+            <h2>Теоретический блок</h2>
+
+            <p class="lead">Якорь — это связь между стимулом и реакцией. Звук → эмоция. Жест → состояние. Ритуал → готовность. Эту связь можно создавать осознанно.</p>
+
+            <h3>Типы якорей</h3>
+
+            <div class="anchor-types">
+                <div class="anchor-type">
+                    <div class="icon">👁️</div>
+                    <div class="label">Визуальные</div>
+                </div>
+                <div class="anchor-type">
+                    <div class="icon">👂</div>
+                    <div class="label">Аудиальные</div>
+                </div>
+                <div class="anchor-type">
+                    <div class="icon">✋</div>
+                    <div class="label">Кинестетические</div>
+                </div>
+                <div class="anchor-type">
+                    <div class="icon">📍</div>
+                    <div class="label">Пространственные</div>
+                </div>
+                <div class="anchor-type">
+                    <div class="icon">📝</div>
+                    <div class="label">Ритуальные</div>
+                </div>
+            </div>
+
+            <h3>Условия эффективного якоря</h3>
+
+            <ul class="steps">
+                <li><strong>Интенсивность:</strong> Состояние должно быть ярким в момент установки якоря</li>
+                <li><strong>Уникальность:</strong> Стимул должен быть достаточно специфичным, не встречаться случайно</li>
+                <li><strong>Точность времени:</strong> Якорь устанавливается на пике состояния, не до и не после</li>
+                <li><strong>Повторение:</strong> 5-7 повторений за сессию, регулярные подкрепления</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Принцип:</strong> Якоря — не магия, а условные рефлексы. Павлов открыл их на собаках. Вы можете создавать их сознательно. Это даёт контроль над своими состояниями на глубинном уровне.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Практический блок</h2>
+            <p class="lead">Семь техник якорения — для закрепления решений и состояний.</p>
+
+            <div class="technique-card">
+                <span class="technique-number">20.1</span>
+                <h3 class="technique-title">Базовое якорение состояния</h3>
+                <p>Создание простого кинестетического якоря для желаемого состояния.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите состояние, которое хотите закрепить (уверенность, спокойствие, решимость)</li>
+                    <li>Войдите в это состояние через воспоминание или визуализацию</li>
+                    <li>Усильте состояние: сделайте его ярче, интенсивнее</li>
+                    <li>На ПИКЕ интенсивности — сделайте уникальный жест (сжать мочку уха, коснуться запястья)</li>
+                    <li>Отпустите состояние, подождите 30 секунд</li>
+                    <li>Повторите 5-7 раз</li>
+                    <li>Проверьте: делаете жест — состояние активируется?</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-20 минут</span>
+                    <span class="meta-tag">Повторения: 5-7</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Первые разы якорь может быть слабым. С каждым повторением (и в сессии, и в будущем) связь укрепляется. Регулярно «подзаряжайте» якорь.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">20.2</span>
+                <h3 class="technique-title">Якорь решимости</h3>
+                <p>Специальный якорь для моментов, когда нужно принять решение.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Вспомните моменты, когда вы решали уверенно и правильно</li>
+                    <li>Войдите в то состояние: ясность, уверенность, отсутствие сомнений</li>
+                    <li>Усильте до максимума</li>
+                    <li>На пике — установите якорь (например, сжать кулак)</li>
+                    <li>Повторите с разными воспоминаниями о хороших решениях</li>
+                    <li>Используйте перед важными решениями</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Применение: Перед важными решениями</span>
+                    <span class="meta-tag">Эффект: Ясность и уверенность</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Вы уже принимали хорошие решения. Этот якорь позволяет «вызвать» то состояние по запросу. Не нужно ждать, пока оно придёт само.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">20.3</span>
+                <h3 class="technique-title">Пространственный якорь</h3>
+                <p>Привязка разных состояний к разным местам в пространстве.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Определите место для размышлений и сомнений — «зона обдумывания»</li>
+                    <li>Другое место — для принятых решений и действий — «зона решимости»</li>
+                    <li>Размышляйте только в первой зоне</li>
+                    <li>Когда решили — физически переходите во вторую зону</li>
+                    <li>Там — только действия, никакого пересмотра</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Тип: Организация пространства</span>
+                    <span class="meta-tag">Эффект: Чёткое разделение режимов</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Физическое перемещение помогает ментальному переключению. Когда вы встаёте и переходите — это не просто движение, это переход в другой режим.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">20.4</span>
+                <h3 class="technique-title">Музыкальный якорь</h3>
+                <p>Ассоциация музыки с определённым состоянием.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите мелодию или песню для определённого состояния</li>
+                    <li>Слушайте её ТОЛЬКО когда находитесь в этом состоянии</li>
+                    <li>Не включайте её фоном или в другие моменты</li>
+                    <li>Через время: музыка → автоматическая активация состояния</li>
+                    <li>Можете использовать перед важными моментами</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Формирование: 2-3 недели</span>
+                    <span class="meta-tag">Ключ: Эксклюзивность</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Музыка — мощный эмоциональный триггер. Это знают спортсмены, военные, ораторы. Используйте эту силу осознанно.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">20.5</span>
+                <h3 class="technique-title">Словесный якорь</h3>
+                <p>Короткая фраза, активирующая нужное состояние.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите короткую фразу для состояния: «Я решаю» / «Ясность» / «Сила»</li>
+                    <li>Войдите в желаемое состояние</li>
+                    <li>На пике — произнесите фразу вслух, с убеждённостью</li>
+                    <li>Повторите связывание</li>
+                    <li>Используйте фразу, когда нужно вызвать состояние</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 10 минут на установку</span>
+                    <span class="meta-tag">Применение: В любой момент</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Слова имеют силу — но только если заряжены. Пустое «я могу» не работает. Заякоренное «я могу» — работает.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">20.6</span>
+                <h3 class="technique-title">Ритуал начала</h3>
+                <p>Последовательность действий, запускающая нужный режим.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Создайте последовательность действий перед важной активностью</li>
+                    <li>Пример: кофе → определённая музыка → три глубоких вдоха → работа</li>
+                    <li>Выполняйте КАЖДЫЙ раз перед этой активностью</li>
+                    <li>Последовательность должна быть короткой (1-3 минуты) и выполнимой везде</li>
+                    <li>Через время: ритуал автоматически включает нужный режим</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Формирование: 2-3 недели</span>
+                    <span class="meta-tag">Эффект: Автоматическое переключение</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Ритуал — это цепочка якорей. Каждое действие запускает следующее. К концу последовательности — вы уже в нужном состоянии, без усилия воли.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">20.7</span>
+                <h3 class="technique-title">Якорь «точки невозврата»</h3>
+                <p>Физический акт, «запечатывающий» решение окончательно.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Создайте физический ритуал завершения решения</li>
+                    <li>Это может быть: громкий хлопок, удар по столу, глубокий решительный выдох, слово «РЕШЕНО»</li>
+                    <li>Используйте ТОЛЬКО для окончательных решений</li>
+                    <li>После этого ритуала — пересмотра нет (минимум 30 дней)</li>
+                    <li>Это создаёт психологический барьер для откатов</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Применение: Окончательные решения</span>
+                    <span class="meta-tag">Эффект: Закрытие вопроса</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Мозг любит оставлять «дверь открытой» — вдруг передумаю. Ритуал закрытия говорит: дверь закрыта. Это освобождает энергию, которая тратилась на сомнения.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Интеграция</h2>
+
+            <p class="lead">Якоря — это мост между сознательным решением и телесным знанием. Когда решение живёт в теле — оно устойчиво.</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Нейрофизиология, не магия</h4>
+                    <p>Условные рефлексы — наука. Вы можете программировать свою нервную систему сознательно. Это не самообман — это использование того, как работает мозг.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Регулярное подкрепление</h4>
+                    <p>Якоря со временем слабеют, если их не «подзаряжать». Периодически возвращайтесь к установке — входите в состояние и активируйте якорь.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Ключевой принцип:</strong> Решение, живущее только в уме — хрупко. Решение, закреплённое в теле — устойчиво. Создавайте якоря сознательно — и управляйте своими состояниями на глубинном уровне.</p>
+            </div>
+        </section>
+
+        <div class="part-summary">
+            <h3>Завершение Части II: Механика выбора</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem;">Вы прошли путь от суперпозиции до закреплённого решения. Вот карта пройденного:</p>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 11</div>
+                    <div class="chapter-title">Состояние неопределённости</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 12</div>
+                    <div class="chapter-title">Хоровод советчиков</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 13</div>
+                    <div class="chapter-title">Коллапс в решение</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 14</div>
+                    <div class="chapter-title">Цена выбора</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 15</div>
+                    <div class="chapter-title">Откат и перевыбор</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 16</div>
+                    <div class="chapter-title">Петля обратной связи</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 17</div>
+                    <div class="chapter-title">Пробой паттерна</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 18</div>
+                    <div class="chapter-title">Создание нового аттрактора</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 19</div>
+                    <div class="chapter-title">Информационная диета</div>
+                </div>
+                <div class="summary-item">
+                    <div class="chapter-num">Глава 20</div>
+                    <div class="chapter-title">Якорение решений</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-primary); margin-top: 1.5rem; font-style: italic;">В Части III мы перейдём к топографии сознания — исследуем пять слоёв и особое пространство Колыбели.</p>
+        </div>
+
+        <div class="homework">
+            <h3>Домашнее задание</h3>
+            <ul class="task-list">
+                <li>Создайте один базовый якорь для состояния решимости. Практикуйте установку, используйте на реальных решениях</li>
+                <li>Разработайте «ритуал начала» для вашей главной рабочей активности. Выполняйте его неделю, наблюдайте эффект</li>
+                <li>Для одного важного решения — используйте «якорь точки невозврата». Примите решение, закрепите ритуалом, не пересматривайте 30 дней</li>
+            </ul>
+        </div>
+
+        <nav>
+            <a href="19.html">← Глава 19: Информационная диета</a>
+            <a href="21.html">Глава 21: Карта территорий →</a>
+        </nav>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section:not(.visible)').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>

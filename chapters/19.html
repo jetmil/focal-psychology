@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 19: Информационная диета — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6366f1; --secondary: #a855f7; --accent: #06b6d4; --danger: #ef4444; --success: #22c55e; --bg-dark: #0f0f1a; --bg-card: rgba(255, 255, 255, 0.03); --text-primary: #e2e8f0; --text-secondary: #94a3b8; --text-accent: #c4b5fd; --border: rgba(255, 255, 255, 0.08); --glow: rgba(99, 102, 241, 0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08), transparent), radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent); pointer-events: none; z-index: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+        header { text-align: center; padding: 4rem 0 3rem; }
+        .part-label { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); background: rgba(168, 85, 247, 0.1); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(168, 85, 247, 0.2); }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 600; color: var(--primary); line-height: 1; margin-bottom: 1rem; text-shadow: 0 0 40px var(--glow); }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.75rem; font-weight: 600; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text-primary), var(--text-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { font-size: 1.125rem; color: var(--text-secondary); font-style: italic; }
+        .decoration-line { width: 150px; height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent); margin: 2rem auto; }
+        section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 1.5rem; padding: 3rem; margin-bottom: 2rem; backdrop-filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        section.visible { opacity: 1; transform: translateY(0); }
+        .story-section { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05)); border-color: rgba(99, 102, 241, 0.2); position: relative; }
+        .story-section::before { content: '"'; position: absolute; top: 1rem; left: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: rgba(99, 102, 241, 0.2); line-height: 1; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+        h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-accent); margin: 2rem 0 1rem; }
+        h4 { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .lead { font-size: 1.125rem; color: var(--text-primary); margin-bottom: 1.5rem; }
+        .highlight-box { background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(99, 102, 241, 0.05)); border-left: 3px solid var(--accent); padding: 1.5rem; border-radius: 0 1rem 1rem 0; margin: 1.5rem 0; }
+        .highlight-box p { margin-bottom: 0; color: var(--text-primary); }
+        .technique-card { background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 1rem; padding: 2rem; margin: 1.5rem 0; position: relative; transition: all 0.3s ease; }
+        .technique-card:hover { border-color: rgba(99, 102, 241, 0.3); box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1); }
+        .technique-number { position: absolute; top: -0.75rem; left: 1.5rem; background: var(--primary); color: white; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 1rem; }
+        .technique-title { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
+        .steps { list-style: none; margin: 1rem 0; }
+        .steps li { position: relative; padding-left: 2rem; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        .steps li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 8px; height: 8px; background: var(--secondary); border-radius: 50%; }
+        .meta-info { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .meta-tag { font-size: 0.8rem; color: var(--text-secondary); background: rgba(255, 255, 255, 0.03); padding: 0.25rem 0.75rem; border-radius: 1rem; }
+        .observation { background: rgba(168, 85, 247, 0.08); border-left: 3px solid var(--secondary); padding: 1rem 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); }
+        .observation strong { color: var(--secondary); }
+        .integration-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+        .integration-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; }
+        .integration-item h4 { color: var(--primary); margin-top: 0; }
+        .food-category { border-radius: 1rem; padding: 1.5rem; margin: 1rem 0; }
+        .food-nutritious { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .food-nutritious h4 { color: var(--success); margin-top: 0; }
+        .food-neutral { background: rgba(156, 163, 175, 0.1); border: 1px solid rgba(156, 163, 175, 0.3); }
+        .food-neutral h4 { color: #9ca3af; margin-top: 0; }
+        .food-toxic { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .food-toxic h4 { color: var(--danger); margin-top: 0; }
+        .homework { background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05)); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 1rem; padding: 2rem; margin-top: 2rem; }
+        .homework h3 { color: var(--secondary); margin-top: 0; }
+        .task-list { list-style: none; }
+        .task-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        .task-list li::before { content: '[ ]'; color: var(--secondary); font-family: monospace; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; margin-top: 2rem; border-top: 1px solid var(--border); }
+        nav a { color: var(--text-accent); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        nav a:hover { color: var(--primary); }
+        @media (max-width: 768px) { .container { padding: 1rem; } section { padding: 2rem 1.5rem; } .chapter-number { font-size: 3.5rem; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="part-label">Часть II: Механика выбора</div>
+            <div class="chapter-number">19</div>
+            <h1>Информационная диета</h1>
+            <p class="subtitle">Ты — то, что потребляешь</p>
+            <div class="decoration-line"></div>
+        </header>
+
+        <section class="story-section visible">
+            <h2>История</h2>
+            <p class="lead">Дмитрий решился на эксперимент: месяц без новостей. Полный информационный детокс от всего, что «нужно знать».</p>
+
+            <p>Первую неделю было тяжело. Рука тянулась к телефону. В голове крутилось: «А вдруг что-то важное?» Он чувствовал себя отрезанным от мира.</p>
+
+            <p>Ко второй неделе что-то изменилось. Утренняя тревога, с которой он жил годами, начала таять. Мысли стали медленнее, яснее. Появилось время для чтения книг — настоящих, бумажных.</p>
+
+            <p>К концу месяца Дмитрий обнаружил странную вещь: ничего «важного» он не пропустил. Мир не рухнул. Войны и катастрофы продолжались без его осведомлённости, но его жизнь стала спокойнее.</p>
+
+            <p>«Я понял, — сказал он позже, — что новости — это не информация. Это эмоциональный наркотик. Они продают мне тревогу под видом "быть в курсе". А я покупал каждый день».</p>
+
+            <p>После эксперимента Дмитрий не вернулся к старым привычкам. Он ввёл строгую информационную диету: один новостной дайджест в неделю, никаких уведомлений, осознанный выбор того, что входит в его ум.</p>
+        </section>
+
+        <section>
+            <h2>Теоретический блок</h2>
+
+            <p class="lead">Информация — это пища для ума. Так же, как тело строится из того, что вы едите, сознание формируется из того, что вы потребляете.</p>
+
+            <h3>Три категории информационной пищи</h3>
+
+            <div class="food-category food-nutritious">
+                <h4>Питательное</h4>
+                <p>Учит, развивает, вдохновляет. Книги, качественные статьи, глубокие разговоры, обучающий контент. После потребления — чувствуете себя богаче, яснее, сильнее.</p>
+            </div>
+
+            <div class="food-category food-neutral">
+                <h4>Нейтральное</h4>
+                <p>Не вредит, но и не питает. Развлекательный контент средней руки, бессмысленный скроллинг. Время потрачено, но ни пользы, ни вреда.</p>
+            </div>
+
+            <div class="food-category food-toxic">
+                <h4>Токсичное</h4>
+                <p>Забирает энергию, пугает, злит, сравнивает. Негативные новости, токсичные дискуссии, контент, вызывающий зависть или тревогу. После потребления — чувствуете себя хуже.</p>
+            </div>
+
+            <h3>Бизнес-модель внимания</h3>
+
+            <p>Важно понимать: большинство медиа продают не информацию. Они продают ваше внимание рекламодателям. Их задача — захватить ваш взгляд любой ценой.</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Новости</h4>
+                    <p>Бизнес-модель, основанная на тревоге. «Срочно!» «Шокирующее!» Страх удерживает внимание лучше всего.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Соцсети</h4>
+                    <p>Бизнес-модель, основанная на сравнении. Вы видите лучшие моменты других и сравниваете со своей рутиной. Зависть удерживает.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Рекомендации</h4>
+                    <p>Алгоритмы не показывают «лучшее». Они показывают то, что удержит вас дольше. Часто — провокационное и поляризующее.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Ключевой вопрос:</strong> Вы выбираете, что потреблять? Или алгоритмы решают за вас? Если второе — ваше внимание не принадлежит вам.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Практический блок</h2>
+            <p class="lead">Семь техник для осознанного управления информационным потреблением.</p>
+
+            <div class="technique-card">
+                <span class="technique-number">19.1</span>
+                <h3 class="technique-title">Полный аудит</h3>
+                <p>Честный подсчёт того, сколько и чего вы потребляете.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Один день записывайте ВСЁ информационное потребление</li>
+                    <li>Соцсети, новости, ютуб, подкасты, разговоры, фоновое ТВ, реклама</li>
+                    <li>Для каждого: сколько времени? Какая эмоция после?</li>
+                    <li>В конце дня — подсчитайте общее время</li>
+                    <li>Честно посмотрите на картину</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 1 день мониторинга</span>
+                    <span class="meta-tag">Цель: Осознание</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Большинство людей в шоке от результатов. 3-5 часов в день на информационный шум — норма. Осознание — первый шаг к изменению.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">19.2</span>
+                <h3 class="technique-title">Сортировка по категориям</h3>
+                <p>Распределение источников по питательности.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите результаты аудита</li>
+                    <li>Для каждого источника определите: питательное, нейтральное или токсичное?</li>
+                    <li>Критерий: как я себя чувствую ПОСЛЕ?</li>
+                    <li>Посчитайте пропорции: сколько % питательного? Токсичного?</li>
+                    <li>Здоровая диета: максимум питательного, минимум токсичного</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 20-30 минут</span>
+                    <span class="meta-tag">Формат: Таблица</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> У большинства людей пропорция перевёрнута: много токсичного, мало питательного. Это как питаться фастфудом — выживать можно, но здоровья не будет.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">19.3</span>
+                <h3 class="technique-title">48-часовой детокс</h3>
+                <p>Полное отключение от информационного шума на два дня.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите 48 часов (лучше выходные)</li>
+                    <li>Никаких новостей, соцсетей, сериалов</li>
+                    <li>Только: живое общение, бумажные книги, природа, тишина</li>
+                    <li>Ведите дневник состояния: до, во время (каждые несколько часов), после</li>
+                    <li>Наблюдайте: что меняется в теле, в уме, в настроении?</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Длительность: 48 часов</span>
+                    <span class="meta-tag">Тип: Эксперимент</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Первые часы могут быть дискомфортными — это симптом зависимости. Потом приходит ясность, которую вы, возможно, забыли. Тишина — тоже информация.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">19.4</span>
+                <h3 class="technique-title">Замена токсичного</h3>
+                <p>Для каждого токсичного источника — здоровая альтернатива.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите список токсичных источников из сортировки</li>
+                    <li>Для каждого найдите замену, удовлетворяющую ту же потребность</li>
+                    <li>Вместо новостей — еженедельный дайджест</li>
+                    <li>Вместо бесконечного скроллинга — конкретный список: что именно хочу посмотреть</li>
+                    <li>Внедряйте замены постепенно</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Тип: Постепенное изменение</span>
+                    <span class="meta-tag">Ключ: Замена, не отказ</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Просто «бросить» не работает — возникает пустота, которая заполнится чем-то другим (часто тем же). Замена работает лучше, чем отказ.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">19.5</span>
+                <h3 class="technique-title">Информационные окна</h3>
+                <p>Выделенное время для соцсетей и новостей — за пределами окна не трогать.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Определите конкретное время для «шума»: например, 15 минут утром, 15 вечером</li>
+                    <li>За пределами этих окон — не открывать соцсети и новости</li>
+                    <li>Используйте таймеры и блокировщики приложений</li>
+                    <li>Строго соблюдайте границы</li>
+                    <li>Постепенно сокращайте окна, если хотите</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Тип: Структурирование</span>
+                    <span class="meta-tag">Инструменты: Таймеры, блокировщики</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Без границ потребление расползается на весь день. С окнами — вы контролируете, когда и сколько. Это огромная разница.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">19.6</span>
+                <h3 class="technique-title">Курирование ленты</h3>
+                <p>Осознанный выбор того, что вам показывают алгоритмы.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Пройдитесь по подпискам — отпишитесь от всего, что раздражает или опустошает</li>
+                    <li>Подпишитесь на то, что питает: образование, вдохновение, полезные навыки</li>
+                    <li>Используйте «не интересует» для нежелательного контента</li>
+                    <li>Помните: лента — это вы решаете, не алгоритм</li>
+                    <li>Регулярно (раз в месяц) пересматривайте подписки</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 30-60 минут</span>
+                    <span class="meta-tag">Частота: Раз в месяц</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Алгоритмы «обучаются» на вашем поведении. Если вы кликаете на негатив — они дадут больше негатива. Сознательно учите их показывать полезное.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">19.7</span>
+                <h3 class="technique-title">Диета одного источника</h3>
+                <p>Неделя глубокого погружения в один источник вместо поверхностного скольжения по многим.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите одну книгу / одного автора / одну тему</li>
+                    <li>На неделю — только это. Никакого другого информационного потребления</li>
+                    <li>Глубина вместо широты</li>
+                    <li>Заметьте, как меняется качество мышления</li>
+                    <li>После недели — рефлексия: что изменилось?</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Длительность: 1 неделя</span>
+                    <span class="meta-tag">Эффект: Глубина понимания</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Современный ум привык к мелкому — бесконечное переключение между кусочками. Погружение в одно показывает, какое богатство открывается в глубине.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Интеграция</h2>
+
+            <p class="lead">Информационная гигиена — такой же навык, как физическая. И такой же необходимый.</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Не отшельничество</h4>
+                    <p>Цель — не изоляция от мира. Цель — осознанное курирование. Выбирать, что входит в ум, вместо того чтобы глотать всё подряд.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Качество вместо количества</h4>
+                    <p>Лучше одна глубокая книга, чем сто поверхностных статей. Лучше один осмысленный разговор, чем бесконечный скролл.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Ключевой принцип:</strong> Ваше внимание — ваш самый ценный ресурс. Корпорации борются за него миллиардами. Если вы не защищаете его осознанно — оно будет украдено. Информационная диета — это акт самозащиты.</p>
+            </div>
+
+            <p>В следующей, заключительной главе Части II, мы поговорим о якорении решений — как закрепить выбор, чтобы он не размылся со временем.</p>
+        </section>
+
+        <div class="homework">
+            <h3>Домашнее задание</h3>
+            <ul class="task-list">
+                <li>Проведите 48-часовой информационный детокс. Ведите дневник состояния: до, во время, после</li>
+                <li>После детокса — проведите полный аудит своего информационного потребления за обычный день</li>
+                <li>Вычистите подписки: отпишитесь от токсичного, подпишитесь на питательное</li>
+            </ul>
+        </div>
+
+        <nav>
+            <a href="18.html">← Глава 18: Создание нового аттрактора</a>
+            <a href="20.html">Глава 20: Якорение решений →</a>
+        </nav>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section:not(.visible)').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>

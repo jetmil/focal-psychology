@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 11: Состояние неопределённости — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --bg-dark: #0f0f1a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #c4b5fd;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent),
+                radial-gradient(ellipse 40% 30% at 50% 80%, rgba(6, 182, 212, 0.05), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+
+        .part-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            background: rgba(168, 85, 247, 0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px var(--glow);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .decoration-line {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 2rem auto;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05));
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .story-section::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: rgba(99, 102, 241, 0.2);
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin: 2rem 0 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(99, 102, 241, 0.05));
+            border-left: 3px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .technique-card {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .technique-number {
+            position: absolute;
+            top: -0.75rem;
+            left: 1.5rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .technique-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .steps li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .steps li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .observation {
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 3px solid var(--secondary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .observation strong {
+            color: var(--secondary);
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .integration-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .integration-item h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .quantum-metaphor {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .quantum-symbol {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .quantum-metaphor h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .task-list li::before {
+            content: '[ ]';
+            color: var(--secondary);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        nav a {
+            color: var(--text-accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .part-intro {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.08));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .part-intro h2 {
+            color: var(--secondary);
+            border-bottom: none;
+            margin-bottom: 1rem;
+        }
+
+        .part-intro .subtitle {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .chapter-number {
+                font-size: 3.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .technique-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="part-label">Часть II: Механика выбора</div>
+            <div class="chapter-number">11</div>
+            <h1>Состояние неопределённости</h1>
+            <p class="subtitle">Суперпозиция, коллапс и действие</p>
+            <div class="decoration-line"></div>
+        </header>
+
+        <section class="part-intro visible">
+            <h2>Начало Части II</h2>
+            <p class="subtitle">Механика выбора</p>
+            <p class="lead">В первой части мы исследовали природу внимания — что это такое, как оно движется, откуда смотрит. Теперь мы переходим к более сложному вопросу: как внимание становится действием? Как неопределённость превращается в решение? Как суперпозиция возможностей схлопывается в одну конкретную реальность?</p>
+            <p>Следующие десять глав посвящены механике выбора — от состояния до решения, от решения до закрепления.</p>
+        </section>
+
+        <section class="story-section">
+            <h2>История</h2>
+            <p class="lead">В квантовой физике есть знаменитый мысленный эксперимент. Кота помещают в закрытую коробку с механизмом, который может сработать с вероятностью 50%. Пока коробка закрыта, кот одновременно жив и мёртв. Только когда наблюдатель открывает крышку — реальность «схлопывается» в одно из двух состояний.</p>
+
+            <p>Это метафора нашей жизни. Пока решение не принято, мы существуем во всех вариантах одновременно.</p>
+
+            <p>Андрей три года думал о переезде. Каждый вечер он мысленно уезжал и оставался. Представлял новый город — и видел, как остаётся в старом. Собирал информацию о переезде — и искал причины остаться. Он жил сразу в двух реальностях, и это истощало его больше, чем любой конкретный выбор мог бы.</p>
+
+            <p>«Я думаю об этом каждый день», — говорил он. Но он не думал. Он мучился. Разница огромна. Думать — значит продвигаться к решению. Мучиться — значит бесконечно вращаться в неопределённости, не позволяя ни одной реальности стать настоящей.</p>
+
+            <p>Однажды друг спросил его: «Ты понимаешь, что платишь за нерешённость каждый день? Это не бесплатное ожидание. Это постоянный расход».</p>
+
+            <p>Это был поворотный момент. Андрей впервые увидел, что суперпозиция — не нейтральное состояние. Оно имеет цену. И эта цена накапливается с каждым днём.</p>
+        </section>
+
+        <section>
+            <h2>Теоретический блок</h2>
+
+            <div class="quantum-metaphor">
+                <div class="quantum-symbol">|ψ⟩</div>
+                <h3>Психологическая суперпозиция</h3>
+                <p>Пока решение не принято — все варианты существуют одновременно. Это не метафора. В психике реально присутствует несколько «будущих я».</p>
+            </div>
+
+            <p class="lead">В квантовой механике частица находится во всех возможных состояниях, пока не произведено измерение. В момент измерения — волновая функция коллапсирует, и частица оказывается в конкретном месте.</p>
+
+            <p>То же самое происходит с нашим вниманием и нашими решениями. Пока вы не выбрали — вы существуете во множестве возможных реальностей. Часть вас уже переехала. Часть — осталась. Часть — нашла третий вариант. И все эти «вы» одновременно присутствуют в вашем сознании, требуя энергии на своё поддержание.</p>
+
+            <h3>Почему неопределённость энергозатратна</h3>
+
+            <p>Держать открытыми несколько реальностей — это как запустить несколько тяжёлых программ одновременно. Процессор греется. Батарея садится. Вы устаёте, даже ничего не делая, потому что делаете слишком много — в своём воображении.</p>
+
+            <div class="highlight-box">
+                <p>Каждый нерешённый вопрос — это открытая вкладка в вашем сознании. Чем больше вкладок открыто, тем медленнее работает вся система. Закрытие вкладки (решение) освобождает ресурсы.</p>
+            </div>
+
+            <h3>Полезная неопределённость vs. паралич выбора</h3>
+
+            <p>Важно различать два типа пребывания в суперпозиции:</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Полезная неопределённость</h4>
+                    <p>Временное состояние сбора информации. Вы исследуете варианты, тестируете гипотезы, собираете данные. Это активный процесс с понятным горизонтом.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Паралич выбора</h4>
+                    <p>Застревание без продвижения. Вы не собираете информацию — вы бесконечно пережёвываете одно и то же. Нет дедлайна, нет критериев решения, нет выхода.</p>
+                </div>
+            </div>
+
+            <h3>Как распознать паралич</h3>
+
+            <p>Признаки того, что вы застряли в бесполезной суперпозиции:</p>
+            <ul class="steps">
+                <li>Вы думаете об этом больше месяца без продвижения</li>
+                <li>Каждый раз приходите к тем же аргументам «за» и «против»</li>
+                <li>Новая информация не меняет вашего понимания ситуации</li>
+                <li>Вы избегаете разговоров об этом — потому что устали от себя</li>
+                <li>Энергия уходит на само сомнение, а не на решение</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p>Если вы думаете об одном и том же вопросе больше трёх раз без нового понимания — вы не думаете. Вы застряли. Нужен другой подход.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Практический блок</h2>
+            <p class="lead">Семь техник для работы с неопределённостью — от её исследования до выхода из неё.</p>
+
+            <div class="technique-card">
+                <span class="technique-number">11.1</span>
+                <h3 class="technique-title">Картирование суперпозиции</h3>
+                <p>Визуализация всех возможных реальностей, чтобы увидеть их целиком, а не метаться между ними.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите нерешённый вопрос, который давно висит</li>
+                    <li>Выпишите ВСЕ варианты — даже абсурдные, даже те, которые «точно нет»</li>
+                    <li>Для каждого варианта напишите: «Если я выберу это, моя жизнь через год будет выглядеть так...»</li>
+                    <li>Опишите каждую реальность в деталях — место, люди, ощущения</li>
+                    <li>Нарисуйте это как развилку дорог: вы в центре, пути расходятся</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 30-40 минут</span>
+                    <span class="meta-tag">Частота: При каждом важном решении</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Когда варианты выписаны — они становятся менее пугающими. Вы видите, что каждый путь ведёт куда-то конкретное. Страх исчезает, когда неопределённость получает форму.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">11.2</span>
+                <h3 class="technique-title">Проживание в неопределённости</h3>
+                <p>Намеренное пребывание в суперпозиции, чтобы научиться её выносить.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выделите 10 минут в тихом месте</li>
+                    <li>Вызовите нерешённый вопрос в сознание</li>
+                    <li>Намеренно НЕ решайте. Не склоняйтесь ни в одну сторону</li>
+                    <li>Держите все варианты открытыми одновременно</li>
+                    <li>Наблюдайте, что происходит в теле: напряжение? зуд? тревога? или любопытство?</li>
+                    <li>Оставайтесь в этом состоянии, не сбегая в решение</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 10-15 минут</span>
+                    <span class="meta-tag">Цель: Развитие толерантности к неопределённости</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Многие люди настолько боятся неопределённости, что хватаются за любое решение, лишь бы закончить дискомфорт. Эта техника тренирует способность находиться в открытом вопросе без паники.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">11.3</span>
+                <h3 class="technique-title">Телесный отклик на варианты</h3>
+                <p>Использование мудрости тела для диагностики «правильного» выбора.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Сядьте удобно, закройте глаза, сделайте несколько глубоких вдохов</li>
+                    <li>Представьте себя в варианте А — как будто вы уже там, уже выбрали</li>
+                    <li>Просканируйте тело: где легко, где сжато? Как дышится? Как в груди?</li>
+                    <li>Запомните ощущения, вернитесь в нейтральное состояние</li>
+                    <li>Теперь представьте вариант Б — так же детально</li>
+                    <li>Снова просканируйте тело. Сравните ощущения</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-20 минут</span>
+                    <span class="meta-tag">Условие: Телесная чувствительность</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Тело часто знает ответ раньше ума. Там, где лёгкость и свобода дыхания — обычно «ваш» вариант. Где сжатие и задержка дыхания — там сопротивление.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">11.4</span>
+                <h3 class="technique-title">Временная шкала суперпозиции</h3>
+                <p>Осознание цены, которую вы платите за нерешённость.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Вспомните, когда именно этот вопрос впервые встал. Сколько дней/месяцев/лет назад?</li>
+                    <li>Подсчитайте: сколько часов вы потратили на размышления об этом?</li>
+                    <li>Оцените: сколько энергии это забрало? Какие решения не приняли, пока зависли в этом?</li>
+                    <li>Спросите себя: какую цену я плачу за каждый дополнительный день без решения?</li>
+                    <li>Установите чёткий дедлайн: «Я принимаю решение до [дата]»</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15 минут</span>
+                    <span class="meta-tag">Тип: Анализ и планирование</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Когда вы видите реальную цену нерешённости в часах и энергии — мотивация принять решение резко возрастает. Нерешённость перестаёт казаться «безопасной».
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">11.5</span>
+                <h3 class="technique-title">Разрешение на не-решение</h3>
+                <p>Осознанный выбор отложить решение — без фоновой тревоги.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Убедитесь, что решение не срочное и может подождать</li>
+                    <li>Скажите себе вслух: «Я официально принимаю решение НЕ принимать это решение до [конкретная дата]»</li>
+                    <li>Запишите это. Поставьте напоминание на выбранную дату</li>
+                    <li>До этой даты — запретите себе думать об этом. Как только мысль появляется — «Я решу это [дата], сейчас не время»</li>
+                    <li>Освободившееся внимание направьте на что-то конкретное</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 5 минут на установку</span>
+                    <span class="meta-tag">Эффект: Освобождение фоновых ресурсов</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Парадоксально, но осознанное решение «не решать сейчас» снимает напряжение лучше, чем бесконечные метания. Вы закрываете вкладку до определённой даты.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">11.6</span>
+                <h3 class="technique-title">Минимальный эксперимент</h3>
+                <p>Вместо «большого решения» — маленький тест, дающий реальные данные.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Определите, что именно вы хотите проверить (не решить, а именно проверить)</li>
+                    <li>Придумайте минимальный эксперимент. Хотите переехать? Поживите в новом месте неделю</li>
+                    <li>Хотите сменить работу? Возьмите отпуск и день поработайте в новой сфере</li>
+                    <li>Проведите эксперимент с открытым вниманием — наблюдайте за своими реакциями</li>
+                    <li>После эксперимента — не спешите с выводами. Дайте информации осесть</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: Зависит от эксперимента</span>
+                    <span class="meta-tag">Тип: Сбор реальных данных</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Реальный опыт стоит тысячи размышлений. Один день в новом городе даёт больше информации, чем год фантазий о переезде. Эксперименты превращают абстракцию в конкретику.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">11.7</span>
+                <h3 class="technique-title">«Что, если оба варианта правильные?»</h3>
+                <p>Снятие давления «единственно верного выбора».</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите свой нерешённый вопрос</li>
+                    <li>Допустите мысль: нет «правильного» и «неправильного» выбора</li>
+                    <li>Представьте, что оба пути ведут к чему-то ценному — просто к разному ценному</li>
+                    <li>Для каждого варианта найдите: что уникально хорошего случится именно на этом пути?</li>
+                    <li>Почувствуйте, как снижается давление, когда убираете страх «ошибиться»</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 10-15 минут</span>
+                    <span class="meta-tag">Тип: Когнитивное переосмысление</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Большинство жизненных решений — не про «правильно/неправильно», а про «что я выбираю создать». На каждом пути есть свои дары. Страх ошибки часто парализует больше, чем сама «ошибка» когда-либо могла бы.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Интеграция</h2>
+
+            <p class="lead">Суперпозиция — не враг. Это место силы, если вы не застреваете в нём.</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Суперпозиция как ресурс</h4>
+                    <p>В состоянии открытых возможностей у вас есть доступ ко всем вариантам. Вы можете исследовать, пробовать, чувствовать. Это драгоценное время — до того, как реальность «застынет».</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Суперпозиция как ловушка</h4>
+                    <p>Если вы застреваете — суперпозиция становится тюрьмой. Бесконечное «что, если» без продвижения. Энергия утекает на поддержание всех возможных «я», ни одно из которых не живёт по-настоящему.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Ключевой навык:</strong> Уметь входить в суперпозицию (для исследования) и выходить из неё (для решения). Свобода — это способность делать и то, и другое по своей воле.</p>
+            </div>
+
+            <p>Неопределённость — не противоположность жизни. Это её часть. Умение находиться в открытом вопросе без паники, собирать информацию без спешки, а потом — решительно действовать — это признак зрелости внимания.</p>
+
+            <p>В следующей главе мы поговорим о внутренних голосах, которые спорят во время принятия решения — о хороводе советчиков внутри вас.</p>
+        </section>
+
+        <div class="homework">
+            <h3>Домашнее задание</h3>
+            <ul class="task-list">
+                <li>Составьте список всех «открытых суперпозиций» в вашей жизни сейчас — нерешённых вопросов, висящих дел, откладываемых выборов. Сколько их? Сколько энергии они в сумме забирают?</li>
+                <li>Выберите одну суперпозицию (не самую сложную) и проведите минимальный эксперимент. Вместо размышлений — соберите реальный опыт.</li>
+                <li>Для другой суперпозиции — установите конкретный дедлайн решения и официально дайте себе разрешение не думать об этом до дедлайна.</li>
+            </ul>
+        </div>
+
+        <nav>
+            <a href="10.html">← Глава 10: Калибровка нуля</a>
+            <a href="12.html">Глава 12: Хоровод советчиков →</a>
+        </nav>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section:not(.visible)').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

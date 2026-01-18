@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 12: Хоровод советчиков — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --bg-dark: #0f0f1a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #c4b5fd;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent),
+                radial-gradient(ellipse 40% 30% at 50% 80%, rgba(6, 182, 212, 0.05), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+
+        .part-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            background: rgba(168, 85, 247, 0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px var(--glow);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .decoration-line {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 2rem auto;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05));
+            border-color: rgba(99, 102, 241, 0.2);
+            position: relative;
+        }
+
+        .story-section::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: rgba(99, 102, 241, 0.2);
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin: 2rem 0 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(99, 102, 241, 0.05));
+            border-left: 3px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .technique-card {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .technique-number {
+            position: absolute;
+            top: -0.75rem;
+            left: 1.5rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .technique-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .steps li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .steps li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .observation {
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 3px solid var(--secondary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .observation strong {
+            color: var(--secondary);
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .integration-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .integration-item h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .subpersonality-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .subpersonality-card h4 {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .subpersonality-card .role {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+
+        .council-visual {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .council-visual h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .task-list li::before {
+            content: '[ ]';
+            color: var(--secondary);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        nav a {
+            color: var(--text-accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .dialogue-example {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+        }
+
+        .dialogue-line {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            border-left: 2px solid transparent;
+        }
+
+        .dialogue-line.critic { border-color: #ef4444; }
+        .dialogue-line.adventurer { border-color: #22c55e; }
+        .dialogue-line.child { border-color: #f59e0b; }
+        .dialogue-line.wise { border-color: #6366f1; }
+
+        .dialogue-speaker {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .chapter-number {
+                font-size: 3.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .technique-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="part-label">Часть II: Механика выбора</div>
+            <div class="chapter-number">12</div>
+            <h1>Хоровод советчиков</h1>
+            <p class="subtitle">Внутренний парламент и искусство модерации</p>
+            <div class="decoration-line"></div>
+        </header>
+
+        <section class="story-section visible">
+            <h2>История</h2>
+            <p class="lead">Вы когда-нибудь замечали, что «внутренний голос» — это не один голос? Что внутри вас идёт постоянное совещание, где разные части спорят, убеждают, критикуют друг друга?</p>
+
+            <p>Марина сидела над пустым заявлением об увольнении. Голова гудела от внутренних разговоров.</p>
+
+            <p>«Давай! — кричал кто-то внутри. — Хватит терпеть! Жизнь одна!»</p>
+
+            <p>«Ты с ума сошла? — возражал другой голос. — А кредит? А стабильность? Что скажут родители?»</p>
+
+            <p>«Может, ещё подождать... — робко вступал третий. — Вдруг само как-нибудь...»</p>
+
+            <p>«Эх, помнишь, как мечтала стать художницей? — вздыхал четвёртый. — А теперь вот, отчёты...»</p>
+
+            <p>Марина схватилась за голову. «Кто я в этом хоре? Который голос — настоящий я?»</p>
+
+            <p>Это был правильный вопрос. Но ответ на него неочевиден. Ни один из голосов не является «настоящим вами». И одновременно — все они являются. Они — ваш внутренний парламент. Ваш хоровод советчиков. И вам не нужно выбирать между ними — вам нужно научиться их слышать и модерировать.</p>
+        </section>
+
+        <section>
+            <h2>Теоретический блок</h2>
+
+            <p class="lead">Субличности — не патология, а норма. У каждого человека внутри живёт множество «персонажей», сформированных в разное время и по разным причинам.</p>
+
+            <h3>Откуда берутся субличности</h3>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Возрастные слои</h4>
+                    <p>Внутри вас живут все возрасты: испуганный трёхлетка, бунтующий подросток, молодой мечтатель. Они не исчезли — они «записаны» в психике.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Социальные роли</h4>
+                    <p>Вы — разные люди с коллегами, с родителями, с друзьями, наедине с собой. Эти роли тоже становятся «голосами».</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Интроекты</h4>
+                    <p>Голоса родителей, учителей, культуры. «Так не делают», «Ты должен», «Что люди подумают» — всё это интернализированные голоса других.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Защитные части</h4>
+                    <p>Критик, который спасал от ошибок. Осторожный, который берёг от боли. Они появились как защита — и остались.</p>
+                </div>
+            </div>
+
+            <h3>Типичные персонажи внутреннего хоровода</h3>
+
+            <div class="subpersonality-card">
+                <h4>Критик</h4>
+                <p class="role">Защитник от ошибок и позора</p>
+                <p>Видит недостатки, предупреждает об опасностях, не даёт расслабиться. Его положительное намерение — защитить вас от провала. Его теневая сторона — парализующий перфекционизм.</p>
+            </div>
+
+            <div class="subpersonality-card">
+                <h4>Авантюрист</h4>
+                <p class="role">Искатель новизны и приключений</p>
+                <p>Хочет риска, свободы, новых горизонтов. Его положительное намерение — дать вам жить полной жизнью. Его теневая сторона — безрассудство и неспособность к стабильности.</p>
+            </div>
+
+            <div class="subpersonality-card">
+                <h4>Внутренний ребёнок</h4>
+                <p class="role">Хранитель желаний и эмоций</p>
+                <p>Чувствует глубоко, хочет любви и игры, боится отвержения. Его положительное намерение — сохранить живость и спонтанность. Его теневая сторона — инфантильность и капризность.</p>
+            </div>
+
+            <div class="subpersonality-card">
+                <h4>Контролёр</h4>
+                <p class="role">Гарант безопасности и порядка</p>
+                <p>Планирует, контролирует, предусматривает. Его положительное намерение — стабильность и предсказуемость. Его теневая сторона — тревожность и неспособность отпустить.</p>
+            </div>
+
+            <div class="subpersonality-card">
+                <h4>Мудрец</h4>
+                <p class="role">Голос интуиции и глубинного знания</p>
+                <p>Говорит тихо, но точно. Видит дальше, чем другие голоса. Его положительное намерение — вести к истине. Его теневая сторона — может быть слишком тихим, чтобы его услышать в шуме других.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Важный принцип:</strong> У каждой субличности — позитивное намерение. Даже самый «вредный» голос когда-то возник, чтобы вас защитить. Понять это намерение — ключ к сотрудничеству с ним.</p>
+            </div>
+
+            <h3>Почему возникает конфликт</h3>
+
+            <p>Субличности хотят разного — и это нормально. Проблема начинается, когда:</p>
+            <ul class="steps">
+                <li>Одна часть подавляет другие (например, Контролёр затыкает Авантюриста)</li>
+                <li>Части не слышат друг друга и говорят одновременно</li>
+                <li>Вы отождествляетесь с одной частью, считая её «собой», а остальные — «не собой»</li>
+                <li>Нет «модератора» — того, кто слушает всех и принимает окончательное решение</li>
+            </ul>
+
+            <div class="council-visual">
+                <h3>Кто вы в этом хороводе?</h3>
+                <p>Вы — не один из голосов. Вы — тот, кто слышит всех. Вы — модератор совещания, председатель внутреннего парламента. Ваша работа — не убить часть себя, а услышать каждого и принять мудрое решение.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Практический блок</h2>
+            <p class="lead">Семь техник для работы с внутренним хороводом — от знакомства до интеграции.</p>
+
+            <div class="technique-card">
+                <span class="technique-number">12.1</span>
+                <h3 class="technique-title">Перепись населения</h3>
+                <p>Знакомство со своими субличностями — первый шаг к осознанной работе с ними.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Вспомните моменты принятия важных решений. Какие «голоса» вы слышали?</li>
+                    <li>Выпишите каждый голос отдельно: что он обычно говорит? Какой у него тон?</li>
+                    <li>Дайте каждому имя — не обязательно «Критик», может быть «Бабушка Нина» или «Осторожный заяц»</li>
+                    <li>Для каждого опишите: возраст, внешность, характерные фразы</li>
+                    <li>Отметьте: какое позитивное намерение у каждого? О чём он заботится?</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 30-40 минут</span>
+                    <span class="meta-tag">Минимум: 5 субличностей</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Когда субличности получают имена — с ними легче работать. «Голос, который критикует» становится «Строгим Учителем», и с ним можно разговаривать как с персонажем.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">12.2</span>
+                <h3 class="technique-title">Визуализация хоровода</h3>
+                <p>Создание визуального образа внутреннего «совета».</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Сядьте удобно, закройте глаза, расслабьтесь</li>
+                    <li>Представьте круглый стол в комнате — это ваш внутренний совет</li>
+                    <li>Позвольте субличностям занять свои места. Кто где сидит? Кто рядом, кто далеко?</li>
+                    <li>Рассмотрите каждого: как они выглядят? Во что одеты? Какая поза?</li>
+                    <li>Обратите внимание: кто громче всех? Кто молчит? Кто с кем конфликтует?</li>
+                    <li>Где вы — модератор — находитесь? Видите ли вы всех?</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-20 минут</span>
+                    <span class="meta-tag">Тип: Визуализация</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Расположение за столом говорит о многом. Если Критик сидит ближе всех к вам — его голос самый громкий. Если кто-то в углу — эта часть подавлена.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">12.3</span>
+                <h3 class="technique-title">Слово каждому</h3>
+                <p>Дать каждой субличности высказаться по конкретному вопросу.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите конкретный нерешённый вопрос</li>
+                    <li>По очереди обращайтесь к каждой субличности: «[Имя], что ты думаешь о...?»</li>
+                    <li>Дайте каждому высказаться полностью, не перебивая</li>
+                    <li>Записывайте их ответы — от первого лица («Я считаю, что...»)</li>
+                    <li>После всех выступлений — прочитайте записи. Что нового вы узнали?</li>
+                </ul>
+
+                <div class="dialogue-example">
+                    <div class="dialogue-line critic">
+                        <span class="dialogue-speaker">Критик:</span> «Если ты уйдёшь с работы, ты провалишься. Ты недостаточно хорош для свободного плавания. Помни, как в прошлый раз...»
+                    </div>
+                    <div class="dialogue-line adventurer">
+                        <span class="dialogue-speaker">Авантюрист:</span> «Слушай, жизнь одна! Ты что, хочешь через 30 лет жалеть, что не попробовал? Давай, прыгай!»
+                    </div>
+                    <div class="dialogue-line child">
+                        <span class="dialogue-speaker">Ребёнок:</span> «Мне страшно. А вдруг не получится, и все будут смеяться? Но я так хочу рисовать...»
+                    </div>
+                    <div class="dialogue-line wise">
+                        <span class="dialogue-speaker">Мудрец:</span> «Может быть, не нужно всё или ничего. Есть промежуточные шаги. Послушай всех, но реши сам.»
+                    </div>
+                </div>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 20-30 минут</span>
+                    <span class="meta-tag">Формат: Письменно</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Когда голоса записаны — они перестают крутиться в голове. Вы видите всю картину целиком, а не тонете в хаосе одновременных криков.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">12.4</span>
+                <h3 class="technique-title">Поиск позитивного намерения</h3>
+                <p>Обнаружение глубинной заботы за каждым голосом — даже неприятным.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите субличность, которая вас раздражает или мешает</li>
+                    <li>Спросите её: «Что ты хочешь для меня? О чём ты заботишься?»</li>
+                    <li>Слушайте не слова, а намерение за словами</li>
+                    <li>Критик защищает от ошибок, Тревожный — от боли, Контролёр — от хаоса</li>
+                    <li>Поблагодарите субличность за заботу. Искренне</li>
+                    <li>Спросите: «Есть ли другой способ защищать меня, менее болезненный?»</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-20 минут</span>
+                    <span class="meta-tag">Тип: Внутренний диалог</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Когда вы понимаете, что «вредная» часть на самом деле пытается вас защитить — отношение к ней меняется. Враг становится союзником с устаревшими методами.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">12.5</span>
+                <h3 class="technique-title">Модератор совещания</h3>
+                <p>Введение «председателя», который слушает всех, но решает сам.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Представьте себя как модератора внутреннего совета</li>
+                    <li>Ваша позиция — не внутри круга, а во главе стола</li>
+                    <li>Когда субличности спорят — поднимите руку: «Я слышу вас всех. Сейчас говорит [имя]»</li>
+                    <li>После всех выступлений — резюмируйте: «Я услышал следующее...»</li>
+                    <li>Объявите решение: «Учитывая всё, что вы сказали, я решаю...»</li>
+                    <li>Поблагодарите каждого за вклад</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-25 минут</span>
+                    <span class="meta-tag">Тип: Управление внутренним диалогом</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Ключевой сдвиг: вы — не один из голосов, а тот, кто их слушает и решает. Это создаёт внутреннюю иерархию, где есть центр принятия решений.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">12.6</span>
+                <h3 class="technique-title">Диалог двух противоположных</h3>
+                <p>Письменный диалог между двумя конфликтующими частями — до достижения понимания.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите две субличности, которые противоречат друг другу</li>
+                    <li>Возьмите лист бумаги, разделите на две колонки</li>
+                    <li>Начните диалог. Одна часть говорит — записываете. Вторая отвечает — записываете</li>
+                    <li>Пишите от первого лица каждой части</li>
+                    <li>Продолжайте, пока не произойдёт сдвиг: они услышат друг друга, найдут общее, достигнут компромисса</li>
+                    <li>Завершите, зафиксировав договорённость</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 20-30 минут</span>
+                    <span class="meta-tag">Формат: Двухколоночный диалог</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Конфликтующие части часто хотят одного — но разными путями. Авантюрист и Осторожный оба хотят вашего благополучия. Когда они это понимают — находят общий язык.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">12.7</span>
+                <h3 class="technique-title">Ролевое проживание</h3>
+                <p>Прожить день «от лица» одной субличности, чтобы понять её логику изнутри.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите субличность, которую хотите понять лучше</li>
+                    <li>Посвятите один день (или несколько часов) проживанию от её лица</li>
+                    <li>Как бы Авантюрист провёл этот вечер? Что бы выбрал?</li>
+                    <li>Как бы Критик начал рабочий день? На что бы обращал внимание?</li>
+                    <li>Наблюдайте: каково это — быть этой частью? Что становится понятно изнутри?</li>
+                    <li>После — выйдите из роли и запишите инсайты</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: Несколько часов — день</span>
+                    <span class="meta-tag">Тип: Эмпатическое погружение</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Когда вы проживаете день от лица субличности — вы начинаете чувствовать её мотивацию. Критик оказывается не садистом, а тревожным защитником. Авантюрист — не безответственным, а жаждущим жизни.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Интеграция</h2>
+
+            <p class="lead">Зрелость — это когда субличности сотрудничают, а не воюют. Когда внутренний парламент принимает решения большинством, а не гражданской войной.</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Что значит «интегрировать»</h4>
+                    <p>Не убить или подавить часть себя. Не выбрать «правильный» голос и заглушить остальные. А дать место каждому — с признанием его ценности и ограничений.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Признаки интеграции</h4>
+                    <p>Вы слышите разные голоса, но не тонете в них. Вы можете дать слово каждому и принять решение, которое учитывает всех. Внутренний шум становится внутренним советом.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>«Я» — это не один из голосов, а тот, кто слушает всех.</strong> Вы не Критик, не Авантюрист, не Ребёнок. Вы — осознание, которое может наблюдать каждого из них. Это понимание — ключ к внутренней свободе.</p>
+            </div>
+
+            <p>В следующей главе мы перейдём от слушания к действию: как превратить внутреннее совещание в решение? Как происходит коллапс суперпозиции в конкретный выбор?</p>
+        </section>
+
+        <div class="homework">
+            <h3>Домашнее задание</h3>
+            <ul class="task-list">
+                <li>Составьте «перепись населения» — опишите минимум 5 своих субличностей с именами, характеристиками и позитивными намерениями</li>
+                <li>Проведите «совещание» по одному нерешённому вопросу: дайте слово каждой субличности, запишите их позиции, примите решение как модератор</li>
+                <li>Выберите одну «неприятную» субличность и найдите её позитивное намерение. Поблагодарите её за заботу</li>
+            </ul>
+        </div>
+
+        <nav>
+            <a href="11.html">← Глава 11: Состояние неопределённости</a>
+            <a href="13.html">Глава 13: Коллапс в решение →</a>
+        </nav>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section:not(.visible)').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

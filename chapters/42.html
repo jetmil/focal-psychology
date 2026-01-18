@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 42: Где заканчивается помощь | Фокальная психология</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #553c9a;
+            --secondary-color: #805ad5;
+            --accent-color: #b794f4;
+            --boundary-color: #ed8936;
+            --text-color: #e2e8f0;
+            --text-muted: #a0aec0;
+            --bg-gradient-start: #1a1a2e;
+            --bg-gradient-end: #16213e;
+            --card-bg: rgba(85, 60, 154, 0.12);
+            --border-color: rgba(183, 148, 244, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-color);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .horizon-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .horizon-line {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), var(--boundary-color), var(--accent-color), transparent);
+            opacity: 0.4;
+            animation: horizonPulse 5s ease-in-out infinite;
+        }
+
+        .path-fade {
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 300px;
+            background: linear-gradient(to top, var(--accent-color), transparent);
+            opacity: 0.1;
+            clip-path: polygon(40% 100%, 60% 100%, 55% 0%, 45% 0%);
+        }
+
+        .boundary-marker {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.15;
+            animation: markerFloat 7s ease-in-out infinite;
+        }
+
+        .boundary-marker:nth-child(3) {
+            top: 25%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .boundary-marker:nth-child(4) {
+            top: 45%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .boundary-marker:nth-child(5) {
+            bottom: 35%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        @keyframes horizonPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes markerFloat {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.1; }
+            50% { transform: translateY(-15px) scale(1.1); opacity: 0.2; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .part-label {
+            text-align: center;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 40px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 0.2s;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .chapter-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            background: linear-gradient(135deg, var(--text-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.3em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        .story-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1.15em;
+            line-height: 2;
+            color: var(--text-color);
+        }
+
+        .story-text::first-letter {
+            font-size: 3.5em;
+            float: left;
+            line-height: 1;
+            padding-right: 15px;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(183, 148, 244, 0.15), rgba(183, 148, 244, 0.05));
+            border-left: 4px solid var(--accent-color);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .boundary-box {
+            background: linear-gradient(135deg, rgba(237, 137, 54, 0.15), rgba(237, 137, 54, 0.05));
+            border-left: 4px solid var(--boundary-color);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .technique-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.9));
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--boundary-color));
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .technique-number {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .technique-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5em;
+            color: var(--text-color);
+        }
+
+        .technique-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(183, 148, 244, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: var(--accent-color);
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .steps-list li {
+            padding: 15px 0 15px 50px;
+            position: relative;
+            border-bottom: 1px solid rgba(183, 148, 244, 0.1);
+        }
+
+        .steps-list li:last-child {
+            border-bottom: none;
+        }
+
+        .steps-list li::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--accent-color);
+        }
+
+        .observation {
+            background: rgba(128, 90, 213, 0.2);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-style: italic;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .observation strong {
+            color: var(--accent-color);
+            font-style: normal;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .scenario-card {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(183, 148, 244, 0.2);
+        }
+
+        .scenario-title {
+            font-family: 'Merriweather', serif;
+            color: var(--accent-color);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scenario-content {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        .dialogue-example {
+            background: rgba(85, 60, 154, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .dialogue-line {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(183, 148, 244, 0.1);
+        }
+
+        .dialogue-line:last-child {
+            border-bottom: none;
+        }
+
+        .dialogue-speaker {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .dialogue-text {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .homework-section {
+            background: linear-gradient(135deg, rgba(183, 148, 244, 0.2), rgba(183, 148, 244, 0.05));
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .homework-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6em;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .homework-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .homework-list li {
+            padding: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            border-bottom: 1px solid rgba(183, 148, 244, 0.2);
+        }
+
+        .homework-list li:last-child {
+            border-bottom: none;
+        }
+
+        .homework-list li::before {
+            content: '📝';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3em;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--bg-gradient-start);
+            transform: translateY(-2px);
+        }
+
+        .nav-home {
+            padding: 15px 25px;
+            background: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-title {
+                font-size: 2em;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .technique-card {
+                padding: 25px 20px;
+            }
+
+            .navigation {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="horizon-bg">
+        <div class="horizon-line"></div>
+        <div class="path-fade"></div>
+        <div class="boundary-marker">🚪</div>
+        <div class="boundary-marker">🌅</div>
+        <div class="boundary-marker">🛤️</div>
+    </div>
+
+    <div class="container">
+        <div class="part-label">Часть V: Мастерство и границы</div>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Глава 42</div>
+            <h1 class="chapter-title">Где заканчивается помощь</h1>
+            <p class="chapter-subtitle">Этика и ответственность в работе с другими</p>
+        </header>
+
+        <section class="content-section">
+            <h2 class="section-title"><span class="section-icon">📖</span> Невидимая черта</h2>
+            <div class="story-text">
+                <p>Когда подруга Анны узнала, что та изучает фокальную психологию, она попросила помочь разобраться с «депрессией». Анна с энтузиазмом согласилась — применила техники переключения внимания, работала с внутренним критиком, практиковала ресурсирование. Поначалу казалось, что помогает. Но через месяц подруга призналась: «Мне хуже. Я притворялась, что становится лучше, потому что не хотела тебя разочаровать».</p>
+            </div>
+            <p>Анна была в шоке. Она искренне хотела помочь. Она использовала техники правильно. Но она совершила несколько критических ошибок: взяла на себя роль, для которой не была готова; не увидела, что «депрессия» подруги — не бытовая грусть, а клиническое состояние; создала отношения, в которых подруге было неудобно быть честной.</p>
+            <p>Эта глава — о границах помощи. О том, где заканчиваются наши полномочия, когда мы делимся техниками с другими. О разнице между поддержкой и терапией. О защите себя и другого.</p>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title"><span class="section-icon">⚖️</span> Три роли: не путать</h2>
+
+            <div class="scenario-grid">
+                <div class="scenario-card">
+                    <h3 class="scenario-title">🤝 Друг</h3>
+                    <div class="scenario-content">
+                        <p><strong>Что можно:</strong> Слушать, поддерживать, делиться опытом («Мне помогла эта техника»), быть рядом.</p>
+                        <p><strong>Что нельзя:</strong> Анализировать, интерпретировать, давать диагнозы, систематически «лечить».</p>
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <h3 class="scenario-title">📚 Практик-любитель</h3>
+                    <div class="scenario-content">
+                        <p><strong>Что можно:</strong> Практиковать на себе, делиться знаниями в формате «я делаю так», проводить взаимные практики с равными.</p>
+                        <p><strong>Что нельзя:</strong> Брать ответственность за результат, работать с травмой, принимать оплату за «сессии».</p>
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <h3 class="scenario-title">🎓 Специалист</h3>
+                    <div class="scenario-content">
+                        <p><strong>Что можно:</strong> Всё вышеперечисленное плюс систематическая работа, ответственность, работа со сложными случаями.</p>
+                        <p><strong>Требует:</strong> Образования, супервизии, личной терапии, этического кодекса.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boundary-box">
+                <p><strong>Критически важно:</strong> Большинство читателей этой книги — практики-любители или друзья, желающие помочь. Это прекрасная роль, но она имеет чёткие границы. Выход за эти границы — не подвиг, а безответственность.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title"><span class="section-icon">🔧</span> Правила безопасной помощи</h2>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">1</div>
+                    <h3 class="technique-title">Техника «Честный контракт»</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> 5 минут</span>
+                    <span class="meta-tag"><span>📋</span> Перед любой помощью</span>
+                </div>
+                <p>Прояснение ролей и ожиданий до начала любой практики с другим человеком.</p>
+                <ol class="steps-list">
+                    <li data-step="1">Скажите прямо: «Я не психолог. Я просто человек, который практикует некоторые техники и готов поделиться опытом».</li>
+                    <li data-step="2">Проясните границы: «Если тебе станет хуже или ты почувствуешь, что это не помогает — скажи сразу. Это нормально».</li>
+                    <li data-step="3">Договоритесь о формате: «Мы можем попробовать одну технику. Это не терапия, это эксперимент».</li>
+                    <li data-step="4">Оставьте выход: «В любой момент можем остановиться, и это не будет означать провал».</li>
+                </ol>
+                <div class="observation">
+                    <strong>Почему важно:</strong> Честный контракт снимает скрытые ожидания и защищает обе стороны от разочарования.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">2</div>
+                    <h3 class="technique-title">Правило «Не глубже, чем сам»</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> Постоянно</span>
+                    <span class="meta-tag"><span>🎯</span> Ограничитель глубины</span>
+                </div>
+                <p>Вы можете помогать другому только в тех областях, которые проработали у себя.</p>
+                <ol class="steps-list">
+                    <li data-step="1">Перед помощью спросите себя: «Есть ли у меня опыт успешной работы с похожей темой в своей жизни?»</li>
+                    <li data-step="2">Если тема у вас не проработана — честно скажите: «Я сам ещё не разобрался с подобным».</li>
+                    <li data-step="3">Предложите альтернативу: техники, которые вы освоили, или направление к специалисту.</li>
+                    <li data-step="4">Помните: ваша непроработанность может резонировать с чужой болью и усилить её.</li>
+                </ol>
+                <div class="observation">
+                    <strong>Пример:</strong> Если вы сами не проработали отношения с родителями, помогать другому в этой теме опасно — вы можете проецировать своё, вместо того чтобы видеть его.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">3</div>
+                    <h3 class="technique-title">Протокол «Красная линия»</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> Мгновенно</span>
+                    <span class="meta-tag"><span>🚨</span> При тревожных сигналах</span>
+                </div>
+                <p>Что делать, когда в разговоре всплывает что-то серьёзное.</p>
+
+                <div class="dialogue-example">
+                    <div class="dialogue-line">
+                        <div class="dialogue-speaker">Человек:</div>
+                        <div class="dialogue-text">«Иногда мне кажется, что всем было бы лучше без меня...»</div>
+                    </div>
+                    <div class="dialogue-line">
+                        <div class="dialogue-speaker">Ваша реакция:</div>
+                        <div class="dialogue-text">Остановитесь. Не продолжайте технику. Переключитесь в режим слушания.</div>
+                    </div>
+                    <div class="dialogue-line">
+                        <div class="dialogue-speaker">Вы:</div>
+                        <div class="dialogue-text">«Это звучит очень тяжело. Я рядом и слышу тебя. Можешь рассказать больше о том, что ты чувствуешь?»</div>
+                    </div>
+                </div>
+
+                <ol class="steps-list">
+                    <li data-step="1">При любых признаках суицидальных мыслей, самоповреждения, психоза — прекратите «технику» и станьте просто человеком рядом.</li>
+                    <li data-step="2">Не пытайтесь «исправить» или «переключить внимание». Просто слушайте.</li>
+                    <li data-step="3">Мягко предложите профессиональную помощь: «Мне кажется, было бы хорошо поговорить с психологом. Хочешь, поможем вместе найти?»</li>
+                    <li data-step="4">Если ситуация острая — не оставляйте человека одного и помогите связаться с экстренными службами.</li>
+                </ol>
+                <div class="observation">
+                    <strong>Главное правило:</strong> При серьёзных симптомах ваша задача — не лечить, а быть мостом к профессиональной помощи.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">4</div>
+                    <h3 class="technique-title">Техника «Возврат ответственности»</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> По необходимости</span>
+                    <span class="meta-tag"><span>⚖️</span> Баланс ролей</span>
+                </div>
+                <p>Как не брать на себя чужую ответственность за изменения.</p>
+                <ol class="steps-list">
+                    <li data-step="1">Вместо «Я помогу тебе» говорите «Я покажу технику, а ты решишь, подходит ли она тебе».</li>
+                    <li data-step="2">Вместо «У тебя проблема с...» говорите «Мне кажется, тут может быть полезно...».</li>
+                    <li data-step="3">Вместо «Ты должен сделать так» говорите «Один из вариантов — попробовать...».</li>
+                    <li data-step="4">Всегда подчёркивайте: «Ты эксперт в своей жизни. Я только делюсь инструментами».</li>
+                </ol>
+                <div class="observation">
+                    <strong>Ловушка:</strong> Желание быть «спасателем» приятно для эго, но разрушительно для обоих. Человек теряет веру в свои силы, а вы берёте на себя невозможное.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">5</div>
+                    <h3 class="technique-title">Правило одной техники</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> За один раз</span>
+                    <span class="meta-tag"><span>📊</span> Ограничение объёма</span>
+                </div>
+                <p>Почему меньше — это больше при помощи другим.</p>
+                <ol class="steps-list">
+                    <li data-step="1">За одну встречу предлагайте не более одной техники.</li>
+                    <li data-step="2">Дайте время на интеграцию — минимум неделю до следующей практики.</li>
+                    <li data-step="3">Спрашивайте о результатах прежде, чем предлагать новое.</li>
+                    <li data-step="4">Если техника не сработала — не «добавляйте ещё». Возможно, это не тот случай.</li>
+                </ol>
+                <div class="observation">
+                    <strong>Почему:</strong> Перегрузка техниками создаёт хаос и ощущение, что «ничего не работает». Одна техника, освоенная глубоко, ценнее десяти поверхностных.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">6</div>
+                    <h3 class="technique-title">Проверка «Чья это потребность?»</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> 1 минута</span>
+                    <span class="meta-tag"><span>🔍</span> Самоанализ</span>
+                </div>
+                <p>Честный взгляд на собственные мотивы помощи.</p>
+                <ol class="steps-list">
+                    <li data-step="1">Спросите себя: «Кому на самом деле нужно, чтобы я помог — ему или мне?»</li>
+                    <li data-step="2">Проверьте: «Я помогаю, потому что меня просят, или потому что хочу чувствовать себя полезным/умным/нужным?»</li>
+                    <li data-step="3">Отследите: «Буду ли я разочарован, если человек не воспользуется моим советом?»</li>
+                    <li data-step="4">Если разочарование вероятно — это сигнал, что вы вкладываете в помощь свои нерешённые потребности.</li>
+                </ol>
+                <div class="observation">
+                    <strong>Честность:</strong> Иногда мы «помогаем», чтобы избежать собственных проблем, почувствовать превосходство или получить признание. Осознание этого — путь к более чистой помощи.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="technique-header">
+                    <div class="technique-number">7</div>
+                    <h3 class="technique-title">Защита от слияния</h3>
+                </div>
+                <div class="technique-meta">
+                    <span class="meta-tag"><span>⏱️</span> После каждого разговора</span>
+                    <span class="meta-tag"><span>🛡️</span> Самозащита</span>
+                </div>
+                <p>Как не «забирать» чужие проблемы с собой.</p>
+                <ol class="steps-list">
+                    <li data-step="1">После разговора сделайте паузу — хотя бы 5 минут в одиночестве.</li>
+                    <li data-step="2">Физическая граница: встряхните руки, потопайте ногами, умойтесь холодной водой.</li>
+                    <li data-step="3">Ментальная граница: скажите себе «Это его/её история. Я могу сопереживать, не неся это в себе».</li>
+                    <li data-step="4">Энергетическая граница: представьте, как возвращаете энергию человеку — с благодарностью, но без присвоения.</li>
+                    <li data-step="5">Переключитесь на что-то своё: прогулку, еду, свои дела.</li>
+                </ol>
+                <div class="observation">
+                    <strong>Риск:</strong> Без защиты вы начнёте нести чужие проблемы, истощитесь и перестанете быть способны помогать. Забота о себе — условие заботы о других.
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title"><span class="section-icon">🚫</span> Чего точно нельзя делать</h2>
+
+            <div class="boundary-box">
+                <p><strong>Абсолютные запреты</strong> — даже если кажется, что вы «справитесь»:</p>
+            </div>
+
+            <ul class="steps-list">
+                <li data-step="✕">Работать с травмой насилия, особенно сексуального — это требует специальной подготовки.</li>
+                <li data-step="✕">Давать советы о медикаментах или отмене медикаментов — это прерогатива врачей.</li>
+                <li data-step="✕">«Лечить» зависимости — алкоголь, наркотики, игромания требуют комплексного подхода.</li>
+                <li data-step="✕">Работать с острым горем (первые недели после потери) — здесь нужно просто быть рядом, не техники.</li>
+                <li data-step="✕">Помогать, когда вы сами в нестабильном состоянии — сначала своя маска.</li>
+                <li data-step="✕">Работать с тем, с кем есть личные отношения с неравным балансом власти (ваш подчинённый, ученик).</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title"><span class="section-icon">🔗</span> Интеграция</h2>
+            <p>Границы — это не ограничение любви и заботы. Это её зрелая форма. Признавая, где заканчиваются наши возможности, мы не отказываем в помощи — мы направляем к тем, кто может помочь лучше.</p>
+            <p>Настоящая помощь — это не демонстрация своих знаний и не удовлетворение потребности быть нужным. Это честное присутствие, в котором другой человек чувствует себя увиденным и поддержанным, но при этом сохраняет свою автономию и ответственность за собственную жизнь.</p>
+            <p>Самый ценный подарок, который мы можем дать другому — это не решение его проблем, а вера в его способность найти своё решение. И иногда эта вера выражается в том, чтобы сказать: «Я рядом, но для этого тебе нужен другой специалист. Давай найдём его вместе».</p>
+
+            <div class="highlight-box">
+                <p><strong>Главный урок:</strong> Знать свои границы — это не слабость. Это мудрость, которая защищает и вас, и тех, кому вы хотите помочь.</p>
+            </div>
+        </section>
+
+        <div class="homework-section">
+            <h3 class="homework-title"><span>📝</span> Домашнее задание</h3>
+            <ul class="homework-list">
+                <li>Составьте личный список тем, в которых вы достаточно проработаны, чтобы помогать, и тем, которые — за пределами ваших возможностей.</li>
+                <li>Напишите «честный контракт» своими словами — как бы вы объяснили свою роль человеку, просящему о помощи.</li>
+                <li>Вспомните ситуацию, когда вы помогали из «неправильных» мотивов. Что можно было сделать иначе?</li>
+                <li>Отработайте технику «Защита от слияния» после следующего эмоционально насыщенного разговора.</li>
+                <li>Найдите 2-3 контакта профессионалов в вашем городе, к которым можно направить человека при необходимости.</li>
+            </ul>
+        </div>
+
+        <nav class="navigation">
+            <a href="41.html" class="nav-button">
+                <span>←</span>
+                <span>Глава 41: Границы метода</span>
+            </a>
+            <a href="../index.html" class="nav-button nav-home">
+                <span>🏠</span>
+                <span>Содержание</span>
+            </a>
+            <a href="43.html" class="nav-button">
+                <span>Глава 43: Контролируемая провокация</span>
+                <span>→</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.content-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

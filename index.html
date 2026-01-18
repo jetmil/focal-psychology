@@ -651,10 +651,25 @@
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .chapter-item:hover {
-            background: rgba(124, 92, 255, 0.1);
+            background: rgba(124, 92, 255, 0.15);
+            transform: translateX(5px);
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .chapter-item:hover .chapter-num {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
+
+        .chapter-item:hover .chapter-title {
+            color: var(--text-primary);
         }
 
         .chapter-num {
@@ -1135,16 +1150,16 @@
                     </div>
                     <div class="chapters-accordion">
                         <div class="chapter-list">
-                            <div class="chapter-item"><span class="chapter-num">1</span><span class="chapter-title">Что остаётся, когда снять все маски</span></div>
-                            <div class="chapter-item"><span class="chapter-num">2</span><span class="chapter-title">Наблюдатель и наблюдаемое</span></div>
-                            <div class="chapter-item"><span class="chapter-num">3</span><span class="chapter-title">Откуда ты смотришь</span></div>
-                            <div class="chapter-item"><span class="chapter-num">4</span><span class="chapter-title">Ширина и глубина луча</span></div>
-                            <div class="chapter-item"><span class="chapter-num">5</span><span class="chapter-title">Магниты внимания</span></div>
-                            <div class="chapter-item"><span class="chapter-num">6</span><span class="chapter-title">Закон подобия</span></div>
-                            <div class="chapter-item"><span class="chapter-num">7</span><span class="chapter-title">Внимание к вниманию</span></div>
-                            <div class="chapter-item"><span class="chapter-num">8</span><span class="chapter-title">Энергетическая экономика</span></div>
-                            <div class="chapter-item"><span class="chapter-num">9</span><span class="chapter-title">Скорость и инерция</span></div>
-                            <div class="chapter-item"><span class="chapter-num">10</span><span class="chapter-title">Калибровка нуля</span></div>
+                            <a href="chapters/1.html" class="chapter-item"><span class="chapter-num">1</span><span class="chapter-title">Что остаётся, когда снять все маски</span></a>
+                            <a href="chapters/2.html" class="chapter-item"><span class="chapter-num">2</span><span class="chapter-title">Наблюдатель и наблюдаемое</span></a>
+                            <a href="chapters/3.html" class="chapter-item"><span class="chapter-num">3</span><span class="chapter-title">Откуда ты смотришь</span></a>
+                            <a href="chapters/4.html" class="chapter-item"><span class="chapter-num">4</span><span class="chapter-title">Ширина и глубина луча</span></a>
+                            <a href="chapters/5.html" class="chapter-item"><span class="chapter-num">5</span><span class="chapter-title">Магниты внимания</span></a>
+                            <a href="chapters/6.html" class="chapter-item"><span class="chapter-num">6</span><span class="chapter-title">Закон подобия</span></a>
+                            <a href="chapters/7.html" class="chapter-item"><span class="chapter-num">7</span><span class="chapter-title">Внимание к вниманию</span></a>
+                            <a href="chapters/8.html" class="chapter-item"><span class="chapter-num">8</span><span class="chapter-title">Энергетическая экономика</span></a>
+                            <a href="chapters/9.html" class="chapter-item"><span class="chapter-num">9</span><span class="chapter-title">Скорость и инерция</span></a>
+                            <a href="chapters/10.html" class="chapter-item"><span class="chapter-num">10</span><span class="chapter-title">Калибровка нуля</span></a>
                         </div>
                     </div>
                 </div>
@@ -1162,16 +1177,16 @@
                     </div>
                     <div class="chapters-accordion">
                         <div class="chapter-list">
-                            <div class="chapter-item"><span class="chapter-num">11</span><span class="chapter-title">Состояние неопределённости</span></div>
-                            <div class="chapter-item"><span class="chapter-num">12</span><span class="chapter-title">Хоровод советчиков</span></div>
-                            <div class="chapter-item"><span class="chapter-num">13</span><span class="chapter-title">Коллапс в решение</span></div>
-                            <div class="chapter-item"><span class="chapter-num">14</span><span class="chapter-title">Цена выбора</span></div>
-                            <div class="chapter-item"><span class="chapter-num">15</span><span class="chapter-title">Откат и перевыбор</span></div>
-                            <div class="chapter-item"><span class="chapter-num">16</span><span class="chapter-title">Петля обратной связи</span></div>
-                            <div class="chapter-item"><span class="chapter-num">17</span><span class="chapter-title">Пробой паттерна</span></div>
-                            <div class="chapter-item"><span class="chapter-num">18</span><span class="chapter-title">Создание нового аттрактора</span></div>
-                            <div class="chapter-item"><span class="chapter-num">19</span><span class="chapter-title">Информационная диета</span></div>
-                            <div class="chapter-item"><span class="chapter-num">20</span><span class="chapter-title">Якорение решений</span></div>
+                            <a href="chapters/11.html" class="chapter-item"><span class="chapter-num">11</span><span class="chapter-title">Состояние неопределённости</span></a>
+                            <a href="chapters/12.html" class="chapter-item"><span class="chapter-num">12</span><span class="chapter-title">Хоровод советчиков</span></a>
+                            <a href="chapters/13.html" class="chapter-item"><span class="chapter-num">13</span><span class="chapter-title">Коллапс в решение</span></a>
+                            <a href="chapters/14.html" class="chapter-item"><span class="chapter-num">14</span><span class="chapter-title">Цена выбора</span></a>
+                            <a href="chapters/15.html" class="chapter-item"><span class="chapter-num">15</span><span class="chapter-title">Откат и перевыбор</span></a>
+                            <a href="chapters/16.html" class="chapter-item"><span class="chapter-num">16</span><span class="chapter-title">Петля обратной связи</span></a>
+                            <a href="chapters/17.html" class="chapter-item"><span class="chapter-num">17</span><span class="chapter-title">Пробой паттерна</span></a>
+                            <a href="chapters/18.html" class="chapter-item"><span class="chapter-num">18</span><span class="chapter-title">Создание нового аттрактора</span></a>
+                            <a href="chapters/19.html" class="chapter-item"><span class="chapter-num">19</span><span class="chapter-title">Информационная диета</span></a>
+                            <a href="chapters/20.html" class="chapter-item"><span class="chapter-num">20</span><span class="chapter-title">Якорение решений</span></a>
                         </div>
                     </div>
                 </div>
@@ -1189,16 +1204,16 @@
                     </div>
                     <div class="chapters-accordion">
                         <div class="chapter-list">
-                            <div class="chapter-item"><span class="chapter-num">21</span><span class="chapter-title">Карта территорий: обзор</span></div>
-                            <div class="chapter-item"><span class="chapter-num">22</span><span class="chapter-title">Колыбель — точка ноль</span></div>
-                            <div class="chapter-item"><span class="chapter-num">23</span><span class="chapter-title">Театр внутри — осознанная суперпозиция</span></div>
-                            <div class="chapter-item"><span class="chapter-num">24</span><span class="chapter-title">Граница сна — погружение</span></div>
-                            <div class="chapter-item"><span class="chapter-num">25</span><span class="chapter-title">Театр масок — калейдоскоп</span></div>
-                            <div class="chapter-item"><span class="chapter-num">26</span><span class="chapter-title">Междумирье — взгляд орла</span></div>
-                            <div class="chapter-item"><span class="chapter-num">27</span><span class="chapter-title">Лимб — внутренняя мастерская</span></div>
-                            <div class="chapter-item"><span class="chapter-num">28</span><span class="chapter-title">Поворот калейдоскопа</span></div>
-                            <div class="chapter-item"><span class="chapter-num">29</span><span class="chapter-title">Фазовые переходы и буферы</span></div>
-                            <div class="chapter-item"><span class="chapter-num">30</span><span class="chapter-title">Критерий здоровья</span></div>
+                            <a href="chapters/21.html" class="chapter-item"><span class="chapter-num">21</span><span class="chapter-title">Карта территорий: обзор</span></a>
+                            <a href="chapters/22.html" class="chapter-item"><span class="chapter-num">22</span><span class="chapter-title">Колыбель — точка ноль</span></a>
+                            <a href="chapters/23.html" class="chapter-item"><span class="chapter-num">23</span><span class="chapter-title">Театр внутри — осознанная суперпозиция</span></a>
+                            <a href="chapters/24.html" class="chapter-item"><span class="chapter-num">24</span><span class="chapter-title">Граница сна — погружение</span></a>
+                            <a href="chapters/25.html" class="chapter-item"><span class="chapter-num">25</span><span class="chapter-title">Театр масок — калейдоскоп</span></a>
+                            <a href="chapters/26.html" class="chapter-item"><span class="chapter-num">26</span><span class="chapter-title">Междумирье — взгляд орла</span></a>
+                            <a href="chapters/27.html" class="chapter-item"><span class="chapter-num">27</span><span class="chapter-title">Лимб — внутренняя мастерская</span></a>
+                            <a href="chapters/28.html" class="chapter-item"><span class="chapter-num">28</span><span class="chapter-title">Поворот калейдоскопа</span></a>
+                            <a href="chapters/29.html" class="chapter-item"><span class="chapter-num">29</span><span class="chapter-title">Фазовые переходы и буферы</span></a>
+                            <a href="chapters/30.html" class="chapter-item"><span class="chapter-num">30</span><span class="chapter-title">Критерий здоровья</span></a>
                         </div>
                     </div>
                 </div>
@@ -1216,16 +1231,16 @@
                     </div>
                     <div class="chapters-accordion">
                         <div class="chapter-list">
-                            <div class="chapter-item"><span class="chapter-num">31</span><span class="chapter-title">Принцип разделения тела и образа</span></div>
-                            <div class="chapter-item"><span class="chapter-num">32</span><span class="chapter-title">Горячий стул (соло-версия)</span></div>
-                            <div class="chapter-item"><span class="chapter-num">33</span><span class="chapter-title">Работа с образом в теле</span></div>
-                            <div class="chapter-item"><span class="chapter-num">34</span><span class="chapter-title">Перерисовка карты (переписывание импринтинга)</span></div>
-                            <div class="chapter-item"><span class="chapter-num">35</span><span class="chapter-title">Передача контроля подсознанию</span></div>
-                            <div class="chapter-item"><span class="chapter-num">36</span><span class="chapter-title">Расстановка на столе</span></div>
-                            <div class="chapter-item"><span class="chapter-num">37</span><span class="chapter-title">Сказка как диагностика</span></div>
-                            <div class="chapter-item"><span class="chapter-num">38</span><span class="chapter-title">Диалог с симптомом</span></div>
-                            <div class="chapter-item"><span class="chapter-num">39</span><span class="chapter-title">Техника «как будто»</span></div>
-                            <div class="chapter-item"><span class="chapter-num">40</span><span class="chapter-title">Перенос в тело (психодрама)</span></div>
+                            <a href="chapters/31.html" class="chapter-item"><span class="chapter-num">31</span><span class="chapter-title">Принцип разделения тела и образа</span></a>
+                            <a href="chapters/32.html" class="chapter-item"><span class="chapter-num">32</span><span class="chapter-title">Горячий стул (соло-версия)</span></a>
+                            <a href="chapters/33.html" class="chapter-item"><span class="chapter-num">33</span><span class="chapter-title">Работа с образом в теле</span></a>
+                            <a href="chapters/34.html" class="chapter-item"><span class="chapter-num">34</span><span class="chapter-title">Перерисовка карты (переписывание импринтинга)</span></a>
+                            <a href="chapters/35.html" class="chapter-item"><span class="chapter-num">35</span><span class="chapter-title">Передача контроля подсознанию</span></a>
+                            <a href="chapters/36.html" class="chapter-item"><span class="chapter-num">36</span><span class="chapter-title">Расстановка на столе</span></a>
+                            <a href="chapters/37.html" class="chapter-item"><span class="chapter-num">37</span><span class="chapter-title">Сказка как диагностика</span></a>
+                            <a href="chapters/38.html" class="chapter-item"><span class="chapter-num">38</span><span class="chapter-title">Диалог с симптомом</span></a>
+                            <a href="chapters/39.html" class="chapter-item"><span class="chapter-num">39</span><span class="chapter-title">Техника «как будто»</span></a>
+                            <a href="chapters/40.html" class="chapter-item"><span class="chapter-num">40</span><span class="chapter-title">Перенос в тело (психодрама)</span></a>
                         </div>
                     </div>
                 </div>
@@ -1243,16 +1258,16 @@
                     </div>
                     <div class="chapters-accordion">
                         <div class="chapter-list">
-                            <div class="chapter-item"><span class="chapter-num">41</span><span class="chapter-title">Границы метода</span></div>
-                            <div class="chapter-item"><span class="chapter-num">42</span><span class="chapter-title">Где заканчивается помощь</span></div>
-                            <div class="chapter-item"><span class="chapter-num">43</span><span class="chapter-title">Контролируемая провокация</span></div>
-                            <div class="chapter-item"><span class="chapter-num">44</span><span class="chapter-title">Удержание пространства</span></div>
-                            <div class="chapter-item"><span class="chapter-num">45</span><span class="chapter-title">Чистый язык</span></div>
-                            <div class="chapter-item"><span class="chapter-num">46</span><span class="chapter-title">Работа с сопротивлением</span></div>
-                            <div class="chapter-item"><span class="chapter-num">47</span><span class="chapter-title">Распознавание переноса</span></div>
-                            <div class="chapter-item"><span class="chapter-num">48</span><span class="chapter-title">Экология изменений</span></div>
-                            <div class="chapter-item"><span class="chapter-num">49</span><span class="chapter-title">Завершение и выход</span></div>
-                            <div class="chapter-item"><span class="chapter-num">50</span><span class="chapter-title">Возвращение в Колыбель</span></div>
+                            <a href="chapters/41.html" class="chapter-item"><span class="chapter-num">41</span><span class="chapter-title">Границы метода</span></a>
+                            <a href="chapters/42.html" class="chapter-item"><span class="chapter-num">42</span><span class="chapter-title">Где заканчивается помощь</span></a>
+                            <a href="chapters/43.html" class="chapter-item"><span class="chapter-num">43</span><span class="chapter-title">Контролируемая провокация</span></a>
+                            <a href="chapters/44.html" class="chapter-item"><span class="chapter-num">44</span><span class="chapter-title">Удержание пространства</span></a>
+                            <a href="chapters/45.html" class="chapter-item"><span class="chapter-num">45</span><span class="chapter-title">Чистый язык</span></a>
+                            <a href="chapters/46.html" class="chapter-item"><span class="chapter-num">46</span><span class="chapter-title">Работа с сопротивлением</span></a>
+                            <a href="chapters/47.html" class="chapter-item"><span class="chapter-num">47</span><span class="chapter-title">Распознавание переноса</span></a>
+                            <a href="chapters/48.html" class="chapter-item"><span class="chapter-num">48</span><span class="chapter-title">Экология изменений</span></a>
+                            <a href="chapters/49.html" class="chapter-item"><span class="chapter-num">49</span><span class="chapter-title">Завершение и выход</span></a>
+                            <a href="chapters/50.html" class="chapter-item"><span class="chapter-num">50</span><span class="chapter-title">Путь продолжается</span></a>
                         </div>
                     </div>
                 </div>
@@ -1408,6 +1423,13 @@
         function togglePart(card) {
             card.classList.toggle('expanded');
         }
+
+        // Prevent accordion toggle when clicking chapter links
+        document.querySelectorAll('.chapter-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
 
         // Animate on scroll
         const observerOptions = {

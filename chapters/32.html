@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 32: Горячий стул | Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #1a1410;
+            --color-surface: rgba(42, 32, 24, 0.88);
+            --color-primary: #dc2626;
+            --color-secondary: #b91c1c;
+            --color-accent: #f87171;
+            --color-text: #fef2f2;
+            --color-text-muted: #d4b8b8;
+            --color-glow: rgba(220, 38, 38, 0.35);
+            --color-warm: #f59e0b;
+            --color-cool: #60a5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Part IV Header */
+        .part-header {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.12), rgba(185, 28, 28, 0.06));
+            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 16px 24px;
+            text-align: center;
+        }
+
+        .part-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+        }
+
+        /* Hot chairs visualization */
+        .chairs-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .chairs-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(248, 113, 113, 0.06) 0%, transparent 45%);
+        }
+
+        .chairs-visual {
+            position: fixed;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 60px;
+            opacity: 0.12;
+        }
+
+        .chair {
+            font-size: 48px;
+            animation: chairGlow 3s ease-in-out infinite;
+        }
+
+        .chair-1 {
+            animation-delay: 0s;
+        }
+
+        .chair-2 {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes chairGlow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Dialogue arrows */
+        .dialogue-arrow {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--color-primary);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+        }
+
+        .dialogue-arrow::before,
+        .dialogue-arrow::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: var(--color-primary);
+            right: 0;
+        }
+
+        .dialogue-arrow::before {
+            transform: rotate(45deg);
+            transform-origin: right center;
+        }
+
+        .dialogue-arrow::after {
+            transform: rotate(-45deg);
+            transform-origin: right center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        .chapter-number {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--color-primary);
+            text-shadow: 0 0 40px var(--color-glow);
+        }
+
+        .chapter-subtitle {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        .section {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(220, 38, 38, 0.12);
+            box-shadow:
+                0 4px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(220, 38, 38, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+        }
+
+        .story-text {
+            font-size: 19px;
+            font-style: italic;
+            color: var(--color-text);
+            border-left: 3px solid var(--color-warm);
+            padding-left: 24px;
+            margin: 24px 0;
+            line-height: 1.9;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: var(--color-primary);
+            margin: 48px 0 24px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 22px;
+            color: var(--color-accent);
+            margin: 36px 0 18px 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: var(--color-text);
+        }
+
+        .concept {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(220, 38, 38, 0.2) 0%, rgba(185, 28, 28, 0.1) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Dialogue example block */
+        .dialogue-example {
+            background: rgba(20, 15, 12, 0.6);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .dialogue-line {
+            margin-bottom: 16px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .dialogue-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .dialogue-speaker {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .speaker-self {
+            color: var(--color-cool);
+        }
+
+        .speaker-other {
+            color: var(--color-warm);
+        }
+
+        .dialogue-text {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        .technique {
+            background: linear-gradient(135deg, rgba(42, 32, 24, 0.9), rgba(32, 24, 18, 0.95));
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .technique-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px var(--color-glow);
+        }
+
+        .technique-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .technique-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+
+        .technique-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .steps {
+            background: rgba(15, 12, 10, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            padding-top: 3px;
+        }
+
+        .observation {
+            background: rgba(96, 165, 250, 0.1);
+            border-left: 3px solid var(--color-cool);
+            padding: 16px 20px;
+            margin-top: 16px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .observation-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-cool);
+            margin-bottom: 8px;
+        }
+
+        .observation-text {
+            color: var(--color-text-muted);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.12), rgba(185, 28, 28, 0.08));
+            border: 1px solid rgba(220, 38, 38, 0.25);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .key-insight::before {
+            content: '🔥';
+            position: absolute;
+            top: -12px;
+            left: 28px;
+            background: var(--color-bg);
+            padding: 0 12px;
+            font-size: 18px;
+        }
+
+        .key-insight p {
+            color: var(--color-text);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .warning-block {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.04));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 28px 0;
+        }
+
+        .warning-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .warning-icon {
+            font-size: 24px;
+        }
+
+        .warning-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-warm);
+        }
+
+        .warning-block p {
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.12), rgba(220, 38, 38, 0.05));
+            border: 1px solid rgba(220, 38, 38, 0.25);
+            border-radius: 20px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .homework-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .homework-list {
+            list-style: none;
+        }
+
+        .homework-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--color-text);
+        }
+
+        .homework-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 10px;
+            top: 7px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(220, 38, 38, 0.15);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+            padding: 12px 24px;
+            background: var(--color-surface);
+            border-radius: 12px;
+            border: 1px solid rgba(220, 38, 38, 0.12);
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 16px 50px;
+            }
+
+            .section {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            .technique {
+                padding: 24px 18px;
+            }
+
+            .chairs-visual {
+                display: none;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="part-header">
+        <div class="part-label">Часть IV: Инструментарий</div>
+    </div>
+
+    <div class="chairs-bg">
+        <div class="chairs-visual">
+            <div class="chair chair-1">🪑</div>
+            <div class="dialogue-arrow"></div>
+            <div class="chair chair-2">🪑</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="chapter-header">
+            <span class="chapter-number">Глава тридцать вторая</span>
+            <h1 class="chapter-title">Горячий стул</h1>
+            <p class="chapter-subtitle">Соло-версия классической гештальт-техники</p>
+        </header>
+
+        <section class="section">
+            <div class="section-title">Открывающая история</div>
+            <div class="story-text">
+                <p>Фриц Перлз, создатель гештальт-терапии, любил работать на сцене. В 1960-х его демонстрации в Эсалене собирали сотни зрителей. На сцене — два стула. На одном сидит клиент. Другой — пустой.</p>
+                <p>«Представь, что на этом стуле сидит твой отец», — говорил Перлз. И происходило волшебство. Взрослый человек начинал говорить с пустым стулом — и пустой стул отвечал. Потому что человек пересаживался и отвечал от лица отца.</p>
+                <p>Наблюдатели видели трансформацию. Годы невысказанного вырывались наружу. Слёзы. Гнев. Прощение. Понимание. То, что было внутренним конфликтом — становилось внешним диалогом. И в этом диалоге что-то сдвигалось.</p>
+                <p>«Я никогда не мог сказать ему этого», — плакал мужчина после сессии. А потом добавлял: «Но теперь я понимаю, почему он так поступал.»</p>
+                <p>Техника работает и без терапевта. Вам нужны только два стула и готовность к честному разговору с самим собой.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Теоретический блок</div>
+
+            <h2>Почему это работает</h2>
+            <p><span class="concept">Экстернализация</span> — вот ключ. Когда конфликт живёт только внутри, он смешан, спутан, неуловим. Невозможно одновременно быть в двух позициях. Мысли путаются. Аргументы сливаются.</p>
+
+            <p>Но когда вы <span class="highlight">выносите конфликт вовне</span> — на два физических стула — происходит разделение. Теперь это две отдельные позиции. Можно смотреть на каждую по очереди. Можно переключаться между ними. Можно слышать каждую сторону.</p>
+
+            <h3>Механизм техники</h3>
+            <p><strong>Два стула</strong> = две стороны конфликта. Это могут быть:</p>
+            <p>• Вы и другой человек (мать, начальник, партнёр)</p>
+            <p>• Две ваши субличности (критик и творец, долг и желание)</p>
+            <p>• Вы-сейчас и вы-в-прошлом</p>
+            <p>• Вы и ваш страх/симптом/проблема</p>
+
+            <p><strong>Пересаживание</strong> = переключение позиции. Физическое движение помогает психике «переключить режим». На одном стуле вы — это вы. На другом — вы говорите от лица другого.</p>
+
+            <div class="key-insight">
+                <p>Цель горячего стула — не «победа» одной стороны над другой. Это диалог для понимания. Часто обнаруживается, что обе стороны хотят одного и того же — просто разными способами.</p>
+            </div>
+
+            <h3>Почему «горячий»</h3>
+            <p>Название отражает интенсивность. Когда вы садитесь на стул «другого» и говорите от его лица — <span class="highlight">вы действительно чувствуете то, что чувствует он</span>. Это не игра. Это эмпатическое погружение. И оно может быть очень «горячим» эмоционально.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Практический блок</div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🪑</div>
+                    <div class="technique-title">Техника 32.1: Базовая установка</div>
+                </div>
+                <div class="technique-content">
+                    <p>Подготовка пространства для работы.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Поставьте два стула напротив друг друга на расстоянии около метра.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Определите: на одном стуле будете вы (ваша текущая позиция).</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">На другом — часть вас (субличность), другой человек, или что-то, с чем нужен диалог.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Физически пересаживайтесь при каждой смене «роли». Это важно — не пропускайте.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Убедитесь, что вас не прервут. Выделите минимум 20-30 минут.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Помните</div>
+                        <p class="observation-text">Принцип разделения тела и образа (Глава 31): если работа эмоционально интенсивная, следите за телом.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">👤</div>
+                    <div class="technique-title">Техника 32.2: Диалог с субличностью</div>
+                </div>
+                <div class="technique-content">
+                    <p>Разговор с внутренней частью — критиком, страхом, «ленивым я», перфекционистом.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Выберите внутреннюю часть, с которой хотите поговорить.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Сядьте на «свой» стул. Обратитесь к пустому стулу: «Я хочу поговорить с тобой...»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Скажите всё, что хотите сказать этой части.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Пересядьте на другой стул. Теперь вы — эта часть. Ответьте.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Продолжайте диалог, пересаживаясь каждый раз при смене «говорящего».</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-example">
+                        <div class="dialogue-line">
+                            <div class="dialogue-speaker speaker-self">Я (со своего стула):</div>
+                            <div class="dialogue-text">«Внутренний критик, почему ты никогда не доволен? Я делаю всё, что могу, а тебе всегда мало.»</div>
+                        </div>
+                        <div class="dialogue-line">
+                            <div class="dialogue-speaker speaker-other">Критик (после пересаживания):</div>
+                            <div class="dialogue-text">«Потому что я боюсь за тебя. Если ты расслабишься — случится что-то плохое. Я защищаю тебя.»</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Инсайт</div>
+                        <p class="observation-text">Часто «враждебные» части оказываются защитниками. Они используют плохие методы, но с хорошими намерениями.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">👥</div>
+                    <div class="technique-title">Техника 32.3: Разговор с человеком (без него)</div>
+                </div>
+                <div class="technique-content">
+                    <p>Диалог с человеком, которому вы не можете или не хотите говорить в жизни.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Представьте человека на пустом стуле. Как он сидит? Как смотрит?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Скажите ему то, что не можете сказать в реальности. Без цензуры.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Пересядьте на его место. Ответьте от его лица — как вы его понимаете.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Продолжайте диалог. Замечайте, что нового открывается.</div>
+                        </div>
+                    </div>
+                    <div class="warning-block">
+                        <div class="warning-header">
+                            <span class="warning-icon">⚠️</span>
+                            <span class="warning-title">Важное уточнение</span>
+                        </div>
+                        <p>Это разговор не с реальным человеком — а с вашим образом этого человека. Вы узнаёте не его правду, а свои проекции. И это тоже ценно.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">❤️</div>
+                    <div class="technique-title">Техника 32.4: Поиск потребности</div>
+                </div>
+                <div class="technique-content">
+                    <p>Когда конфликт ясен — время искать, что стоит за позициями.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">После нескольких обменов репликами — пауза.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">С каждого стула задайте вопрос: «Чего я на самом деле хочу?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">За претензиями обычно скрываются глубинные потребности: безопасность, любовь, признание, свобода.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Когда потребности названы — ищите общее. Где пересечение?</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Открытие</div>
+                        <p class="observation-text">Часто обе стороны хотят одного: например, безопасности. Но одна ищет её через контроль, другая — через свободу.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">👁️</div>
+                    <div class="technique-title">Техника 32.5: Интеграция через третий стул</div>
+                </div>
+                <div class="technique-content">
+                    <p>Добавление позиции наблюдателя для более полной картины.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Поставьте третий стул — сбоку, на равном расстоянии от первых двух.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">После диалога пересядьте на этот стул.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Это позиция наблюдателя — мудрого свидетеля, который видит обе стороны.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Спросите себя: «Что я вижу? Что нужно обоим? Какое решение возможно?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Озвучьте послание наблюдателя обеим сторонам.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Связь</div>
+                        <p class="observation-text">Это напоминает Междумирье (Глава 26) — взгляд с высоты, который видит всю картину.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">✍️</div>
+                    <div class="technique-title">Техника 32.6: Письменная версия</div>
+                </div>
+                <div class="technique-content">
+                    <p>Если физические стулья неудобны — диалог можно вести на бумаге.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Возьмите две ручки разных цветов (или просто пишите по очереди).</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Один цвет — ваши реплики. Другой — реплики «собеседника».</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Пишите диалог, не планируя ответы заранее. Позвольте им возникать спонтанно.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Не редактируйте, не думайте долго — пишите первое, что приходит.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Преимущество</div>
+                        <p class="observation-text">Письменный вариант можно делать в любом месте. И остаётся запись для анализа.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🏁</div>
+                    <div class="technique-title">Техника 32.7: Завершение</div>
+                </div>
+                <div class="technique-content">
+                    <p>Диалог должен иметь конец. Не оставляйте его «открытым».</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Когда чувствуете, что главное сказано — начинайте завершение.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Дайте каждой стороне финальное слово.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Возможные варианты: благодарность, признание, обещание, договор.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Пример: «Я вижу, что ты защищаешь меня. Спасибо. Я постараюсь слушать тебя иначе.»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Вернитесь на «свой» стул. Сделайте несколько глубоких вдохов. Вы — снова вы.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Важно</div>
+                        <p class="observation-text">Незавершённый диалог может оставить ощущение разорванности. Даже если решение не найдено — закройте сессию признанием этого.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Интеграция</div>
+
+            <h2>Когда использовать</h2>
+            <p><span class="concept">Горячий стул</span> особенно эффективен при:</p>
+            <p>• Явных внутренних конфликтах с двумя полюсами</p>
+            <p>• Незавершённых отношениях (невысказанное родителям, бывшим, ушедшим)</p>
+            <p>• Конфликтах между субличностями (перфекционист vs расслабленный)</p>
+            <p>• Необходимости понять чужую позицию</p>
+
+            <div class="warning-block">
+                <div class="warning-header">
+                    <span class="warning-icon">⚠️</span>
+                    <span class="warning-title">Когда не использовать</span>
+                </div>
+                <p>• При острых травмах — без поддержки терапевта<br>
+                • При психотических состояниях<br>
+                • Если не можете контролировать интенсивность эмоций<br>
+                • Если тема слишком «заряжена» для самостоятельной работы</p>
+            </div>
+
+            <div class="key-insight">
+                <p>Горячий стул — не про победу над другой стороной. Это про установление контакта. Часто самое ценное — не решение, а понимание: почему «та сторона» делает то, что делает.</p>
+            </div>
+
+            <div class="homework">
+                <div class="homework-title">
+                    <span>◆</span> Домашнее задание
+                </div>
+                <ul class="homework-list">
+                    <li>Проведите один диалог с внутренней субличностью (критик, перфекционист, «ленивый я»)</li>
+                    <li>Используйте три стула: вы, субличность, наблюдатель</li>
+                    <li>Запишите основные реплики и инсайты после сессии</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="31.html" class="nav-link">← Глава 31: Разделение тела и образа</a>
+            <a href="33.html" class="nav-link">Глава 33: Работа с образом в теле →</a>
+        </nav>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

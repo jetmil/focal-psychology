@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 30: Критерий здоровья | Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0d1117;
+            --color-surface: rgba(22, 32, 45, 0.88);
+            --color-primary: #7ee8a5;
+            --color-secondary: #4ade80;
+            --color-accent: #a3e635;
+            --color-text: #e8f5e9;
+            --color-text-muted: #9ec5a8;
+            --color-glow: rgba(126, 232, 165, 0.35);
+            --color-warm: #fbbf24;
+            --color-danger: #f87171;
+            --color-balance: #60a5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Health balance animated background */
+        .health-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .health-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 25% 30%, rgba(126, 232, 165, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 70%, rgba(74, 222, 128, 0.08) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(163, 230, 53, 0.05) 0%, transparent 55%);
+        }
+
+        /* Balance scale visualization */
+        .balance-scale {
+            position: fixed;
+            top: 15%;
+            right: 8%;
+            opacity: 0.15;
+        }
+
+        .scale-beam {
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-danger), var(--color-primary), var(--color-balance));
+            border-radius: 2px;
+            animation: scaleBalance 6s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes scaleBalance {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .scale-pivot {
+            width: 12px;
+            height: 12px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            margin: -4px auto 0;
+        }
+
+        .scale-base {
+            width: 40px;
+            height: 60px;
+            border-left: 3px solid var(--color-primary);
+            border-right: 3px solid var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+            margin: 0 auto;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Health indicators */
+        .health-indicators {
+            position: fixed;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0.2;
+        }
+
+        .health-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: healthPulse 3s ease-in-out infinite;
+        }
+
+        .health-dot:nth-child(1) { background: var(--color-primary); animation-delay: 0s; }
+        .health-dot:nth-child(2) { background: var(--color-secondary); animation-delay: 0.4s; }
+        .health-dot:nth-child(3) { background: var(--color-accent); animation-delay: 0.8s; }
+        .health-dot:nth-child(4) { background: var(--color-balance); animation-delay: 1.2s; }
+        .health-dot:nth-child(5) { background: var(--color-warm); animation-delay: 1.6s; }
+
+        @keyframes healthPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.4);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        .chapter-number {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--color-primary);
+            text-shadow: 0 0 40px var(--color-glow);
+        }
+
+        .chapter-subtitle {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        .section {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(126, 232, 165, 0.12);
+            box-shadow:
+                0 4px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(126, 232, 165, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(126, 232, 165, 0.15);
+        }
+
+        .story-text {
+            font-size: 19px;
+            font-style: italic;
+            color: var(--color-text);
+            border-left: 3px solid var(--color-warm);
+            padding-left: 24px;
+            margin: 24px 0;
+            line-height: 1.9;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: var(--color-primary);
+            margin: 48px 0 24px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 22px;
+            color: var(--color-accent);
+            margin: 36px 0 18px 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: var(--color-text);
+        }
+
+        .concept {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(126, 232, 165, 0.2) 0%, rgba(74, 222, 128, 0.1) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Health criteria block */
+        .criteria-block {
+            background: linear-gradient(135deg, rgba(126, 232, 165, 0.1), rgba(74, 222, 128, 0.05));
+            border: 1px solid rgba(126, 232, 165, 0.25);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 28px 0;
+        }
+
+        .criteria-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .criteria-icon {
+            font-size: 28px;
+        }
+
+        .criteria-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .criteria-block p {
+            color: var(--color-text-muted);
+            margin: 0;
+            font-size: 17px;
+        }
+
+        /* Pathology block */
+        .pathology-block {
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.12), rgba(248, 113, 113, 0.04));
+            border: 1px solid rgba(248, 113, 113, 0.25);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 28px 0;
+        }
+
+        .pathology-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .pathology-icon {
+            font-size: 28px;
+        }
+
+        .pathology-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-danger);
+        }
+
+        .pathology-block p {
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            background: rgba(15, 22, 30, 0.6);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 28px 0;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid rgba(126, 232, 165, 0.1);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-header {
+            background: rgba(126, 232, 165, 0.1);
+        }
+
+        .comparison-cell {
+            padding: 16px 20px;
+            color: var(--color-text-muted);
+        }
+
+        .comparison-header .comparison-cell {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+        }
+
+        .cell-healthy {
+            border-right: 1px solid rgba(126, 232, 165, 0.1);
+        }
+
+        .technique {
+            background: linear-gradient(135deg, rgba(22, 32, 45, 0.9), rgba(15, 22, 30, 0.95));
+            border: 1px solid rgba(126, 232, 165, 0.2);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .technique-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px var(--color-glow);
+        }
+
+        .technique-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .technique-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+
+        .technique-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .steps {
+            background: rgba(10, 18, 25, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-bg);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            padding-top: 3px;
+        }
+
+        .observation {
+            background: rgba(126, 232, 165, 0.08);
+            border-left: 3px solid var(--color-balance);
+            padding: 16px 20px;
+            margin-top: 16px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .observation-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-balance);
+            margin-bottom: 8px;
+        }
+
+        .observation-text {
+            color: var(--color-text-muted);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(126, 232, 165, 0.12), rgba(74, 222, 128, 0.08));
+            border: 1px solid rgba(126, 232, 165, 0.25);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .key-insight::before {
+            content: '✧';
+            position: absolute;
+            top: -12px;
+            left: 28px;
+            background: var(--color-bg);
+            padding: 0 12px;
+            color: var(--color-primary);
+            font-size: 18px;
+        }
+
+        .key-insight p {
+            color: var(--color-text);
+            margin: 0;
+            font-style: italic;
+        }
+
+        /* Summary block for Part III */
+        .part-summary {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(96, 165, 250, 0.05));
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 40px 0;
+        }
+
+        .part-summary-header {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-balance);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .part-summary h3 {
+            color: var(--color-balance);
+            margin-top: 0;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.05));
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            border-radius: 20px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .homework-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-warm);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .homework-list {
+            list-style: none;
+        }
+
+        .homework-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--color-text);
+        }
+
+        .homework-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--color-warm);
+            font-size: 10px;
+            top: 7px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(126, 232, 165, 0.15);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+            padding: 12px 24px;
+            background: var(--color-surface);
+            border-radius: 12px;
+            border: 1px solid rgba(126, 232, 165, 0.12);
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+            border-color: rgba(126, 232, 165, 0.3);
+        }
+
+        .nav-link.next-part {
+            background: linear-gradient(135deg, rgba(126, 232, 165, 0.15), rgba(74, 222, 128, 0.08));
+            border-color: rgba(126, 232, 165, 0.25);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .section {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            .technique {
+                padding: 24px 18px;
+            }
+
+            .balance-scale,
+            .health-indicators {
+                display: none;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cell-healthy {
+                border-right: none;
+                border-bottom: 1px solid rgba(126, 232, 165, 0.1);
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="health-bg">
+        <div class="balance-scale">
+            <div class="scale-beam"></div>
+            <div class="scale-pivot"></div>
+            <div class="scale-base"></div>
+        </div>
+        <div class="health-indicators">
+            <div class="health-dot"></div>
+            <div class="health-dot"></div>
+            <div class="health-dot"></div>
+            <div class="health-dot"></div>
+            <div class="health-dot"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="chapter-header">
+            <span class="chapter-number">Глава тридцатая</span>
+            <h1 class="chapter-title">Критерий здоровья</h1>
+            <p class="chapter-subtitle">Свобода движения как мера благополучия</p>
+        </header>
+
+        <section class="section">
+            <div class="section-title">Открывающая история</div>
+            <div class="story-text">
+                <p>Много лет назад я работал с человеком, который видел врагов повсюду. Коллеги хотели его подсидеть. Друзья использовали. Родственники манипулировали. Незнакомцы на улице смотрели «не так». Весь мир был враждебен.</p>
+                <p>На первый взгляд это выглядело как паранойя. Но при ближайшем рассмотрении оказалось чем-то более тонким: он переносил внутренний фильтр на внешнюю реальность. Внутри жил персонаж — «вечно преданный» — и этот персонаж окрашивал всё вокруг в цвета предательства.</p>
+                <p>Проблема была не в том, что у него были внутренние персонажи — они есть у всех. Проблема была в том, что он <em>не знал</em>, что смотрит на мир через фильтр. Для него это была «просто реальность».</p>
+                <p>Работа заняла месяцы. Постепенно он научился различать: вот это — мой внутренний фильтр. А вот это — то, что происходит на самом деле. Фильтр никуда не делся — но он перестал путать его с реальностью.</p>
+                <p>Это и есть критерий здоровья: не отсутствие фильтров, а <em>осознание</em> их наличия.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Теоретический блок</div>
+
+            <h2>Один вопрос — вся диагностика</h2>
+            <p>После всего, что мы узнали о слоях сознания, о переходах, о разных режимах восприятия, возникает естественный вопрос: <em>а что нормально?</em> Когда погружение в глубокие состояния — признак мастерства, а когда — симптом расстройства?</p>
+
+            <div class="criteria-block">
+                <div class="criteria-header">
+                    <span class="criteria-icon">✓</span>
+                    <span class="criteria-title">Главный критерий здоровья</span>
+                </div>
+                <p>Задайте себе вопрос: «Я понимаю, в каком слое нахожусь?» Если да — норма, даже если слой «странный». Если нет — сигнал тревоги.</p>
+            </div>
+
+            <p>Обратите внимание: критерий — не <em>где</em> вы находитесь, а <span class="highlight">знаете ли вы, где находитесь</span>. Человек в глубокой медитации (Колыбель) здоров, если осознаёт, что он в медитации. Человек в социальной маске здоров, если понимает, что это маска.</p>
+
+            <h3>Норма: осознанное присутствие</h3>
+            <p><span class="concept">Здоровое</span> функционирование выглядит так:</p>
+            <p>• Вы можете определить, в каком слое находитесь прямо сейчас</p>
+            <p>• Вы способны намеренно переключаться между слоями (с учётом буферов)</p>
+            <p>• Вы различаете внутреннее и внешнее — фильтр и реальность</p>
+            <p>• Вы не застреваете надолго в одном слое</p>
+            <p>• Вы можете выйти из любого состояния, если нужно</p>
+
+            <h3>Патология: потеря границ</h3>
+            <p><span class="concept">Патологическое</span> функционирование — это когда границы между слоями размываются без вашего ведома:</p>
+
+            <div class="pathology-block">
+                <div class="pathology-header">
+                    <span class="pathology-icon">⚠️</span>
+                    <span class="pathology-title">Признаки нарушения границ</span>
+                </div>
+                <p>• Вы путаете содержимое внутреннего мира с внешней реальностью<br>
+                • Персонажи Театра внутри «вылезают» наружу без вашего контроля<br>
+                • Образы Границы сна продолжают жить после пробуждения<br>
+                • Маски «прилипают» и не снимаются<br>
+                • Вы не можете определить, где находитесь<br>
+                • Вы не можете выйти из состояния по желанию</p>
+            </div>
+
+            <h3>Сравнение</h3>
+            <div class="comparison-table">
+                <div class="comparison-row comparison-header">
+                    <div class="comparison-cell cell-healthy">Здоровое</div>
+                    <div class="comparison-cell">Патологическое</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell cell-healthy">Знаю, что это мой внутренний персонаж</div>
+                    <div class="comparison-cell">Это просто я такой</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell cell-healthy">Понимаю, что вижу мир через фильтр</div>
+                    <div class="comparison-cell">Это объективная реальность</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell cell-healthy">Намеренно надеваю маску</div>
+                    <div class="comparison-cell">Не могу снять маску</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell cell-healthy">Вхожу в состояние по желанию</div>
+                    <div class="comparison-cell">Состояние «захватывает» меня</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell cell-healthy">Могу выйти, когда нужно</div>
+                    <div class="comparison-cell">Не могу выйти</div>
+                </div>
+            </div>
+
+            <div class="key-insight">
+                <p>Ключевое различие — в <strong>контроле</strong> и <strong>осознанности</strong>. Глубина погружения сама по себе — не проблема. Проблема — потеря связи с реальностью и невозможность вернуться.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Практический блок</div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🔍</div>
+                    <div class="technique-title">Техника 30.1: Экспресс-диагностика</div>
+                </div>
+                <div class="technique-content">
+                    <p>Быстрый способ проверить своё психическое состояние прямо сейчас.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Остановитесь. Задайте вопрос: «Где я сейчас?» — имея в виду слой сознания.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Попробуйте определить: Колыбель? Театр? Маски? Междумирье? Лимб? Или обычное бодрствование?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Если смогли определить — хорошо. Если затрудняетесь — это информация.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Попробуйте «повернуть калейдоскоп» — перейти в другой слой намеренно. Получается?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Если да — всё в порядке. Если нет — нужна работа с буферами и заземлением.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Время</div>
+                        <p class="observation-text">30 секунд. Можно делать несколько раз в день как профилактику.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🎭</div>
+                    <div class="technique-title">Техника 30.2: Проверка границ «внутри-снаружи»</div>
+                </div>
+                <div class="technique-content">
+                    <p>Убедитесь, что не путаете внутренние фильтры с внешней реальностью.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Возьмите текущую ситуацию, которая вызывает эмоции.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Спросите: «Что здесь — факт, а что — моя интерпретация?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Факт: «Коллега не ответил на сообщение». Интерпретация: «Он меня игнорирует, потому что злится».</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Можете ли вы удержать обе версии? Факт + интерпретация, не сливая их?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Если да — граница на месте. Если нет — интерпретация «захватила» реальность.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Практика</div>
+                        <p class="observation-text">Используйте эту технику, когда эмоции сильные. Именно тогда граница чаще всего размывается.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🚪</div>
+                    <div class="technique-title">Техника 30.3: Тест на выход</div>
+                </div>
+                <div class="technique-content">
+                    <p>Проверка способности выходить из состояний по желанию — ключевой маркер здоровья.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Определите, в каком состоянии вы сейчас находитесь.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Попробуйте намеренно выйти из него. Используйте заземление (5-4-3-2-1) или смену позы.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Наблюдайте: получилось? Легко или с сопротивлением?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Если легко — отлично. Если с трудом — это нормально, но требует внимания.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Если совсем не получается — это сигнал. Возможно, нужна помощь специалиста.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Важно</div>
+                        <p class="observation-text">Не путайте «не хочу выходить» с «не могу выйти». Первое — выбор. Второе — проблема.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">📊</div>
+                    <div class="technique-title">Техника 30.4: Карта гибкости</div>
+                </div>
+                <div class="technique-content">
+                    <p>Оцените свою способность пользоваться разными слоями сознания.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Нарисуйте список всех слоёв: Колыбель, Театр внутри, Граница сна, Театр масок, Междумирье, Лимб.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Для каждого оцените по шкале 1-5: насколько легко вам туда входить?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Для каждого оцените: насколько легко оттуда выходить?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Отметьте: куда вы «застреваете»? Куда избегаете заходить?</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Это ваша карта — и план развития. Работайте над ограниченными зонами.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Идеал</div>
+                        <p class="observation-text">Здоровое состояние — примерно равная доступность всех слоёв. Большой разброс указывает на области для развития.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🔄</div>
+                    <div class="technique-title">Техника 30.5: Восстановление границ</div>
+                </div>
+                <div class="technique-content">
+                    <p>Если вы заметили, что границы размылись — как их восстановить.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text"><strong>Заземление:</strong> начните с физического — ноги на полу, дыхание, 5-4-3-2-1.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text"><strong>Ориентация:</strong> кто я, где я, какой сегодня день, что было сегодня утром.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text"><strong>Различение:</strong> «Это внутри меня (мысль, образ, персонаж). А это — снаружи (комната, звуки, люди).»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text"><strong>Называние:</strong> если есть фильтр — назовите его. «Сейчас я смотрю через фильтр страха.»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text"><strong>Выбор:</strong> «Я выбираю оставить этот фильтр / снять этот фильтр.» Важен сам акт выбора.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">При сильном размытии</div>
+                        <p class="observation-text">Если самостоятельное восстановление не работает — обратитесь к специалисту. Это не слабость, а адекватность.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">📅</div>
+                    <div class="technique-title">Техника 30.6: Ежедневный мониторинг</div>
+                </div>
+                <div class="technique-content">
+                    <p>Простая практика профилактики — несколько минут в день для поддержания здоровья.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text"><strong>Утром:</strong> после пробуждения (с буфером) — «Где я? Что чувствую? Готов ли к дню?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text"><strong>Днём (2-3 раза):</strong> короткая пауза — «В каком слое я сейчас? Это адекватно ситуации?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text"><strong>Вечером:</strong> обзор дня — «Были ли моменты потери контроля? Застревания? Размытия границ?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text"><strong>Запись:</strong> краткие заметки помогают отслеживать паттерны во времени.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Время</div>
+                        <p class="observation-text">Вся практика занимает 5-10 минут в день. Эффект накапливается со временем.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🚨</div>
+                    <div class="technique-title">Техника 30.7: Красные флаги</div>
+                </div>
+                <div class="technique-content">
+                    <p>Когда нужно обращаться за профессиональной помощью — не игнорируйте эти сигналы.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Вы не можете выйти из состояния несколько дней подряд.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Внутренние голоса или персонажи начинают «командовать» без вашего согласия.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Вы теряете связь с реальностью: не уверены, что реально, а что нет.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Появляются мысли о самоповреждении или суициде.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Страдает работа, отношения, здоровье — и вы не можете это изменить.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-text">Близкие выражают серьёзное беспокойство о вашем состоянии.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Действие</div>
+                        <p class="observation-text">При любом из этих признаков — обратитесь к психологу или психиатру. Книга не заменяет специалиста.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Интеграция</div>
+
+            <h2>Свобода как здоровье</h2>
+            <p>Мы прошли через всю <span class="concept">топографию сознания</span>: от Колыбели до Междумирья, от Театра внутри до Лимба. Мы научились переключаться между слоями и использовать буферы. Теперь понимаем главное:</p>
+
+            <div class="key-insight">
+                <p>Психическое здоровье — это не нахождение в «правильном» состоянии. Это свободное движение между состояниями с пониманием того, где вы находитесь и почему.</p>
+            </div>
+
+            <p>Мистик, погружающийся в глубокие состояния — здоров, если осознаёт это и может вернуться. Бизнесмен в жёстких масках — здоров, если знает, что это маски, и может их снять. Художник на границе сна — здоров, если различает образы и реальность.</p>
+
+            <p><span class="highlight">Патология начинается там, где заканчивается осознанность</span>: когда фильтры сливаются с реальностью, когда выход невозможен, когда вы не знаете, где находитесь.</p>
+
+            <div class="part-summary">
+                <div class="part-summary-header">
+                    <span>◈</span> Итоги части III: Топография сознания
+                </div>
+                <h3>Что мы освоили</h3>
+                <p>• <strong>Карта территорий</strong> — шесть слоёв сознания и их функции</p>
+                <p>• <strong>Колыбель</strong> — точка ноль для восстановления и обнуления</p>
+                <p>• <strong>Театр внутри</strong> — работа с субличностями и внутренними персонажами</p>
+                <p>• <strong>Граница сна</strong> — доступ к образам и символам подсознания</p>
+                <p>• <strong>Театр масок</strong> — управление социальными ролями и контекстами</p>
+                <p>• <strong>Междумирье</strong> — стратегический взгляд на жизнь с высоты</p>
+                <p>• <strong>Лимб</strong> — мастерская для интеграции и синтеза</p>
+                <p>• <strong>Повороты калейдоскопа</strong> — искусство переключения между слоями</p>
+                <p>• <strong>Фазовые переходы</strong> — техника безопасности при смене состояний</p>
+                <p>• <strong>Критерий здоровья</strong> — свобода движения как мера благополучия</p>
+            </div>
+
+            <p>В следующей части мы перейдём к <strong>Инструментарию</strong> — конкретным техникам для работы с вниманием в повседневной жизни: как удерживать фокус, как управлять периферией, как входить в поток.</p>
+
+            <div class="homework">
+                <div class="homework-title">
+                    <span>◆</span> Домашнее задание
+                </div>
+                <ul class="homework-list">
+                    <li>Проведите экспресс-диагностику (техника 30.1) трижды сегодня — утром, днём, вечером</li>
+                    <li>Создайте свою «карту гибкости» (техника 30.4) — оцените доступность каждого слоя</li>
+                    <li>Определите «зоны риска» — где вы склонны застревать или терять границы</li>
+                    <li>Неделю ведите ежедневный мониторинг (техника 30.6) — краткие записи утром и вечером</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="29.html" class="nav-link">← Глава 29: Фазовые переходы</a>
+            <a href="31.html" class="nav-link next-part">Часть IV: Инструментарий →</a>
+        </nav>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

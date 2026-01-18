@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 15: Откат и перевыбор — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --bg-dark: #0f0f1a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #c4b5fd;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent),
+                radial-gradient(ellipse 40% 30% at 50% 80%, rgba(6, 182, 212, 0.05), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .part-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            background: rgba(168, 85, 247, 0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px var(--glow);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .decoration-line {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 2rem auto;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05));
+            border-color: rgba(99, 102, 241, 0.2);
+            position: relative;
+        }
+
+        .story-section::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: rgba(99, 102, 241, 0.2);
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin: 2rem 0 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(99, 102, 241, 0.05));
+            border-left: 3px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .technique-card {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .technique-number {
+            position: absolute;
+            top: -0.75rem;
+            left: 1.5rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .technique-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .steps li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .steps li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-tag {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .observation {
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 3px solid var(--secondary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .observation strong {
+            color: var(--secondary);
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .integration-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .integration-item h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .time-visual {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .time-visual h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .timeline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .timeline-past {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: #f87171;
+        }
+
+        .timeline-now {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .timeline-future {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: #4ade80;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .task-list li::before {
+            content: '[ ]';
+            color: var(--secondary);
+            font-family: monospace;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        nav a {
+            color: var(--text-accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            section { padding: 2rem 1.5rem; }
+            .chapter-number { font-size: 3.5rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="part-label">Часть II: Механика выбора</div>
+            <div class="chapter-number">15</div>
+            <h1>Откат и перевыбор</h1>
+            <p class="subtitle">Прошлое как материал для редактирования</p>
+            <div class="decoration-line"></div>
+        </header>
+
+        <section class="story-section visible">
+            <h2>История</h2>
+            <p class="lead">Время в психике работает не так, как в физике. Прошлое не фиксировано. Его можно «редактировать» — не факты, но их значение.</p>
+
+            <p>Антон двадцать лет жил с сожалением. В молодости он отказался от предложения друга начать бизнес вместе. Друг стал миллионером. Антон — остался на обычной работе.</p>
+
+            <p>«Если бы я тогда согласился...» — эта мысль преследовала его годами. Каждый раз, когда он видел успехи друга, внутри поднималась горечь.</p>
+
+            <p>На терапии ему задали странный вопрос: «А что бы ты потерял, если бы согласился?»</p>
+
+            <p>Антон задумался. Он бы не встретил жену — познакомились на работе. Не было бы сына. Не было бы лет спокойной стабильности. Не было бы путешествий, которые они с семьёй так любили.</p>
+
+            <p>«Погоди... — сказал он медленно. — Получается, я не сделал неправильный выбор. Я выбрал одну жизнь вместо другой. И в этой жизни есть вещи, которых не было бы в той».</p>
+
+            <p>«Именно, — ответил терапевт. — Ты не можешь изменить факт отказа. Но ты можешь изменить, что он для тебя значит. Это не ошибка, от которой ты потерял. Это выбор, благодаря которому ты получил».</p>
+
+            <p>В тот день Антон не изменил прошлое. Он изменил своё настоящее отношение к нему. И сожаление, тащившееся за ним двадцать лет, наконец отпустило.</p>
+        </section>
+
+        <section>
+            <h2>Теоретический блок</h2>
+
+            <div class="time-visual">
+                <h3>Нелинейное время психики</h3>
+                <div class="timeline">
+                    <span class="timeline-past">Прошлое (память)</span>
+                    <span class="timeline-now">Сейчас</span>
+                    <span class="timeline-future">Будущее (воображение)</span>
+                </div>
+                <p>Прошлое существует только как текущее воспоминание. Каждый раз, вспоминая, вы реконструируете — не воспроизводите. И можете реконструировать иначе.</p>
+            </div>
+
+            <p class="lead">Нейронаука открыла удивительный факт: память не хранится, а воссоздаётся. Каждый раз, когда вы вспоминаете событие, вы его заново конструируете — и немного меняете.</p>
+
+            <h3>Реконсолидация памяти</h3>
+
+            <p>Когда воспоминание «активируется», оно становится пластичным. В этот момент можно внести изменения — не в факты, но в эмоциональную окраску, интерпретацию, связи с другими воспоминаниями.</p>
+
+            <div class="highlight-box">
+                <p>Прошлое — не камень, а глина. Пока вы живы, его можно переформировывать. Не отрицать факты — но менять, что они для вас значат.</p>
+            </div>
+
+            <h3>Отличие от самообмана</h3>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Самообман</h4>
+                    <p>Отрицание фактов. «Этого не было». «Это не я сделал». «Я не виноват». Попытка изменить реальность через её игнорирование.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Перевыбор</h4>
+                    <p>Признание фактов с изменением их значения. «Это было. И благодаря этому я узнал...» «Это привело к...» «Сейчас я выбираю иначе».</p>
+                </div>
+            </div>
+
+            <h3>Точки перевыбора</h3>
+
+            <p>Прошлое неизменно в смысле фактов. Но настоящее — это место, где прошлое оживает снова. И здесь вы можете выбрать иначе:</p>
+
+            <ul class="steps">
+                <li>Вы когда-то предали доверие — сейчас можете стать надёжным</li>
+                <li>Вы когда-то сдались — сейчас можете проявить настойчивость</li>
+                <li>Вы когда-то промолчали — сейчас можете сказать</li>
+                <li>Вы когда-то выбрали страх — сейчас можете выбрать смелость</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Точка перевыбора</strong> — это момент в настоящем, где вы можете сделать то, что не сделали тогда. Не буквально повторить ситуацию, но проявить качество, которого не хватило. Это «переписывает» прошлое через настоящее действие.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Практический блок</h2>
+            <p class="lead">Семь техник для работы с прошлым — от ревизии сожалений до интеграции тени.</p>
+
+            <div class="technique-card">
+                <span class="technique-number">15.1</span>
+                <h3 class="technique-title">Ревизия сожалений</h3>
+                <p>Переработка сожалений в уроки и ресурсы.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Составьте список решений, о которых жалеете (крупных и мелких)</li>
+                    <li>Для каждого спросите: «Что я узнал благодаря этому?»</li>
+                    <li>Что стало возможно именно потому, что случилось так?</li>
+                    <li>Какие качества развились? Какой опыт получен?</li>
+                    <li>Переформулируйте: не «ошибка», а «урок»</li>
+                    <li>Запишите новую версию истории</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 30-40 минут</span>
+                    <span class="meta-tag">Глубина: Высокая</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Каждое «сожаление» содержит урок. Когда урок извлечён — сожаление теряет свою болезненную силу. Остаётся мудрость.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">15.2</span>
+                <h3 class="technique-title">Поиск точки перевыбора</h3>
+                <p>Нахождение действия в настоящем, которое «переписывает» прошлый выбор.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите одно сожаление из списка</li>
+                    <li>Определите: какое качество/действие тогда не проявили?</li>
+                    <li>Спросите: «Где СЕЙЧАС я могу проявить это качество?»</li>
+                    <li>Найдите конкретную ситуацию в настоящем</li>
+                    <li>Сделайте по-другому — не тогда, а сейчас</li>
+                    <li>Это «перезаписывает» паттерн</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 20-30 минут + действие</span>
+                    <span class="meta-tag">Тип: Практический</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Вы не можете вернуться и сказать «да» на то предложение. Но можете сказать «да» сегодня — на новое предложение. Это другой шанс, но того же качества.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">15.3</span>
+                <h3 class="technique-title">Письмо из будущего</h3>
+                <p>Создание позитивной интерпретации из перспективы «будущего себя».</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите решение, о котором сожалеете</li>
+                    <li>Представьте себя через 10 лет — у вас всё хорошо</li>
+                    <li>Из этой точки напишите письмо себе-сегодняшнему</li>
+                    <li>Объясните: «Благодаря тому решению ты сейчас имеешь...»</li>
+                    <li>Опишите, как «ошибка» привела к чему-то ценному</li>
+                    <li>Прочитайте письмо вслух</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 20-25 минут</span>
+                    <span class="meta-tag">Формат: Письменно</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Перспектива меняет значение. То, что кажется катастрофой сегодня, из будущего может выглядеть как поворотный момент к лучшему.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">15.4</span>
+                <h3 class="technique-title">Отмена «никогда»</h3>
+                <p>Пересмотр старых запретов и ограничений, которые больше не актуальны.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Вспомните решения типа «больше никогда не буду...»</li>
+                    <li>Для каждого спросите: «Это всё ещё актуально?»</li>
+                    <li>Контекст изменился? Я изменился?</li>
+                    <li>Если запрет устарел — дайте себе разрешение пересмотреть</li>
+                    <li>Скажите вслух: «Тогда я решил так. Сейчас я перевыбираю»</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-20 минут</span>
+                    <span class="meta-tag">Эффект: Освобождение</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Многие наши «никогда» были приняты в защиту — часто в детстве или юности. Контекст изменился, а запрет остался. Пора пересмотреть.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">15.5</span>
+                <h3 class="technique-title">Интеграция тени решения</h3>
+                <p>Обращение к «невыбранному пути» для извлечения его ценности.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Вспомните важный выбор, где вы отказались от альтернативы</li>
+                    <li>Представьте: кем бы вы стали на другом пути?</li>
+                    <li>Какие качества развились бы? Какой опыт получили бы?</li>
+                    <li>Спросите: могу ли я взять что-то из того пути в свою текущую жизнь?</li>
+                    <li>Не буквально, но сущностно — качество, подход, ценность</li>
+                    <li>Интегрируйте это в настоящее</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 25-30 минут</span>
+                    <span class="meta-tag">Тип: Визуализация</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Невыбранный путь не исчезает — он становится «тенью». Там есть ресурсы, которые можно извлечь. Не пойдя в бизнес, можно развить предприимчивость в хобби.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">15.6</span>
+                <h3 class="technique-title">Ритуал отпускания</h3>
+                <p>Символическое завершение для решений, которые невозможно изменить.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Выберите сожаление, которое невозможно исправить в реальности</li>
+                    <li>Напишите на бумаге: что произошло, что вы чувствуете, что хотели бы</li>
+                    <li>Прочитайте вслух — признайте</li>
+                    <li>Символически завершите: сожгите, порвите, закопайте бумагу</li>
+                    <li>Скажите: «Я отпускаю это. Я свободен идти дальше»</li>
+                    <li>Физический ритуал закрывает эмоциональный гештальт</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 15-20 минут</span>
+                    <span class="meta-tag">Тип: Ритуал</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Некоторые вещи невозможно исправить. Человек умер. Время ушло. Но можно завершить отношения с этим. Ритуал помогает психике закрыть то, что не закрывается логикой.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">15.7</span>
+                <h3 class="technique-title">Благодарность «неправильному» выбору</h3>
+                <p>Искренняя благодарность за то, что дала «ошибка».</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите решение, которое считаете ошибкой</li>
+                    <li>Найдите три вещи, которые есть у вас ТОЛЬКО благодаря этой «ошибке»</li>
+                    <li>Это могут быть: опыт, люди, качества, понимание</li>
+                    <li>Искренне поблагодарите себя за то решение</li>
+                    <li>«Спасибо, что тогда я выбрал так — благодаря этому у меня есть...»</li>
+                    <li>Почувствуйте сдвиг энергии от сожаления к благодарности</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 10-15 минут</span>
+                    <span class="meta-tag">Эффект: Трансформация</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Благодарность — алхимия. Она превращает яд в лекарство. То же событие, но другая энергия. Сожаление истощает, благодарность питает.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Интеграция</h2>
+
+            <p class="lead">Жить с сожалением — значит тратить энергию настоящего на прошлое. Перевыбрать — значит направить эту энергию в настоящее и будущее.</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Прошлое как ресурс</h4>
+                    <p>Каждый опыт — материал для мудрости. Нет «потерянных лет» — есть годы обучения. Вопрос только в том, извлечён ли урок.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Настоящее как точка силы</h4>
+                    <p>Только здесь можно выбирать. Только сейчас. Прошлое даёт материал, будущее даёт направление, но выбор — только в настоящем.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Ключевой принцип:</strong> Вы не можете изменить то, что было. Но вы можете изменить то, чем это стало. Факты неизменны — значение выбираете вы. И это значение определяет, как прошлое влияет на ваше будущее.</p>
+            </div>
+
+            <p>В следующей главе мы рассмотрим петли обратной связи — как мысли, эмоции и действия образуют циклы, и как найти точку входа для их изменения.</p>
+        </section>
+
+        <div class="homework">
+            <h3>Домашнее задание</h3>
+            <ul class="task-list">
+                <li>Составьте список трёх главных сожалений. Для каждого найдите: что вы узнали благодаря этому?</li>
+                <li>Выберите одно сожаление и найдите «точку перевыбора» в настоящем — конкретное действие, которое можете сделать сейчас</li>
+                <li>Напишите письмо из будущего себе-сегодняшнему, объясняя, как одна «ошибка» привела к чему-то ценному</li>
+            </ul>
+        </div>
+
+        <nav>
+            <a href="14.html">← Глава 14: Цена выбора</a>
+            <a href="16.html">Глава 16: Петля обратной связи →</a>
+        </nav>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section:not(.visible)').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

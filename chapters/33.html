@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 33: Работа с образом в теле | Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0f1318;
+            --color-surface: rgba(24, 32, 42, 0.88);
+            --color-primary: #8b5cf6;
+            --color-secondary: #7c3aed;
+            --color-accent: #a78bfa;
+            --color-text: #f5f3ff;
+            --color-text-muted: #c4b5fd;
+            --color-glow: rgba(139, 92, 246, 0.35);
+            --color-warm: #f472b6;
+            --color-body: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Part IV Header */
+        .part-header {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(124, 58, 237, 0.06));
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 16px 24px;
+            text-align: center;
+        }
+
+        .part-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+        }
+
+        /* Body silhouette with energy points */
+        .body-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .body-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 50% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 60%, rgba(236, 72, 153, 0.06) 0%, transparent 40%);
+        }
+
+        /* Energy points visualization */
+        .energy-points {
+            position: fixed;
+            left: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            opacity: 0.2;
+        }
+
+        .energy-point {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: energyPulse 3s ease-in-out infinite;
+        }
+
+        .point-1 { background: #a78bfa; animation-delay: 0s; }
+        .point-2 { background: #8b5cf6; animation-delay: 0.4s; }
+        .point-3 { background: #ec4899; animation-delay: 0.8s; }
+        .point-4 { background: #f472b6; animation-delay: 1.2s; }
+        .point-5 { background: #a78bfa; animation-delay: 1.6s; }
+
+        @keyframes energyPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.4;
+                box-shadow: 0 0 10px currentColor;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 1;
+                box-shadow: 0 0 25px currentColor;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        .chapter-number {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--color-primary);
+            text-shadow: 0 0 40px var(--color-glow);
+        }
+
+        .chapter-subtitle {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        .section {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            box-shadow:
+                0 4px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(139, 92, 246, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .story-text {
+            font-size: 19px;
+            font-style: italic;
+            color: var(--color-text);
+            border-left: 3px solid var(--color-warm);
+            padding-left: 24px;
+            margin: 24px 0;
+            line-height: 1.9;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: var(--color-primary);
+            margin: 48px 0 24px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 22px;
+            color: var(--color-accent);
+            margin: 36px 0 18px 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: var(--color-text);
+        }
+
+        .concept {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(139, 92, 246, 0.2) 0%, rgba(124, 58, 237, 0.1) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Body metaphor examples */
+        .metaphor-list {
+            background: rgba(15, 19, 24, 0.6);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .metaphor-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .metaphor-item:last-child {
+            border-bottom: none;
+        }
+
+        .metaphor-phrase {
+            font-style: italic;
+            color: var(--color-warm);
+            min-width: 180px;
+        }
+
+        .metaphor-meaning {
+            color: var(--color-text-muted);
+        }
+
+        .technique {
+            background: linear-gradient(135deg, rgba(24, 32, 42, 0.9), rgba(18, 24, 32, 0.95));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-body), var(--color-primary), var(--color-accent));
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .technique-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px var(--color-glow);
+        }
+
+        .technique-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .technique-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+
+        .technique-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .steps {
+            background: rgba(12, 16, 20, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            padding-top: 3px;
+        }
+
+        /* Image attributes */
+        .attributes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .attribute-item {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .attribute-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 4px;
+        }
+
+        .attribute-example {
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+
+        .observation {
+            background: rgba(236, 72, 153, 0.1);
+            border-left: 3px solid var(--color-body);
+            padding: 16px 20px;
+            margin-top: 16px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .observation-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-body);
+            margin-bottom: 8px;
+        }
+
+        .observation-text {
+            color: var(--color-text-muted);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(124, 58, 237, 0.08));
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .key-insight::before {
+            content: '✧';
+            position: absolute;
+            top: -12px;
+            left: 28px;
+            background: var(--color-bg);
+            padding: 0 12px;
+            color: var(--color-primary);
+            font-size: 18px;
+        }
+
+        .key-insight p {
+            color: var(--color-text);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 20px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .homework-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .homework-list {
+            list-style: none;
+        }
+
+        .homework-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--color-text);
+        }
+
+        .homework-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 10px;
+            top: 7px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(139, 92, 246, 0.15);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+            padding: 12px 24px;
+            background: var(--color-surface);
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.12);
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 16px 50px;
+            }
+
+            .section {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            .technique {
+                padding: 24px 18px;
+            }
+
+            .energy-points {
+                display: none;
+            }
+
+            .metaphor-item {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .metaphor-phrase {
+                min-width: unset;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="part-header">
+        <div class="part-label">Часть IV: Инструментарий</div>
+    </div>
+
+    <div class="body-bg">
+        <div class="energy-points">
+            <div class="energy-point point-1"></div>
+            <div class="energy-point point-2"></div>
+            <div class="energy-point point-3"></div>
+            <div class="energy-point point-4"></div>
+            <div class="energy-point point-5"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="chapter-header">
+            <span class="chapter-number">Глава тридцать третья</span>
+            <h1 class="chapter-title">Работа с образом в теле</h1>
+            <p class="chapter-subtitle">Соматическая метафора и телесная трансформация</p>
+        </header>
+
+        <section class="section">
+            <div class="section-title">Открывающая история</div>
+            <div class="story-text">
+                <p>«Комок в горле», «камень на сердце», «тяжесть на плечах» — мы произносим эти фразы, не задумываясь. Но они не просто метафоры. Они описывают реальные ощущения.</p>
+                <p>Клиентка пришла с тревогой, которая не отпускала годами. Терапия, таблетки — ничего не помогало надолго. Я спросил: «Где в теле живёт эта тревога?»</p>
+                <p>Она закрыла глаза, прислушалась. «В груди. Такой... чёрный комок. Плотный. Как уголь.»</p>
+                <p>Мы работали с этим образом. Не анализировали, откуда он. Просто наблюдали. Дышали в него. Спрашивали, что ему нужно.</p>
+                <p>«Он хочет раствориться, — сказала она через некоторое время. — Но не может. Ему нужно... разрешение.»</p>
+                <p>Она дала разрешение. Комок начал рассыпаться, как уголь в золу. Зола растворялась. Через полчаса грудь была «светлой и тёплой».</p>
+                <p>Тревога не вернулась. Не потому что мы «победили» её. А потому что тело наконец смогло отпустить то, что держало.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Теоретический блок</div>
+
+            <h2>Тело знает больше</h2>
+            <p>Эмоции живут не в голове — они живут в теле. Гнев сжимает кулаки. Страх холодит живот. Горе давит грудь. Это не поэзия — это физиология. Эмоциональная память хранится в <span class="concept">соматических паттернах</span>.</p>
+
+            <div class="metaphor-list">
+                <div class="metaphor-item">
+                    <div class="metaphor-phrase">«Комок в горле»</div>
+                    <div class="metaphor-meaning">→ невысказанные слова, подавленный плач</div>
+                </div>
+                <div class="metaphor-item">
+                    <div class="metaphor-phrase">«Камень на сердце»</div>
+                    <div class="metaphor-meaning">→ горе, вина, непрощённая обида</div>
+                </div>
+                <div class="metaphor-item">
+                    <div class="metaphor-phrase">«Тяжесть на плечах»</div>
+                    <div class="metaphor-meaning">→ избыточная ответственность</div>
+                </div>
+                <div class="metaphor-item">
+                    <div class="metaphor-phrase">«Узел в животе»</div>
+                    <div class="metaphor-meaning">→ тревога, страх, неуверенность</div>
+                </div>
+                <div class="metaphor-item">
+                    <div class="metaphor-phrase">«Давит голову»</div>
+                    <div class="metaphor-meaning">→ перегрузка, чрезмерное думание</div>
+                </div>
+            </div>
+
+            <h3>Почему это работает</h3>
+            <p>Работа с телесным образом обходит защиты ума. Когда мы говорим о проблеме словами — включаются рационализации, оправдания, избегание. Но когда мы работаем с ощущением — <span class="highlight">тело не обманывает</span>.</p>
+
+            <p><span class="concept">Наблюдение меняет наблюдаемое</span> — квантовый принцип, который работает и в психологии. Когда вы направляете внимание на телесное ощущение — оно начинает меняться. Не потому что вы его «заставляете». А потому что внимание — это энергия, и она трансформирует.</p>
+
+            <div class="key-insight">
+                <p>Эта техника особенно эффективна для хронических состояний: застарелой тревоги, фоновой грусти, необъяснимого напряжения. То, что было «фоном» так долго, что вы перестали замечать — можно вывести в фокус и трансформировать.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Практический блок</div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">📍</div>
+                    <div class="technique-title">Техника 33.1: Сканирование-локализация</div>
+                </div>
+                <div class="technique-content">
+                    <p>Первый шаг — найти, где в теле «живёт» переживание.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Возьмите текущую проблему или эмоцию. Не анализируйте — просто держите в уме.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Закройте глаза. Спросите тело: «Где это живёт?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Медленно сканируйте: голова, горло, грудь, живот, таз, спина, конечности.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Найдите место, где что-то откликается: напряжение, тяжесть, холод, тепло.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Не ищите «правильный» ответ — доверяйте первому ощущению.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Подсказка</div>
+                        <p class="observation-text">Если ничего не находите — спросите: «Если бы это было где-то в теле, где бы это было?» Воображение укажет путь.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🎨</div>
+                    <div class="technique-title">Техника 33.2: Дать форму</div>
+                </div>
+                <div class="technique-content">
+                    <p>Превращение ощущения в конкретный образ с характеристиками.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Найдя место — направьте туда всё внимание.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Исследуйте ощущение вопросами:</div>
+                        </div>
+                    </div>
+                    <div class="attributes-grid">
+                        <div class="attribute-item">
+                            <div class="attribute-label">Размер</div>
+                            <div class="attribute-example">с кулак? с апельсин? больше?</div>
+                        </div>
+                        <div class="attribute-item">
+                            <div class="attribute-label">Форма</div>
+                            <div class="attribute-example">шар? комок? острое? размытое?</div>
+                        </div>
+                        <div class="attribute-item">
+                            <div class="attribute-label">Цвет</div>
+                            <div class="attribute-example">тёмный? светлый? какой оттенок?</div>
+                        </div>
+                        <div class="attribute-item">
+                            <div class="attribute-label">Плотность</div>
+                            <div class="attribute-example">камень? вата? жидкость? дым?</div>
+                        </div>
+                        <div class="attribute-item">
+                            <div class="attribute-label">Температура</div>
+                            <div class="attribute-example">горячее? холодное? нейтральное?</div>
+                        </div>
+                        <div class="attribute-item">
+                            <div class="attribute-label">Текстура</div>
+                            <div class="attribute-example">гладкое? шершавое? колючее?</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Не торопитесь</div>
+                        <p class="observation-text">Пусть образ проявится сам. Чем детальнее вы его «видите», тем легче с ним работать.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">👁️</div>
+                    <div class="technique-title">Техника 33.3: Наблюдение без вмешательства</div>
+                </div>
+                <div class="technique-content">
+                    <p>Часто этого достаточно: просто смотреть — и образ начинает меняться сам.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Имея чёткий образ — просто смотрите на него внутренним взглядом.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Не пытайтесь менять, выводить, исправлять. Только наблюдение.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Часто образ начинает меняться сам: цвет светлеет, размер уменьшается, форма смягчается.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Следуйте за изменениями. Не форсируйте — сопровождайте.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Если образ не меняется — это тоже информация. Возможно, нужен диалог (техника 33.6).</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Время</div>
+                        <p class="observation-text">5-15 минут чистого наблюдения. Не спешите. Глубокие образы меняются медленно.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">💨</div>
+                    <div class="technique-title">Техника 33.4: Дыхание в образ</div>
+                </div>
+                <div class="technique-content">
+                    <p>Использование дыхания как инструмента трансформации.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Направьте дыхание к месту, где находится образ.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">На вдохе — представляйте, что «светите» туда вниманием, светом.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">На выдохе — позволяйте образу размягчаться, растворяться.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Не силой — приглашением. Как будто говорите: «Можно отпустить.»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Повторяйте, наблюдая за изменениями.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Важно</div>
+                        <p class="observation-text">Это не про «выдохнуть проблему». Это про создание условий, в которых тело может отпустить то, что держит.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">➡️</div>
+                    <div class="technique-title">Техника 33.5: Движение образа</div>
+                </div>
+                <div class="technique-content">
+                    <p>Позволить образу двигаться — иногда он сам знает, куда хочет.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Спросите образ: «Куда ты хочешь двигаться?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Позвольте ему перемещаться по телу. Наблюдайте путь.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Или — позвольте выходить из тела: через руки, ноги, макушку, дыхание.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Не форсируйте направление. Следуйте за тем, что происходит.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Если образ «застрял» — вернитесь к дыханию или диалогу.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Наблюдение</div>
+                        <p class="observation-text">Иногда образ хочет выйти, но «не может» — что-то держит. Это материал для следующей техники.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">💬</div>
+                    <div class="technique-title">Техника 33.6: Диалог с образом</div>
+                </div>
+                <div class="technique-content">
+                    <p>Если образ не трансформируется — возможно, ему нужно что-то сказать.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Обратитесь к образу: «Что ты хочешь мне сказать?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Ждите. Может прийти слово, чувство, воспоминание, понимание.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Спросите: «Что тебе нужно?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Дайте то, что просит: внимание, тепло, признание, разрешение уйти.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Часто образу нужно услышать что-то простое: «Я вижу тебя», «Спасибо», «Можно отпустить».</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Связь</div>
+                        <p class="observation-text">Это похоже на горячий стул (Глава 32), но диалог ведётся с телесным образом, а не с персонажем.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">✨</div>
+                    <div class="technique-title">Техника 33.7: Трансформация образа</div>
+                </div>
+                <div class="technique-content">
+                    <p>Когда образ «готов» — можно предложить трансформацию.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Убедитесь, что образ «согласен» на изменение. Спросите: «Готов ли ты измениться?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Если да — предложите трансформацию:</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Чёрное → светлеет. Плотное → разрежается. Острое → округляется. Холодное → теплеет.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Наблюдайте изменения. Не форсируйте — сопровождайте.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Если образ сопротивляется — вернитесь к диалогу. Что-то ещё не услышано.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">Не насильно</div>
+                        <p class="observation-text">Трансформация происходит, когда образ готов. Форсирование создаёт сопротивление и откат.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique">
+                <div class="technique-header">
+                    <div class="technique-icon">🌟</div>
+                    <div class="technique-title">Техника 33.8: Завершение</div>
+                </div>
+                <div class="technique-content">
+                    <p>Интеграция и закрытие сессии.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Когда трансформация произошла — спросите: «Чем это место сейчас наполнено?»</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Позвольте ему наполниться чем-то ресурсным: светом, теплом, спокойствием.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Поблагодарите тело за работу.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Сделайте несколько глубоких вдохов. Почувствуйте границы тела.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Медленно откройте глаза. Дайте себе время вернуться.</div>
+                        </div>
+                    </div>
+                    <div class="observation">
+                        <div class="observation-label">После сессии</div>
+                        <p class="observation-text">Пейте воду, отдыхайте. Глубокая телесная работа требует времени на интеграцию.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">Интеграция</div>
+
+            <h2>Тело помнит и исцеляет</h2>
+            <p><span class="concept">Телесный образ</span> — это не метафора и не воображение. Это способ, которым психика кодирует эмоциональный опыт. Когда мы работаем с образом — мы работаем напрямую с этим кодом.</p>
+
+            <p>Эта техника особенно ценна для того, что <span class="highlight">ум забыл, а тело помнит</span>. Хроническое напряжение в плечах, которое «всегда было». Тревога в животе без видимой причины. Тяжесть в груди, которая «просто фон». Всё это — закодированный опыт, который можно трансформировать.</p>
+
+            <div class="key-insight">
+                <p>Важное ограничение: при острых травмах работайте с терапевтом. Эта техника для хронических состояний, фоновых ощущений, застарелых эмоций. Свежая травма требует профессиональной поддержки.</p>
+            </div>
+
+            <div class="homework">
+                <div class="homework-title">
+                    <span>◆</span> Домашнее задание
+                </div>
+                <ul class="homework-list">
+                    <li>Найдите одно телесное ощущение (напряжение, тяжесть, дискомфорт)</li>
+                    <li>Дайте ему форму: размер, цвет, плотность, температура</li>
+                    <li>Наблюдайте 10 минут без вмешательства — просто смотрите</li>
+                    <li>Запишите, что произошло: менялся ли образ? Что чувствовали?</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="32.html" class="nav-link">← Глава 32: Горячий стул</a>
+            <a href="34.html" class="nav-link">Глава 34: Перерисовка карты →</a>
+        </nav>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 13: Коллапс в решение — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --bg-dark: #0f0f1a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #c4b5fd;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent),
+                radial-gradient(ellipse 40% 30% at 50% 80%, rgba(6, 182, 212, 0.05), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+
+        .part-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            background: rgba(168, 85, 247, 0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px var(--glow);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .decoration-line {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 2rem auto;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05));
+            border-color: rgba(99, 102, 241, 0.2);
+            position: relative;
+        }
+
+        .story-section::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            color: rgba(99, 102, 241, 0.2);
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin: 2rem 0 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(99, 102, 241, 0.05));
+            border-left: 3px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .technique-card {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .technique-number {
+            position: absolute;
+            top: -0.75rem;
+            left: 1.5rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .technique-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .steps li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .steps li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .observation {
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 3px solid var(--secondary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .observation strong {
+            color: var(--secondary);
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .integration-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .integration-item h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .collapse-visual {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .collapse-visual h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .collapse-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .possibility {
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-accent);
+        }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .reality {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .homework {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .task-list li::before {
+            content: '[ ]';
+            color: var(--secondary);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        nav a {
+            color: var(--text-accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .timeline-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .timeline-point {
+            text-align: center;
+        }
+
+        .timeline-point .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-point .time {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .timeline-arrow {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 0 1rem;
+            position: relative;
+        }
+
+        .timeline-arrow::after {
+            content: '→';
+            position: absolute;
+            right: -0.5rem;
+            top: -0.6rem;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .chapter-number {
+                font-size: 3.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .technique-card {
+                padding: 1.5rem;
+            }
+
+            .collapse-diagram {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="part-label">Часть II: Механика выбора</div>
+            <div class="chapter-number">13</div>
+            <h1>Коллапс в решение</h1>
+            <p class="subtitle">Из бесконечности — в единственную реальность</p>
+            <div class="decoration-line"></div>
+        </header>
+
+        <section class="story-section visible">
+            <h2>История</h2>
+            <p class="lead">Физик Нильс Бор говорил: «Измерение создаёт реальность». До того как вы посмотрели — частица находится везде. После — в конкретном месте. То же самое с решениями.</p>
+
+            <p>Сергей полгода думал о смене профессии. Он консультировался, составлял списки за и против, читал статьи, ходил на мастер-классы. Он знал всё о новой сфере. Но решение не приходило.</p>
+
+            <p>Однажды он встретил знакомого, который сделал такой же переход пять лет назад.</p>
+
+            <p>«Как ты решился?» — спросил Сергей.</p>
+
+            <p>«Знаешь, — ответил тот, — в какой-то момент я понял, что решение — это не понимание. Я никогда не буду знать достаточно. Я просто взял и записался на курс. Оплатил. И в этот момент всё встало на место».</p>
+
+            <p>«То есть ты сначала решил, а потом понял, что это правильно?»</p>
+
+            <p>«Именно. Действие лечит рефлексию. Пока я думал — я был везде и нигде. Когда оплатил — я оказался в конкретной точке. И оттуда уже стало видно, куда идти дальше».</p>
+
+            <p>Сергей шёл домой и думал: может, проблема не в том, что он не готов, а в том, что он ждёт готовности? Может, решение — это не результат думания, а его причина?</p>
+
+            <p>В тот вечер он написал заявление об увольнении. И впервые за полгода почувствовал ясность.</p>
+        </section>
+
+        <section>
+            <h2>Теоретический блок</h2>
+
+            <div class="collapse-visual">
+                <h3>Квантовый коллапс в психике</h3>
+                <div class="collapse-diagram">
+                    <span class="possibility">Вариант А</span>
+                    <span class="possibility">Вариант Б</span>
+                    <span class="possibility">Вариант В</span>
+                    <span class="arrow">→</span>
+                    <span class="reality">РЕШЕНИЕ</span>
+                </div>
+                <p>Все возможности существуют одновременно. Пока вы не выбрали — вы везде. Решение = коллапс = одна конкретная реальность.</p>
+            </div>
+
+            <p class="lead">Коллапс волновой функции — момент, когда бесконечность возможностей превращается в одну реальность. Это физика. Но это же и психология принятия решений.</p>
+
+            <h3>Почему после решения становится легче</h3>
+
+            <p>Парадокс: даже если выбор сложный — после его принятия обычно становится легче. Почему?</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>Освобождение ресурсов</h4>
+                    <p>Держать открытыми несколько реальностей — энергозатратно. Коллапс освобождает всё это внимание для действия.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Появление направления</h4>
+                    <p>В суперпозиции непонятно, куда двигаться. После решения — появляется вектор. Можно идти.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Завершение неопределённости</h4>
+                    <p>Мозг не любит открытые петли. Решение закрывает гештальт, и появляется ощущение завершённости.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Обретение идентичности</h4>
+                    <p>«Я тот, кто выбрал это» — это определённость о себе. Не знать, кто ты, — утомительно.</p>
+                </div>
+            </div>
+
+            <h3>Почему действие важнее «правильности»</h3>
+
+            <p>Мы привыкли думать: сначала нужно найти правильное решение, потом действовать. Но часто работает наоборот:</p>
+
+            <div class="highlight-box">
+                <p><strong>Действие создаёт понимание.</strong> Пока вы только думаете — информация абстрактна. Когда вы делаете — вы получаете реальную обратную связь. Вы узнаёте то, что нельзя узнать заранее.</p>
+            </div>
+
+            <p>Более того: большинство решений обратимы. Страх «неправильного выбора» сильно преувеличен. Вы можете передумать. Скорректировать курс. Попробовать иначе. Но сделать это можно только из точки решения, не из суперпозиции.</p>
+
+            <h3>Паралич анализа</h3>
+
+            <p>Когда обдумывание становится способом избежать действия — это паралич анализа. Признаки:</p>
+
+            <ul class="steps">
+                <li>Вы собираете информацию, которая больше не меняет вашего понимания</li>
+                <li>Вы ищете «гарантию» — но её не существует</li>
+                <li>Каждый новый аргумент «за» тут же вызывает контраргумент «против»</li>
+                <li>Вы чувствуете, что застряли, но продолжаете «думать»</li>
+                <li>Годы проходят, а решение не принято</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Лекарство от паралича анализа — не больше анализа. А действие.</strong> Маленькое, необратимое действие, которое сдвинет вас с мёртвой точки.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Практический блок</h2>
+            <p class="lead">Семь техник для превращения суперпозиции в решение — для тех, кто застрял в обдумывании.</p>
+
+            <div class="technique-card">
+                <span class="technique-number">13.1</span>
+                <h3 class="technique-title">Точка невозврата</h3>
+                <p>Создание маленького необратимого действия, которое «запечатывает» решение.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Примите решение — любое из рассматриваемых вариантов</li>
+                    <li>Сразу же сделайте одно маленькое НЕОБРАТИМОЕ действие</li>
+                    <li>Написать письмо и отправить. Заплатить депозит. Сказать вслух человеку</li>
+                    <li>Важно: действие должно быть таким, чтобы отменить его было неудобно или невозможно</li>
+                    <li>Мосты сожжены. Теперь вы в новой реальности</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 5-10 минут</span>
+                    <span class="meta-tag">Ключ: Необратимость</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> После точки невозврата внутренний диалог меняется. Вместо «а может, лучше...» появляется «окей, как теперь это сделать лучше всего?» Это продуктивный сдвиг.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">13.2</span>
+                <h3 class="technique-title">Метод монеты</h3>
+                <p>Использование случайности для проявления истинного желания.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>При бинарном выборе (А или Б) — возьмите монету</li>
+                    <li>Назначьте: орёл = А, решка = Б</li>
+                    <li>Подбросьте монету</li>
+                    <li>В момент, пока монета в воздухе — наблюдайте: чего ХОТИТЕ, чтобы выпало?</li>
+                    <li>Это и есть ваше настоящее решение. Монета просто помогла его проявить</li>
+                    <li>Необязательно следовать монете — следуйте своему желанию</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 1 минута</span>
+                    <span class="meta-tag">Тип: Проявление интуиции</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Монета не решает за вас — она показывает вам, что вы уже решили на уровне глубже сознания. Момент полёта монеты снимает маску «рационального обдумывания» и показывает желание.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">13.3</span>
+                <h3 class="technique-title">Правило 10-10-10</h3>
+                <p>Масштабирование последствий во времени для снятия страха.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Возьмите решение, которое пугает</li>
+                    <li>Спросите себя: «Как это повлияет на мою жизнь через 10 минут?»</li>
+                    <li>«Как это повлияет через 10 месяцев?»</li>
+                    <li>«Как это повлияет через 10 лет?»</li>
+                    <li>Запишите ответы</li>
+                    <li>Обычно на 10-летней дистанции страх выглядит смешным</li>
+                </ul>
+
+                <div class="timeline-visual">
+                    <div class="timeline-point">
+                        <div class="label">10 минут</div>
+                        <div class="time">Страшно</div>
+                    </div>
+                    <div class="timeline-arrow"></div>
+                    <div class="timeline-point">
+                        <div class="label">10 месяцев</div>
+                        <div class="time">Терпимо</div>
+                    </div>
+                    <div class="timeline-arrow"></div>
+                    <div class="timeline-point">
+                        <div class="label">10 лет</div>
+                        <div class="time">Неважно</div>
+                    </div>
+                </div>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 10-15 минут</span>
+                    <span class="meta-tag">Эффект: Перспектива</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Большинство того, что кажется катастрофой сейчас, через 10 лет будет забытым эпизодом. А нерешённость — помнится долго. Эта перспектива освобождает.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">13.4</span>
+                <h3 class="technique-title">«Если бы я уже решил...»</h3>
+                <p>Ментальное проживание решения для проверки эмоционального отклика.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Представьте, что решение уже принято (выберите любой вариант)</li>
+                    <li>Вчера вечером вы решили. Сегодня утро. Решение — факт</li>
+                    <li>Проживите мысленно один день с этим решением</li>
+                    <li>Как просыпаетесь? Что чувствуете? Как идёт день?</li>
+                    <li>Обратите внимание: облегчение или сожаление? Лёгкость или тяжесть?</li>
+                    <li>Повторите с другим вариантом. Сравните ощущения</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 20-30 минут</span>
+                    <span class="meta-tag">Тип: Проективная визуализация</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Тело реагирует на воображаемое решение почти как на реальное. Если, представив, вы чувствуете облегчение — это, вероятно, ваш выбор. Если тяжесть — сигнал подумать ещё.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">13.5</span>
+                <h3 class="technique-title">Deadline решения</h3>
+                <p>Установка жёсткого срока для прекращения бесконечного обдумывания.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Установите конкретную дату и время: «В пятницу в 18:00 я принимаю решение»</li>
+                    <li>До этого момента — собирайте информацию, консультируйтесь, думайте</li>
+                    <li>После deadline — решение принято. Никакого пересмотра 30 дней</li>
+                    <li>Если к deadline информации недостаточно — решайте с тем, что есть</li>
+                    <li>Запишите решение, подпишите, поставьте дату</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Тип: Структурирование времени</span>
+                    <span class="meta-tag">Ключ: Жёсткое соблюдение</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Дедлайн превращает бесконечное «надо подумать» в конкретную точку выбора. Когда время ограничено — мозг начинает работать эффективнее, отсекая лишнее.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">13.6</span>
+                <h3 class="technique-title">Минимальный первый шаг</h3>
+                <p>Замена «большого решения» на один маленький шаг.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>Осознайте: вам не нужно решать всё сразу</li>
+                    <li>Достаточно видеть первый шаг — следующий проявится из него</li>
+                    <li>Спросите себя: «Какой самый маленький шаг я могу сделать в направлении решения?»</li>
+                    <li>Позвонить? Загуглить? Написать одно сообщение?</li>
+                    <li>Сделайте этот шаг. Прямо сейчас</li>
+                    <li>После первого шага — увидите второй</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 5 минут</span>
+                    <span class="meta-tag">Принцип: Итеративность</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Мы часто застреваем, потому что пытаемся увидеть весь путь целиком. Но достаточно видеть один шаг. Каждый шаг освещает следующий.
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <span class="technique-number">13.7</span>
+                <h3 class="technique-title">Ритуал объявления</h3>
+                <p>Физическое «запечатывание» решения через слова или документ.</p>
+
+                <h4>Пошаговое выполнение</h4>
+                <ul class="steps">
+                    <li>После принятия решения — объявите его</li>
+                    <li>Скажите вслух — себе или кому-то: «Я решил [что именно]»</li>
+                    <li>Напишите на бумаге: дата, решение, подпись</li>
+                    <li>Необязательно показывать кому-то — достаточно самому себе</li>
+                    <li>Этот физический акт «запечатывает» решение в реальности</li>
+                </ul>
+
+                <div class="meta-info">
+                    <span class="meta-tag">Время: 5 минут</span>
+                    <span class="meta-tag">Эффект: Закрепление</span>
+                </div>
+
+                <div class="observation">
+                    <strong>Наблюдение:</strong> Мысленное решение легко пересмотреть. Сказанное вслух — сложнее. Написанное и подписанное — ещё сложнее. Ритуал создаёт психологический барьер для отката.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Интеграция</h2>
+
+            <p class="lead">Ключевые принципы коллапса:</p>
+
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <h4>80% решений обратимы</h4>
+                    <p>Страх «неправильного выбора» преувеличен. Большинство решений можно скорректировать. Но скорректировать можно только то, что уже решено.</p>
+                </div>
+                <div class="integration-item">
+                    <h4>Лучше неидеальное сейчас, чем идеальное никогда</h4>
+                    <p>Совершенного решения не существует. Есть достаточно хорошее решение, принятое вовремя. И есть упущенные возможности.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Действие лечит рефлексию.</strong> Сколько бы вы ни думали — действие даст информацию, которую невозможно получить обдумыванием. Единственный способ узнать, как это будет — это сделать.</p>
+            </div>
+
+            <p>В следующей главе мы поговорим о цене выбора. Каждое «да» означает «нет» чему-то другому. Честно назвать эту цену — половина решения.</p>
+        </section>
+
+        <div class="homework">
+            <h3>Домашнее задание</h3>
+            <ul class="task-list">
+                <li>Выберите одно «зависшее» решение — то, о чём думаете больше месяца без продвижения</li>
+                <li>Установите deadline: когда именно вы примете это решение (день, час)</li>
+                <li>В назначенное время — примите решение (любое) и сразу сделайте одно маленькое необратимое действие</li>
+                <li>Запишите решение на бумаге, подпишите, поставьте дату. Не пересматривайте 30 дней</li>
+            </ul>
+        </div>
+
+        <nav>
+            <a href="12.html">← Глава 12: Хоровод советчиков</a>
+            <a href="14.html">Глава 14: Цена выбора →</a>
+        </nav>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section:not(.visible)').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

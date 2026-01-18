@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 34: Перерисовка карты | Фокальная психология</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        :root {
+            --chapter-color: #e74c3c;
+            --chapter-color-light: #f5b7b1;
+            --chapter-color-dark: #922b21;
+            --chapter-gradient: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #a93226 100%);
+        }
+
+        .chapter-header {
+            background: var(--chapter-gradient);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.2) 0%, transparent 40%);
+        }
+
+        .part-banner {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Map transformation visualization */
+        .map-visual {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .map-piece {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+        }
+
+        .map-piece.old {
+            background: rgba(139, 69, 19, 0.3);
+            animation: fadeOut 4s ease-in-out infinite;
+        }
+
+        .map-piece.new {
+            background: rgba(46, 204, 113, 0.3);
+            animation: fadeIn 4s ease-in-out infinite;
+        }
+
+        .map-piece:nth-child(1) { top: 15%; left: 10%; transform: rotate(-15deg); }
+        .map-piece:nth-child(2) { top: 25%; right: 15%; transform: rotate(10deg); }
+        .map-piece:nth-child(3) { bottom: 30%; left: 20%; transform: rotate(5deg); }
+        .map-piece:nth-child(4) { bottom: 20%; right: 25%; transform: rotate(-8deg); }
+
+        @keyframes fadeOut {
+            0%, 45% { opacity: 0.7; transform: scale(1) rotate(var(--rotation, 0deg)); }
+            50%, 95% { opacity: 0; transform: scale(0.8) rotate(var(--rotation, 0deg)); }
+            100% { opacity: 0.7; transform: scale(1) rotate(var(--rotation, 0deg)); }
+        }
+
+        @keyframes fadeIn {
+            0%, 45% { opacity: 0; transform: scale(0.8) rotate(var(--rotation, 0deg)); }
+            50%, 95% { opacity: 0.7; transform: scale(1) rotate(var(--rotation, 0deg)); }
+            100% { opacity: 0; transform: scale(0.8) rotate(var(--rotation, 0deg)); }
+        }
+
+        /* Pencil icon */
+        .pencil-icon {
+            position: absolute;
+            font-size: 3rem;
+            animation: draw 3s ease-in-out infinite;
+        }
+
+        .pencil-icon:nth-child(5) { top: 40%; left: 8%; }
+        .pencil-icon:nth-child(6) { bottom: 35%; right: 12%; }
+
+        @keyframes draw {
+            0%, 100% { transform: translate(0, 0) rotate(-45deg); opacity: 0.6; }
+            50% { transform: translate(10px, 10px) rotate(-45deg); opacity: 1; }
+        }
+
+        .chapter-title-container {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .chapter-number {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 300;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-block {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(192, 57, 43, 0.05) 100%);
+            border-left: 4px solid var(--chapter-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            line-height: 1.9;
+        }
+
+        .story-block p:first-child::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            color: var(--chapter-color);
+            font-weight: bold;
+        }
+
+        h2 {
+            color: var(--chapter-color-dark);
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--chapter-color-light);
+        }
+
+        h3 {
+            color: var(--chapter-color);
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .concept-block {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.1);
+        }
+
+        .concept-block h3 {
+            margin-top: 0;
+        }
+
+        /* Transformation comparison */
+        .transformation-compare {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .old-image, .new-image {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .old-image {
+            border: 2px solid #95a5a6;
+            position: relative;
+        }
+
+        .old-image::before {
+            content: '✗';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #e74c3c;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .new-image {
+            border: 2px solid #27ae60;
+            position: relative;
+        }
+
+        .new-image::before {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #27ae60;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .transform-arrow {
+            font-size: 2rem;
+            color: var(--chapter-color);
+        }
+
+        .image-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .old-image .image-label { color: #7f8c8d; }
+        .new-image .image-label { color: #27ae60; }
+
+        .image-desc {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .transformation-compare {
+                grid-template-columns: 1fr;
+            }
+            .transform-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        .technique-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(231, 76, 60, 0.15);
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .technique-number {
+            width: 48px;
+            height: 48px;
+            background: var(--chapter-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .technique-title {
+            font-size: 1.4rem;
+            color: var(--chapter-color-dark);
+            margin: 0;
+        }
+
+        .technique-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--chapter-color-dark);
+        }
+
+        .steps-list {
+            background: rgba(231, 76, 60, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(231, 76, 60, 0.2);
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--chapter-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--chapter-color-dark);
+        }
+
+        /* Change parameters list */
+        .change-params {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .change-param {
+            background: white;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .param-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .param-name {
+            font-weight: 600;
+            color: var(--chapter-color-dark);
+            font-size: 0.9rem;
+        }
+
+        .param-examples {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .observation-block {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+            border-left: 4px solid #f1c40f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .observation-block h4 {
+            color: #d68910;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-block {
+            background: linear-gradient(135deg, #fdf2f2 0%, #fce8e8 100%);
+            border-left: 4px solid #e74c3c;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .warning-block h4 {
+            color: #c0392b;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Imprint types */
+        .imprint-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .imprint-type {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .imprint-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .imprint-name {
+            font-weight: 600;
+            color: var(--chapter-color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .imprint-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .imprint-solution {
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .imprint-solution strong {
+            color: #27ae60;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(192, 57, 43, 0.05) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .highlight-box .big-text {
+            font-size: 1.4rem;
+            color: var(--chapter-color-dark);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .integration-section {
+            background: linear-gradient(135deg, #f8f4ff 0%, #f0e8ff 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .integration-section h2 {
+            color: #6b5b95;
+            border-bottom-color: #c9b8e8;
+        }
+
+        .homework-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .homework-section h2 {
+            color: #2e7d32;
+            border-bottom-color: #a5d6a7;
+        }
+
+        .homework-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .homework-list li {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .homework-list li::before {
+            content: '✎';
+            font-size: 1.2rem;
+        }
+
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--chapter-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background: rgba(231, 76, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--chapter-color);
+            color: white;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="part-banner">Часть IV: Инструментарий</div>
+
+        <div class="map-visual">
+            <div class="map-piece old" style="--rotation: -15deg;"></div>
+            <div class="map-piece new" style="--rotation: 10deg;"></div>
+            <div class="map-piece old" style="--rotation: 5deg;"></div>
+            <div class="map-piece new" style="--rotation: -8deg;"></div>
+            <div class="pencil-icon">✏️</div>
+            <div class="pencil-icon">🖌️</div>
+        </div>
+
+        <div class="chapter-title-container">
+            <div class="chapter-number">Глава тридцать четвёртая</div>
+            <h1 class="chapter-title">Перерисовка карты</h1>
+            <p class="chapter-subtitle">Переписывание импринтинга</p>
+        </div>
+    </header>
+
+    <main class="content-section">
+        <div class="story-block fade-in">
+            <p>Мария пришла ко мне с проблемой, которую считала неразрешимой. Каждый раз, когда она выступала перед аудиторией, её охватывал парализующий страх. Руки дрожали, голос срывался, мысли разбегались. «Это со мной с детства», — сказала она. — «В третьем классе я выступала на концерте и забыла слова. Весь зал смеялся. Я до сих пор вижу эти лица, слышу этот смех».</p>
+            <p>«А что если, — предложил я, — мы перерисуем эту картинку? Не будем копаться в травме, анализировать, искать виноватых. Просто возьмём карандаш и нарисуем другую версию?»</p>
+            <p>Мария посмотрела на меня с недоверием. Тридцать лет страданий — и просто перерисовать? Через сорок минут она выходила из кабинета с новым воспоминанием: восьмилетняя Маша стоит на сцене, забывает слова, делает паузу... и зал аплодирует её смелости. Учительница подходит и шёпотом подсказывает следующую строчку. Маша улыбается и продолжает. Это воспоминание было не менее реальным, чем старое. Но оно вело в другое будущее.</p>
+        </div>
+
+        <h2 class="fade-in">Революционная идея</h2>
+
+        <div class="concept-block fade-in">
+            <h3>Мы не меняем прошлое — мы меняем его образ</h3>
+            <p>Классическая психотерапия учит: чтобы исцелить травму, нужно её проработать. Понять причины. Выразить подавленные эмоции. Простить обидчиков. Интегрировать опыт. Это работает, но занимает месяцы и годы.</p>
+            <p>Фокальная психология предлагает радикально иной подход: <strong>подсознание не отличает реальное воспоминание от ярко представленного образа</strong>. Оно просто хранит картинки и реагирует на них. Значит, мы можем заменить старую картинку на новую — и подсознание примет её как факт.</p>
+        </div>
+
+        <div class="highlight-box fade-in">
+            <div class="big-text">«Не копаемся в травме — меняем картинку»</div>
+            <p>Подсознание принимает новую версию быстрее, чем сознание успевает проанализировать старую</p>
+        </div>
+
+        <h2 class="fade-in">Что такое импринтинг</h2>
+
+        <p class="fade-in">Импринтинг — это мгновенное запечатление опыта, которое становится шаблоном на всю жизнь. Термин пришёл из этологии: Конрад Лоренц показал, что гусята в первые часы жизни «запечатлевают» первый движущийся объект как мать и следуют за ним — будь это гусыня, человек или даже игрушечный поезд.</p>
+
+        <p class="fade-in">У людей импринтинг сложнее, но принцип тот же: в моменты высокой эмоциональной уязвимости (детство, стресс, шок) мы мгновенно «фотографируем» ситуацию и делаем её шаблоном. Эта «фотография» затем определяет наши реакции в похожих ситуациях.</p>
+
+        <div class="imprint-types fade-in">
+            <div class="imprint-type">
+                <div class="imprint-icon">👶</div>
+                <div class="imprint-name">Ранний импринтинг</div>
+                <div class="imprint-desc">Образы родителей, первые переживания безопасности или угрозы, базовое доверие к миру</div>
+                <div class="imprint-solution"><strong>Решение:</strong> перерисовка ранних образов родительских фигур</div>
+            </div>
+            <div class="imprint-type">
+                <div class="imprint-icon">🎭</div>
+                <div class="imprint-name">Социальный импринтинг</div>
+                <div class="imprint-desc">Первый опыт публичного выступления, отвержения группой, социального успеха или провала</div>
+                <div class="imprint-solution"><strong>Решение:</strong> замена сценария «социальной сцены»</div>
+            </div>
+            <div class="imprint-type">
+                <div class="imprint-icon">💔</div>
+                <div class="imprint-name">Травматический импринтинг</div>
+                <div class="imprint-desc">Шоковые события — аварии, насилие, потери, которые «впечатались» в подсознание</div>
+                <div class="imprint-solution"><strong>Решение:</strong> изменение визуальных характеристик образа</div>
+            </div>
+            <div class="imprint-type">
+                <div class="imprint-icon">💕</div>
+                <div class="imprint-name">Романтический импринтинг</div>
+                <div class="imprint-desc">Первая любовь, первое отвержение — шаблон для всех будущих отношений</div>
+                <div class="imprint-solution"><strong>Решение:</strong> переодевание персонажей, замена финала</div>
+            </div>
+        </div>
+
+        <h2 class="fade-in">Почему это работает</h2>
+
+        <div class="concept-block fade-in">
+            <h3>Нейропластичность на службе исцеления</h3>
+            <p>Каждый раз, когда мы вспоминаем что-то, память реконструируется заново. Это не проигрывание записи, а пересоздание. В момент воспоминания нейронные связи становятся пластичными и могут быть изменены.</p>
+            <p>Когда мы вызываем старое воспоминание и одновременно вводим новые элементы, мозг записывает обновлённую версию. При достаточной яркости и эмоциональной насыщенности новый образ может полностью заместить старый.</p>
+        </div>
+
+        <h2 class="fade-in">Параметры изменения образа</h2>
+
+        <p class="fade-in">Образ — это не монолит. Он состоит из множества характеристик, каждую из которых можно изменить отдельно:</p>
+
+        <div class="change-params fade-in">
+            <div class="change-param">
+                <div class="param-icon">📐</div>
+                <div class="param-name">Размер</div>
+                <div class="param-examples">Уменьшить угрожающее, увеличить ресурсное</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">📍</div>
+                <div class="param-name">Расстояние</div>
+                <div class="param-examples">Отодвинуть пугающее, приблизить желаемое</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">🎨</div>
+                <div class="param-name">Цвет</div>
+                <div class="param-examples">Из чёрно-белого в цветное, приглушить яркость</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">🔊</div>
+                <div class="param-name">Звук</div>
+                <div class="param-examples">Изменить громкость, тон, добавить музыку</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">⏱️</div>
+                <div class="param-name">Скорость</div>
+                <div class="param-examples">Замедлить или ускорить воспоминание</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">👁️</div>
+                <div class="param-name">Позиция</div>
+                <div class="param-examples">Изнутри (ассоциация) или со стороны (диссоциация)</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">🎭</div>
+                <div class="param-name">Персонажи</div>
+                <div class="param-examples">Изменить внешность, поведение, слова</div>
+            </div>
+            <div class="change-param">
+                <div class="param-icon">🎬</div>
+                <div class="param-name">Сценарий</div>
+                <div class="param-examples">Изменить ход событий, финал</div>
+            </div>
+        </div>
+
+        <!-- Technique 1 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">1</div>
+                <h3 class="technique-title">Изменение визуальных характеристик</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 15-20 минут</span>
+                <span class="meta-badge">🎯 Снижение интенсивности</span>
+                <span class="meta-badge">📊 Простой уровень</span>
+            </div>
+
+            <p>Самый быстрый способ снизить эмоциональную нагрузку воспоминания — изменить его визуальные параметры.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Вызов образа:</strong> Закройте глаза, вызовите проблемное воспоминание. Позвольте ему появиться как картинке перед внутренним взором.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Оценка интенсивности:</strong> Оцените эмоциональную интенсивность от 0 до 10. Запомните это число.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Отодвиньте картинку:</strong> Представьте, что берёте её в руки и отодвигаете от себя — на метр, два, десять. Наблюдайте, как она уменьшается.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Измените цвет:</strong> Сделайте картинку чёрно-белой. Или приглушите яркость, как если бы выкручивали регулятор.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Добавьте рамку:</strong> Поместите картинку в рамку — тяжёлую, музейную. Это уже не ваша жизнь, а экспонат.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Переоценка:</strong> Снова оцените интенсивность от 0 до 10. Обычно она снижается на 3-5 пунктов.</div>
+                </div>
+            </div>
+
+            <div class="observation-block">
+                <h4>💡 Наблюдение</h4>
+                <p>Чем сильнее изменение параметров, тем больше снижение интенсивности. Иногда достаточно отодвинуть картинку на километр — и эмоция полностью исчезает.</p>
+            </div>
+        </div>
+
+        <!-- Technique 2 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">2</div>
+                <h3 class="technique-title">Переодевание персонажей</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 20-30 минут</span>
+                <span class="meta-badge">🎯 Снятие страха перед людьми</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Страх перед конкретными людьми (начальник, родитель, бывший партнёр) часто связан с их образом. Изменив образ — снимаем страх.</p>
+
+            <div class="transformation-compare">
+                <div class="old-image">
+                    <div class="image-label">Было</div>
+                    <div class="image-desc">Строгий отец в костюме, нависающий, с грозным голосом</div>
+                </div>
+                <div class="transform-arrow">→</div>
+                <div class="new-image">
+                    <div class="image-label">Стало</div>
+                    <div class="image-desc">Тот же отец в пижаме с мишками, с писклявым голосом мультяшки</div>
+                </div>
+            </div>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Вызовите образ человека:</strong> Того, кто вызывает страх или напряжение. Рассмотрите детально: одежда, поза, выражение лица, голос.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Начните с одежды:</strong> Мысленно переоденьте человека. В клоунский костюм. В пижаму с уточками. В балетную пачку. Выберите самый нелепый вариант.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Измените голос:</strong> Пусть этот человек говорит голосом мультяшного персонажа — Микки Мауса, Губки Боба, Чебурашки. Важно, чтобы голос вызывал улыбку.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Добавьте абсурд:</strong> Пусть человек делает что-то нелепое — жонглирует, пускает мыльные пузыри, танцует польку. Чем абсурднее, тем лучше.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Закрепите новый образ:</strong> Представьте эту картинку максимально ярко 3-5 раз. С каждым разом она должна вызывать всё больше смеха.</div>
+                </div>
+            </div>
+
+            <div class="observation-block">
+                <h4>💡 Наблюдение</h4>
+                <p>Страх и смех несовместимы. Невозможно бояться человека, который танцует в пачке и пищит голосом мультяшки. Новый образ «перезаписывает» старый.</p>
+            </div>
+        </div>
+
+        <!-- Technique 3 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">3</div>
+                <h3 class="technique-title">Замена выражения лица</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 10-15 минут</span>
+                <span class="meta-badge">🎯 Изменение восприятия</span>
+                <span class="meta-badge">📊 Простой уровень</span>
+            </div>
+
+            <p>Часто травма связана с конкретным выражением лица — гнев, презрение, разочарование. Изменив выражение, мы меняем весь смысл воспоминания.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Вспомните травматичную сцену:</strong> Особенно обратите внимание на лицо ключевого человека. Какое там выражение?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>«Заморозьте» кадр:</strong> Остановите воспоминание как стоп-кадр. Приблизьте лицо, рассмотрите детали.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Начните изменение:</strong> Медленно, как в морфинге, меняйте выражение. Гнев → удивление → понимание → тепло. Наблюдайте трансформацию.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Выберите финальное выражение:</strong> Какое выражение лица вам было бы нужно тогда? Любовь? Поддержка? Гордость? Установите это выражение.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Воспроизведите всю сцену:</strong> Теперь «проиграйте» воспоминание заново — но с новым выражением лица. Что меняется в ваших чувствах?</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technique 4 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">4</div>
+                <h3 class="technique-title">Перезапись сценария</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 30-45 минут</span>
+                <span class="meta-badge">🎯 Полное переписывание</span>
+                <span class="meta-badge">📊 Продвинутый уровень</span>
+            </div>
+
+            <p>Самый мощный метод — полная перезапись хода событий. Мы не просто меняем параметры, а создаём альтернативную историю.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Определите «точку ветвления»:</strong> Найдите момент в воспоминании, после которого всё пошло не так. Обычно это конкретное действие или слово.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Остановите время:</strong> Заморозьте воспоминание прямо перед этим моментом. Вы — режиссёр, и вы говорите «Стоп!»</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Введите нового персонажа:</strong> Представьте, что в эту сцену входите вы-нынешний. Взрослый, сильный, мудрый. Вы пришли помочь себе-тогдашнему.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Перепишите сцену:</strong> Что делает ваша взрослая версия? Может, она обнимает ребёнка. Может, говорит нужные слова обидчику. Может, забирает ребёнка из ситуации.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Доведите до позитивного финала:</strong> Создайте новую концовку истории. Как всё закончилось хорошо? Что чувствует ваше прошлое «я» теперь?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Интеграция:</strong> Попрощайтесь с прошлым «я», зная, что теперь у него есть эта новая история. Медленно вернитесь в настоящее.</div>
+                </div>
+            </div>
+
+            <div class="warning-block">
+                <h4>⚠️ Важное предупреждение</h4>
+                <p>При работе с тяжёлыми травмами (насилие, потери) эту технику лучше выполнять с терапевтом. Техника мощная, и без поддержки можно «застрять» в материале.</p>
+            </div>
+        </div>
+
+        <!-- Technique 5 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">5</div>
+                <h3 class="technique-title">Замена звуковой дорожки</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 15-20 минут</span>
+                <span class="meta-badge">🎯 Изменение эмоционального тона</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Звук — мощный триггер эмоций. Крик, обвинения, плач — всё это записано в воспоминании. Изменив звук, мы меняем эмоцию.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Вызовите воспоминание:</strong> Особенно обратите внимание на звуки. Что вы слышите? Голоса, слова, интонации, фоновые шумы?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Найдите «громкость»:</strong> Представьте регулятор громкости рядом с воспоминанием. Начните уменьшать. Голоса становятся тише, тише, тише...</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Выключите звук:</strong> Доведите до полной тишины. Наблюдайте сцену как немое кино. Как меняется восприятие?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Добавьте новый звук:</strong> Включите музыку — смешную (цирковую, мультяшную) или красивую (вдохновляющую, нежную). Пусть она играет во время сцены.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Перезапишите слова:</strong> Если хотите, замените слова, которые были сказаны, на слова, которые вы хотели бы услышать. Пусть обидчик говорит слова любви. Пусть критик говорит слова поддержки.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technique 6 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">6</div>
+                <h3 class="technique-title">Диссоциация и реассоциация</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 20-30 минут</span>
+                <span class="meta-badge">🎯 Контроль вовлечённости</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Воспоминания бывают двух типов: ассоциированные (вы внутри, смотрите своими глазами) и диссоциированные (вы смотрите на себя со стороны). Переключение между позициями меняет интенсивность.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Определите текущую позицию:</strong> Когда вспоминаете травматичное событие, вы внутри или смотрите со стороны? Первое — ассоциация, второе — диссоциация.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Для снижения интенсивности — диссоциируйтесь:</strong> Если вы внутри, мысленно «выйдите» из своего тела и посмотрите на сцену со стороны. Как из зрительного зала.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Добавьте дистанцию:</strong> Поднимитесь выше — на балкон, на крышу, в облака. Чем дальше вы отходите, тем меньше эмоциональная интенсивность.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Добавьте экран:</strong> Представьте, что смотрите на сцену через экран телевизора или кинотеатра. Это ещё больше увеличивает дистанцию.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Для усиления ресурса — ассоциируйтесь:</strong> С позитивными воспоминаниями работает наоборот. «Войдите» внутрь, смотрите своими глазами, чувствуйте своим телом.</div>
+                </div>
+            </div>
+
+            <div class="observation-block">
+                <h4>💡 Наблюдение</h4>
+                <p>Правило простое: диссоциация для негатива (снижает интенсивность), ассоциация для позитива (усиливает ресурс). Большинство людей делают наоборот — погружаются в травму и смотрят издалека на радость.</p>
+            </div>
+        </div>
+
+        <!-- Technique 7 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">7</div>
+                <h3 class="technique-title">Техника «Кинолента назад»</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 10-15 минут</span>
+                <span class="meta-badge">🎯 Быстрое снятие фобий</span>
+                <span class="meta-badge">📊 Средний уровень</span>
+            </div>
+
+            <p>Классическая НЛП-техника для работы с фобиями и травматическими воспоминаниями. Проигрывание воспоминания в обратном направлении разрушает его эмоциональную структуру.</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Найдите безопасную точку «до»:</strong> Момент перед травматичным событием, когда всё ещё было нормально. Зафиксируйте эту картинку.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Найдите безопасную точку «после»:</strong> Момент после события, когда худшее уже позади и вы в безопасности. Зафиксируйте эту картинку.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Диссоциируйтесь:</strong> Представьте, что вы в кинозале. На экране застывший кадр — точка «после». Вы смотрите на себя на экране.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Двойная диссоциация:</strong> Поднимитесь в будку киномеханика. Теперь вы смотрите на себя в зале, который смотрит на экран. Три уровня.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Просмотр вперёд:</strong> Из будки запустите фильм от точки «до» до точки «после». Чёрно-белый, без звука, быстро. Наблюдайте отстранённо.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Перемотка назад:</strong> Теперь войдите в экран, в точку «после». И очень быстро, за 2-3 секунды, отмотайте фильм назад, к точке «до». Всё мелькает задом наперёд, как ускоренная перемотка.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <div class="step-content"><strong>Повторите:</strong> Вернитесь в точку «после» и снова отмотайте назад. Повторите 5-7 раз, каждый раз быстрее.</div>
+                </div>
+            </div>
+
+            <div class="observation-block">
+                <h4>💡 Наблюдение</h4>
+                <p>После 5-7 повторений попробуйте вызвать старый страх — обычно он или исчез, или значительно ослаб. Мозг буквально «запутывается» в последовательности и теряет эмоциональную привязку.</p>
+            </div>
+        </div>
+
+        <!-- Technique 8 -->
+        <div class="technique-card fade-in">
+            <div class="technique-header">
+                <div class="technique-number">8</div>
+                <h3 class="technique-title">Создание ресурсного воспоминания</h3>
+            </div>
+
+            <div class="technique-meta">
+                <span class="meta-badge">⏱️ 25-35 минут</span>
+                <span class="meta-badge">🎯 Замена негатива на позитив</span>
+                <span class="meta-badge">📊 Продвинутый уровень</span>
+            </div>
+
+            <p>Иногда недостаточно ослабить негативное воспоминание — нужно заменить его позитивным. Мы создаём «воспоминание, которое должно было быть».</p>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content"><strong>Определите, чего не хватало:</strong> В травматичной ситуации — чего вам не хватило? Защиты? Поддержки? Понимания? Любви? Назовите это.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><strong>Найдите источник ресурса:</strong> Кто или что могло бы дать вам это? Реальный человек, вымышленный персонаж, ваша взрослая версия, духовная фигура?</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content"><strong>Создайте идеальную сцену:</strong> Представьте ситуацию, где вы получаете именно то, чего не хватало. Сделайте её максимально яркой, детальной, эмоционально насыщенной.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><strong>Погрузитесь в неё:</strong> Войдите внутрь этой сцены. Смотрите своими глазами, слышьте своими ушами, чувствуйте своим телом. Примите этот ресурс.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content"><strong>Установите якорь:</strong> В момент максимальной интенсивности сожмите кулак или коснитесь пальцами запястья. Это физический якорь ресурса.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content"><strong>Свяжите с прошлым:</strong> Представьте, что отправляете это новое воспоминание в прошлое, где оно занимает место старого. Как будто так было всегда.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <div class="step-content"><strong>Проверка:</strong> Попробуйте вспомнить старую ситуацию. Что приходит первым — старый образ или новый?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="integration-section fade-in">
+            <h2>Интеграция главы</h2>
+
+            <p>Перерисовка карты — это не обман себя и не отрицание прошлого. Это признание того, что:</p>
+
+            <ul>
+                <li>Память — не запись, а реконструкция</li>
+                <li>Каждое воспоминание уже искажено временем</li>
+                <li>Мы имеем право выбирать, какую версию хранить</li>
+                <li>Подсознание одинаково реагирует на «реальные» и «созданные» образы</li>
+                <li>Цель терапии — не правда о прошлом, а свобода в настоящем</li>
+            </ul>
+
+            <p>Мы не стираем память — мы обновляем её. Как картограф, который не уничтожает старую карту, а рисует новую, более точную и полезную для навигации.</p>
+        </div>
+
+        <div class="homework-section fade-in">
+            <h2>Домашнее задание</h2>
+
+            <ul class="homework-list">
+                <li>Выберите одно неприятное воспоминание средней интенсивности (не травму!) и примените к нему технику изменения визуальных характеристик. Отодвиньте, уменьшите, обесцветьте.</li>
+                <li>Вспомните человека, который вызывает у вас напряжение. Мысленно переоденьте его в нелепый костюм и дайте смешной голос. Повторите 5 раз.</li>
+                <li>Найдите позитивное воспоминание и усильте его: войдите внутрь, добавьте яркости, приблизьте. Установите физический якорь.</li>
+                <li>Поэкспериментируйте с диссоциацией и ассоциацией. Заметьте, как меняется интенсивность при смене позиции.</li>
+            </ul>
+        </div>
+    </main>
+
+    <nav class="nav-footer">
+        <a href="33.html" class="nav-link">← Глава 33: Работа с образом в теле</a>
+        <a href="../index.html" class="nav-link">Содержание</a>
+        <a href="35.html" class="nav-link">Глава 35: Передача контроля подсознанию →</a>
+    </nav>
+
+    <script>
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
