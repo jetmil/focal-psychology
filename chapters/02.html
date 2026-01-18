@@ -65,6 +65,21 @@
         .warning-box { background: rgba(255, 107, 157, 0.1); border: 1px solid rgba(255, 107, 157, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
         .warning-box strong { color: var(--accent-secondary); }
         @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } }
+    
+        .chapter-image-container {
+            max-width: 600px;
+            margin: 2rem auto 3rem;
+            text-align: center;
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(124, 92, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -80,6 +95,11 @@
         <h1 class="chapter-title">Наблюдатель и наблюдаемое</h1>
         <p class="chapter-subtitle">Разница между «думать мысль» и «видеть мысль»</p>
     </header>
+
+    <div class="chapter-image-container">
+        <img src="../images/chapter-02.jpg" alt="Иллюстрация к главе 2" class="chapter-image">
+    </div>
+
 
     <main class="chapter-content">
         <section class="section">

@@ -242,6 +242,24 @@
             position: relative;
         }
 
+        .hero-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            filter: blur(2px);
+        }
+
         .hero-content {
             text-align: center;
             max-width: 900px;
@@ -474,6 +492,22 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 4rem;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .topology-image-wrapper {
+            flex: 1;
+            max-width: 450px;
+            min-width: 300px;
+        }
+
+        .topology-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(124, 92, 255, 0.2);
+            border: 1px solid var(--glass-border);
         }
 
         .layer-diagram {
@@ -1061,6 +1095,9 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
+        <div class="hero-image-container">
+            <img src="images/hero.jpg" alt="Фокальная психология - визуализация сознания" class="hero-image">
+        </div>
         <div class="hero-content">
             <div class="hero-badge">Автор методики — Денис Даровицкий</div>
             <h1><span>Фокальная</span> психология</h1>
@@ -1114,6 +1151,9 @@
                 <p class="section-description">Сознание имеет структуру. Не хаос, а территория с разными зонами.</p>
             </div>
             <div class="topology-visual animate-on-scroll">
+                <div class="topology-image-wrapper">
+                    <img src="images/topology.jpg" alt="Топология сознания - пять слоёв" class="topology-image">
+                </div>
                 <div class="layer-diagram">
                     <div class="layer-ring layer-4" title="Междумирье"></div>
                     <div class="layer-ring layer-3" title="Театр масок"></div>

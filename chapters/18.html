@@ -69,6 +69,21 @@
         nav a { color: var(--text-accent); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
         nav a:hover { color: var(--primary); }
         @media (max-width: 768px) { .container { padding: 1rem; } section { padding: 2rem 1.5rem; } .chapter-number { font-size: 3.5rem; } h1 { font-size: 2rem; } }
+    
+        .chapter-image-container {
+            max-width: 600px;
+            margin: 2rem auto 3rem;
+            text-align: center;
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(124, 92, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -80,6 +95,11 @@
             <p class="subtitle">Притягивающее состояние вместо силы воли</p>
             <div class="decoration-line"></div>
         </header>
+
+    <div class="chapter-image-container">
+        <img src="../images/chapter-18.jpg" alt="Иллюстрация к главе 18" class="chapter-image">
+    </div>
+
 
         <section class="story-section visible">
             <h2>История</h2>
