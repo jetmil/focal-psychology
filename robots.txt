@@ -1,0 +1,25 @@
+# Robots.txt for Focal Psychology Book
+# Author: Denis Darovitsky (Денис Даровицкий)
+# https://jetmil.github.io/focal-psychology/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://jetmil.github.io/focal-psychology/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
