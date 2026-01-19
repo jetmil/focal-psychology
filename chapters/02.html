@@ -23,49 +23,81 @@
             --accent-gold: #ffd700;
             --gradient-1: linear-gradient(135deg, #7c5cff 0%, #ff6b9d 100%);
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
-        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(124, 92, 255, 0.1) 0%, transparent 100%); }
-        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .chapter-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(124, 92, 255, 0.1) 0%, transparent 100%);
+        }
+
+        .chapter-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
         .chapter-nav a:hover { color: var(--accent-primary); }
-        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-primary); margin-bottom: 1rem; }
-        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.3; line-height: 1; }
-        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
-        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
-        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-        .section { margin-bottom: 4rem; }
-        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-primary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
-        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
-        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
-        .story-box p { color: var(--text-primary); }
-        .technique-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem; transition: all 0.3s ease; }
-        .technique-card:hover { border-color: var(--accent-tertiary); transform: translateX(5px); }
-        .technique-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .technique-number { background: var(--gradient-1); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; }
-        .technique-title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); }
-        .technique-meta { display: flex; gap: 2rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); }
-        .technique-meta span { display: flex; align-items: center; gap: 0.5rem; }
-        .technique-steps { list-style: none; counter-reset: step; }
-        .technique-steps li { counter-increment: step; padding-left: 2rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
-        .technique-steps li::before { content: counter(step); position: absolute; left: 0; color: var(--accent-tertiary); font-weight: 600; }
-        .technique-observe { background: rgba(0, 212, 170, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem; font-size: 0.95rem; }
-        .technique-observe strong { color: var(--accent-tertiary); }
-        .integration-box { background: linear-gradient(135deg, rgba(124, 92, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
-        .homework-box { background: var(--bg-tertiary); border: 2px dashed var(--accent-gold); border-radius: 15px; padding: 2rem; }
-        .homework-box h3 { color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.3rem; }
-        .homework-box ul { list-style: none; }
-        .homework-box li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: var(--text-secondary); }
-        .homework-box li::before { content: "→"; position: absolute; left: 0; color: var(--accent-gold); }
-        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
-        .chapter-footer a { color: var(--accent-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
-        .chapter-footer a:hover { color: var(--accent-secondary); }
-        blockquote { border-left: 3px solid var(--accent-primary); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
-        .warning-box { background: rgba(255, 107, 157, 0.1); border: 1px solid rgba(255, 107, 157, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
-        .warning-box strong { color: var(--accent-secondary); }
-        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } }
-    
+
+        .part-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
         .chapter-image-container {
             max-width: 600px;
             margin: 2rem auto 3rem;
@@ -80,11 +112,246 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .chapter-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title, h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        strong { color: var(--text-primary); }
+
+        .story-box, .opening-story, .story-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 15px 15px 0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .story-box p, .opening-story p, .story-section p { color: var(--text-primary); }
+
+        .technique-card, .practice-card, .exercise-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover, .practice-card:hover, .exercise-card:hover {
+            border-color: var(--accent-tertiary);
+            transform: translateX(5px);
+        }
+
+        .technique-header, .practice-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .technique-number, .practice-number {
+            background: var(--gradient-1);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .technique-title, .practice-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .technique-meta, .practice-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .technique-meta span, .practice-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .technique-steps, .practice-steps, ol {
+            list-style: none;
+            counter-reset: step;
+            padding-left: 0;
+        }
+
+        .technique-steps li, .practice-steps li, ol li {
+            counter-increment: step;
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .technique-steps li::before, .practice-steps li::before, ol li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            color: var(--accent-tertiary);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+        }
+
+        .technique-observe, .observe-box {
+            background: rgba(0, 212, 170, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .technique-observe strong, .observe-box strong {
+            color: var(--accent-tertiary);
+        }
+
+        .integration-box, .integration-section {
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework-box, .homework-section {
+            background: var(--bg-tertiary);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .homework-box h3, .homework-section h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .chapter-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chapter-footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .chapter-footer a:hover {
+            color: var(--accent-secondary);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .warning-box, .warning {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box strong, .warning strong {
+            color: var(--accent-secondary);
+        }
+
+        .key-point, .insight-box {
+            background: rgba(124, 92, 255, 0.1);
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point strong, .insight-box strong {
+            color: var(--accent-primary);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-header { padding: 6rem 1.5rem 3rem; }
+            .chapter-content { padding: 2rem 1.5rem 4rem; }
+            .chapter-number { font-size: 4rem; }
+            body { font-size: 16px; }
+            .technique-meta, .practice-meta { flex-direction: column; gap: 0.5rem; }
+        }
     </style>
 </head>
 <body>
     <nav class="chapter-nav">
-        <a href="01.html">← Глава 1</a>
+        <a href="../index.html">← Содержание</a>
         <span style="color: var(--text-muted);">Глава 2 из 50</span>
         <a href="03.html">Глава 3 →</a>
     </nav>
@@ -93,16 +360,14 @@
         <div class="part-label">Часть I: Природа внимания</div>
         <div class="chapter-number">02</div>
         <h1 class="chapter-title">Наблюдатель и наблюдаемое</h1>
-        <p class="chapter-subtitle">Разница между «думать мысль» и «видеть мысль»</p>
     </header>
 
     <div class="chapter-image-container">
         <img src="../images/chapter-02.jpg" alt="Иллюстрация к главе 2" class="chapter-image">
     </div>
 
-
     <main class="chapter-content">
-        <section class="section">
+<section class="section">
             <div class="story-box">
                 <p>Мне было двадцать три, когда это случилось впервые. Я сидел в метро, думал о предстоящем экзамене, и вдруг — словно щелчок — увидел свою мысль. Не подумал её. Увидел. Как будто стоял в стороне и смотрел на бегущую строку: «Экзамен... не готов... провалюсь... позор...»</p>
                 <p>Это длилось секунду, может две. Потом я снова «нырнул» в мысль и стал ею. Но эта секунда изменила всё. Я понял: есть я, и есть мои мысли. Это не одно и то же.</p>
@@ -280,7 +545,7 @@
             <div class="integration-box">
                 <p><strong>Когда включать наблюдателя?</strong></p>
                 <p>Позиция свидетеля особенно полезна:</p>
-                <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <ul>
                     <li>Когда эмоции захлёстывают и вы теряете контроль</li>
                     <li>Когда нужно принять решение, а мысли путаются</li>
                     <li>Когда вы застряли в навязчивом цикле мыслей</li>
@@ -289,7 +554,7 @@
                 </ul>
 
                 <p><strong>Когда лучше быть полностью вовлечённым?</strong></p>
-                <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <ul>
                     <li>В моменты близости, любви, радости</li>
                     <li>Когда творите — пишете, рисуете, играете</li>
                     <li>Когда спонтанность важнее контроля</li>
@@ -314,7 +579,7 @@
 
     <footer class="chapter-footer">
         <a href="01.html">← Глава 1</a>
-        <a href="03.html">Глава 3: Откуда ты смотришь →</a>
+        <a href="03.html">Глава 3 →</a>
     </footer>
 </body>
 </html>

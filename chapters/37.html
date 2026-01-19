@@ -3,526 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Глава 37: Сказка как диагностика | Фокальная психология</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Глава 37: Сказка как диагностика — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --chapter-color: #8e44ad;
-            --chapter-color-light: #d2b4de;
-            --chapter-color-dark: #5b2c6f;
-            --chapter-gradient: linear-gradient(135deg, #8e44ad 0%, #9b59b6 50%, #7d3c98 100%);
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --gradient-1: linear-gradient(135deg, #7c5cff 0%, #ff6b9d 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 18px;
         }
 
         .chapter-header {
-            background: var(--chapter-gradient);
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chapter-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.1) 0%, transparent 30%);
-        }
-
-        .part-banner {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 8px 24px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: white;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* Fairy tale visual */
-        .tale-visual {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .tale-element {
-            position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.5;
-            animation: floatTale 6s ease-in-out infinite;
-        }
-
-        .tale-element:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
-        .tale-element:nth-child(2) { top: 60%; left: 15%; animation-delay: 1s; }
-        .tale-element:nth-child(3) { top: 20%; right: 15%; animation-delay: 2s; }
-        .tale-element:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 3s; }
-        .tale-element:nth-child(5) { bottom: 15%; left: 25%; animation-delay: 1.5s; }
-
-        @keyframes floatTale {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-            50% { transform: translateY(-15px) rotate(5deg); opacity: 0.8; }
-        }
-
-        /* Book visual */
-        .book-icon {
-            position: absolute;
-            bottom: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.6; }
-            50% { transform: translateX(-50%) scale(1.1); opacity: 0.9; }
-        }
-
-        .chapter-title-container {
+            padding: 8rem 2rem 4rem;
             text-align: center;
-            z-index: 2;
-            padding: 2rem;
+            background: linear-gradient(180deg, rgba(124, 92, 255, 0.1) 0%, transparent 100%);
+        }
+
+        .chapter-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .chapter-nav a:hover { color: var(--accent-primary); }
+
+        .part-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
         }
 
         .chapter-number {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.3;
+            line-height: 1;
         }
 
         .chapter-title {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 300;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
         }
 
         .chapter-subtitle {
+            color: var(--text-secondary);
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
             font-style: italic;
         }
 
-        .content-section {
-            padding: 4rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .story-block {
-            background: linear-gradient(135deg, rgba(142, 68, 173, 0.08) 0%, rgba(155, 89, 182, 0.05) 100%);
-            border-left: 4px solid var(--chapter-color);
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 0 12px 12px 0;
-            font-style: italic;
-            line-height: 1.9;
-        }
-
-        .story-block p:first-child::first-letter {
-            font-size: 3.5rem;
-            float: left;
-            line-height: 1;
-            margin-right: 0.5rem;
-            color: var(--chapter-color);
-            font-weight: bold;
-        }
-
-        h2 {
-            color: var(--chapter-color-dark);
-            font-size: 1.8rem;
-            margin: 3rem 0 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--chapter-color-light);
-        }
-
-        h3 {
-            color: var(--chapter-color);
-            font-size: 1.3rem;
-            margin: 2rem 0 1rem;
-        }
-
-        .concept-block {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 20px rgba(142, 68, 173, 0.1);
-        }
-
-        .concept-block h3 {
-            margin-top: 0;
-        }
-
-        /* Archetype cards */
-        .archetype-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .archetype-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
-        }
-
-        .archetype-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .archetype-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .archetype-name {
-            font-weight: 600;
-            color: var(--chapter-color-dark);
-            margin-bottom: 0.3rem;
-        }
-
-        .archetype-meaning {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .technique-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 10px 40px rgba(142, 68, 173, 0.1);
-            border: 1px solid rgba(142, 68, 173, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .technique-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(142, 68, 173, 0.15);
-        }
-
-        .technique-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .technique-number {
-            width: 48px;
-            height: 48px;
-            background: var(--chapter-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        .technique-title {
-            font-size: 1.4rem;
-            color: var(--chapter-color-dark);
-            margin: 0;
-        }
-
-        .technique-meta {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-            flex-wrap: wrap;
-        }
-
-        .meta-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            padding: 0.3rem 0.8rem;
-            background: rgba(142, 68, 173, 0.1);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--chapter-color-dark);
-        }
-
-        .steps-list {
-            background: rgba(142, 68, 173, 0.03);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .step-item {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed rgba(142, 68, 173, 0.2);
-        }
-
-        .step-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .step-number {
-            width: 28px;
-            height: 28px;
-            background: var(--chapter-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .step-content strong {
-            color: var(--chapter-color-dark);
-        }
-
-        /* Tale example */
-        .tale-example {
-            background: linear-gradient(135deg, #fdf9ff 0%, #f8f4fc 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 1px solid rgba(142, 68, 173, 0.2);
-        }
-
-        .tale-title {
-            font-weight: 600;
-            color: var(--chapter-color-dark);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tale-text {
-            font-style: italic;
-            line-height: 1.8;
-            color: #444;
-        }
-
-        .tale-analysis {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px dashed var(--chapter-color-light);
-        }
-
-        .analysis-item {
-            display: flex;
-            gap: 1rem;
-            margin: 0.8rem 0;
-            font-size: 0.95rem;
-        }
-
-        .analysis-label {
-            font-weight: 600;
-            color: var(--chapter-color);
-            min-width: 100px;
-        }
-
-        /* Question prompts */
-        .prompt-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .prompt-item {
-            background: white;
-            border-radius: 10px;
-            padding: 1rem 1.2rem;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-            border-left: 3px solid var(--chapter-color);
-        }
-
-        .prompt-item::before {
-            content: '"';
-            font-size: 2rem;
-            color: var(--chapter-color-light);
-            line-height: 1;
-        }
-
-        .observation-block {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
-            border-left: 4px solid #f1c40f;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 12px 12px 0;
-        }
-
-        .observation-block h4 {
-            color: #d68910;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(142, 68, 173, 0.1) 0%, rgba(155, 89, 182, 0.05) 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .highlight-box .big-text {
-            font-size: 1.4rem;
-            color: var(--chapter-color-dark);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* Symbol dictionary */
-        .symbol-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .symbol-item {
-            background: white;
-            border-radius: 10px;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .symbol-icon {
-            font-size: 2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .symbol-name {
-            font-weight: 600;
-            color: var(--chapter-color-dark);
-            font-size: 0.85rem;
-        }
-
-        .symbol-meaning {
-            font-size: 0.75rem;
-            color: #888;
-            margin-top: 0.2rem;
-        }
-
-        .integration-section {
-            background: linear-gradient(135deg, #f8f4ff 0%, #f0e8ff 100%);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin: 3rem 0;
-        }
-
-        .integration-section h2 {
-            color: #6b5b95;
-            border-bottom-color: #c9b8e8;
-        }
-
-        .homework-section {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin: 3rem 0;
-        }
-
-        .homework-section h2 {
-            color: #2e7d32;
-            border-bottom-color: #a5d6a7;
-        }
-
-        .homework-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .homework-list li {
-            padding: 1rem;
-            margin: 0.5rem 0;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .homework-list li::before {
-            content: '📖';
-            font-size: 1.2rem;
-        }
-
-        .nav-footer {
-            display: flex;
-            justify-content: space-between;
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 1px solid #eee;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            color: var(--chapter-color);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            background: rgba(142, 68, 173, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: var(--chapter-color);
-            color: white;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    
         .chapter-image-container {
             max-width: 600px;
             margin: 2rem auto 3rem;
@@ -537,35 +112,262 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .chapter-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title, h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        strong { color: var(--text-primary); }
+
+        .story-box, .opening-story, .story-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 15px 15px 0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .story-box p, .opening-story p, .story-section p { color: var(--text-primary); }
+
+        .technique-card, .practice-card, .exercise-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .technique-card:hover, .practice-card:hover, .exercise-card:hover {
+            border-color: var(--accent-tertiary);
+            transform: translateX(5px);
+        }
+
+        .technique-header, .practice-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .technique-number, .practice-number {
+            background: var(--gradient-1);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .technique-title, .practice-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .technique-meta, .practice-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .technique-meta span, .practice-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .technique-steps, .practice-steps, ol {
+            list-style: none;
+            counter-reset: step;
+            padding-left: 0;
+        }
+
+        .technique-steps li, .practice-steps li, ol li {
+            counter-increment: step;
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .technique-steps li::before, .practice-steps li::before, ol li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            color: var(--accent-tertiary);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+        }
+
+        .technique-observe, .observe-box {
+            background: rgba(0, 212, 170, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .technique-observe strong, .observe-box strong {
+            color: var(--accent-tertiary);
+        }
+
+        .integration-box, .integration-section {
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework-box, .homework-section {
+            background: var(--bg-tertiary);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .homework-box h3, .homework-section h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .chapter-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chapter-footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .chapter-footer a:hover {
+            color: var(--accent-secondary);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .warning-box, .warning {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box strong, .warning strong {
+            color: var(--accent-secondary);
+        }
+
+        .key-point, .insight-box {
+            background: rgba(124, 92, 255, 0.1);
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point strong, .insight-box strong {
+            color: var(--accent-primary);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-header { padding: 6rem 1.5rem 3rem; }
+            .chapter-content { padding: 2rem 1.5rem 4rem; }
+            .chapter-number { font-size: 4rem; }
+            body { font-size: 16px; }
+            .technique-meta, .practice-meta { flex-direction: column; gap: 0.5rem; }
+        }
     </style>
 </head>
 <body>
+    <nav class="chapter-nav">
+        <a href="../index.html">← Содержание</a>
+        <span style="color: var(--text-muted);">Глава 37 из 50</span>
+        <a href="38.html">Глава 38 →</a>
+    </nav>
+
     <header class="chapter-header">
-        <div class="part-banner">Часть IV: Инструментарий</div>
-
-        <div class="tale-visual">
-            <div class="tale-element">🏰</div>
-            <div class="tale-element">🐉</div>
-            <div class="tale-element">👸</div>
-            <div class="tale-element">🗡️</div>
-            <div class="tale-element">✨</div>
-            <div class="book-icon">📚</div>
-        </div>
-
-        <div class="chapter-title-container">
-            <div class="chapter-number">Глава тридцать седьмая</div>
-            <h1 class="chapter-title">Сказка как диагностика</h1>
-            <p class="chapter-subtitle">Когда подсознание рассказывает истории</p>
-        </div>
+        <div class="part-label">Часть IV: Инструментарий</div>
+        <div class="chapter-number">37</div>
+        <h1 class="chapter-title">Сказка как диагностика</h1>
     </header>
 
     <div class="chapter-image-container">
         <img src="../images/chapter-37.jpg" alt="Иллюстрация к главе 37" class="chapter-image">
     </div>
 
-
-    <main class="content-section">
-        <div class="story-block fade-in">
+    <main class="chapter-content">
+<div class="story-block fade-in">
             <p>Когда мне было восемь лет, я любил сочинять истории. Одна из них запомнилась особенно: маленький мальчик жил в большом замке, полном коридоров и комнат. Он всегда был один. Иногда слышал голоса за стенами, но двери были заперты. Однажды он нашёл ключ...</p>
             <p>Спустя тридцать лет, уже работая психологом, я понял: это была не просто сказка. Это была автобиография. Замок — моя семья, где все были «рядом», но недоступны. Запертые двери — эмоциональная дистанция родителей. Ключ — надежда на контакт, которого я так искал.</p>
             <p>С тех пор я использую сказки как диагностический инструмент. Когда человек рассказывает историю «просто так» — он рассказывает о себе самом.</p>
@@ -1030,28 +832,9 @@
         </div>
     </main>
 
-    <nav class="nav-footer">
-        <a href="36.html" class="nav-link">← Глава 36: Расстановка на столе</a>
-        <a href="../index.html" class="nav-link">Содержание</a>
-        <a href="38.html" class="nav-link">Глава 38: Диалог с симптомом →</a>
-    </nav>
-
-    <script>
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <footer class="chapter-footer">
+        <a href="36.html">← Глава 36</a>
+        <a href="38.html">Глава 38 →</a>
+    </footer>
 </body>
 </html>

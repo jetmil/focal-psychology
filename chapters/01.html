@@ -25,7 +25,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -99,6 +98,20 @@
             font-style: italic;
         }
 
+        .chapter-image-container {
+            max-width: 600px;
+            margin: 2rem auto 3rem;
+            text-align: center;
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(124, 92, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .chapter-content {
             max-width: 800px;
             margin: 0 auto;
@@ -109,7 +122,7 @@
             margin-bottom: 4rem;
         }
 
-        .section-title {
+        .section-title, h2 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
             color: var(--accent-primary);
@@ -118,12 +131,21 @@
             border-bottom: 1px solid var(--glass-border);
         }
 
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
         p {
             margin-bottom: 1.5rem;
             color: var(--text-secondary);
         }
 
-        .story-box {
+        strong { color: var(--text-primary); }
+
+        .story-box, .opening-story, .story-section {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-left: 3px solid var(--accent-gold);
@@ -133,9 +155,9 @@
             font-style: italic;
         }
 
-        .story-box p { color: var(--text-primary); }
+        .story-box p, .opening-story p, .story-section p { color: var(--text-primary); }
 
-        .technique-card {
+        .technique-card, .practice-card, .exercise-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 15px;
@@ -144,19 +166,19 @@
             transition: all 0.3s ease;
         }
 
-        .technique-card:hover {
+        .technique-card:hover, .practice-card:hover, .exercise-card:hover {
             border-color: var(--accent-tertiary);
             transform: translateX(5px);
         }
 
-        .technique-header {
+        .technique-header, .practice-header {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 1rem;
         }
 
-        .technique-number {
+        .technique-number, .practice-number {
             background: var(--gradient-1);
             color: white;
             width: 40px;
@@ -169,32 +191,34 @@
             font-size: 0.9rem;
         }
 
-        .technique-title {
+        .technique-title, .practice-title {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--text-primary);
         }
 
-        .technique-meta {
+        .technique-meta, .practice-meta {
             display: flex;
             gap: 2rem;
             margin-bottom: 1rem;
             font-size: 0.85rem;
             color: var(--text-muted);
+            flex-wrap: wrap;
         }
 
-        .technique-meta span {
+        .technique-meta span, .practice-meta span {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .technique-steps {
+        .technique-steps, .practice-steps, ol {
             list-style: none;
             counter-reset: step;
+            padding-left: 0;
         }
 
-        .technique-steps li {
+        .technique-steps li, .practice-steps li, ol li {
             counter-increment: step;
             padding-left: 2rem;
             position: relative;
@@ -202,7 +226,7 @@
             color: var(--text-secondary);
         }
 
-        .technique-steps li::before {
+        .technique-steps li::before, .practice-steps li::before, ol li::before {
             content: counter(step);
             position: absolute;
             left: 0;
@@ -210,7 +234,26 @@
             font-weight: 600;
         }
 
-        .technique-observe {
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+        }
+
+        .technique-observe, .observe-box {
             background: rgba(0, 212, 170, 0.1);
             border-radius: 10px;
             padding: 1rem;
@@ -218,11 +261,11 @@
             font-size: 0.95rem;
         }
 
-        .technique-observe strong {
+        .technique-observe strong, .observe-box strong {
             color: var(--accent-tertiary);
         }
 
-        .integration-box {
+        .integration-box, .integration-section {
             background: linear-gradient(135deg, rgba(124, 92, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
             border: 1px solid var(--glass-border);
             border-radius: 15px;
@@ -230,35 +273,17 @@
             margin-top: 2rem;
         }
 
-        .homework-box {
+        .homework-box, .homework-section {
             background: var(--bg-tertiary);
             border: 2px dashed var(--accent-gold);
             border-radius: 15px;
             padding: 2rem;
         }
 
-        .homework-box h3 {
+        .homework-box h3, .homework-section h3 {
             color: var(--accent-gold);
             margin-bottom: 1rem;
             font-size: 1.3rem;
-        }
-
-        .homework-box ul {
-            list-style: none;
-        }
-
-        .homework-box li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .homework-box li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-gold);
         }
 
         .chapter-footer {
@@ -291,7 +316,7 @@
             color: var(--text-primary);
         }
 
-        .warning-box {
+        .warning-box, .warning {
             background: rgba(255, 107, 157, 0.1);
             border: 1px solid rgba(255, 107, 157, 0.3);
             border-radius: 10px;
@@ -299,8 +324,20 @@
             margin: 1.5rem 0;
         }
 
-        .warning-box strong {
+        .warning-box strong, .warning strong {
             color: var(--accent-secondary);
+        }
+
+        .key-point, .insight-box {
+            background: rgba(124, 92, 255, 0.1);
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point strong, .insight-box strong {
+            color: var(--accent-primary);
         }
 
         @media (max-width: 768px) {
@@ -308,22 +345,8 @@
             .chapter-content { padding: 2rem 1.5rem 4rem; }
             .chapter-number { font-size: 4rem; }
             body { font-size: 16px; }
+            .technique-meta, .practice-meta { flex-direction: column; gap: 0.5rem; }
         }
-    
-        .chapter-image-container {
-            max-width: 600px;
-            margin: 2rem auto 3rem;
-            text-align: center;
-        }
-
-        .chapter-image {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(124, 92, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
     </style>
 </head>
 <body>
@@ -337,16 +360,14 @@
         <div class="part-label">Часть I: Природа внимания</div>
         <div class="chapter-number">01</div>
         <h1 class="chapter-title">Что остаётся, когда снять все маски</h1>
-        <p class="chapter-subtitle">Внимание как сущность человека</p>
     </header>
 
     <div class="chapter-image-container">
         <img src="../images/chapter-01.jpg" alt="Иллюстрация к главе 1" class="chapter-image">
     </div>
 
-
     <main class="chapter-content">
-        <!-- Открывающая история -->
+<!-- Открывающая история -->
         <section class="section">
             <div class="story-box">
                 <p>Представьте луковицу. Вы снимаете слой — под ним ещё один. Снимаете его — ещё слой. И так далее, пока в руках не остаётся... что? Ничего? Или что-то, что невозможно снять, потому что это уже не слой?</p>
@@ -536,7 +557,7 @@
 
     <footer class="chapter-footer">
         <a href="../index.html">← Содержание</a>
-        <a href="02.html">Глава 2: Наблюдатель и наблюдаемое →</a>
+        <a href="02.html">Глава 2 →</a>
     </footer>
 </body>
 </html>
