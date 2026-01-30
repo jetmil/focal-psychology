@@ -35,6 +35,21 @@
         .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-door); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
         .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
         .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        
+        .chapter-image-container {
+            max-width: 600px;
+            margin: 2rem auto 3rem;
+            text-align: center;
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(124, 92, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
         .section { margin-bottom: 4rem; }
         h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-door); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
@@ -65,7 +80,7 @@
 <body>
     <nav class="chapter-nav">
         <a href="65.html">← Глава 65</a>
-        <span style="color: var(--text-muted);">Глава 66</span>
+        <span style="color: var(--text-muted);">Глава 66 из 69</span>
         <a href="67.html">Глава 67 →</a>
     </nav>
 
@@ -75,6 +90,10 @@
         <h1 class="chapter-title">Лестница, которой не было</h1>
         <p class="chapter-subtitle">Ступени были нужны, чтобы понять — ступеней нет</p>
     </header>
+
+    <div class="chapter-image-container">
+        <img src="../images/chapter-66.jpg" alt="Иллюстрация к главе 66" class="chapter-image">
+    </div>
 
     <main class="chapter-content">
 
