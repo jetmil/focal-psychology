@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 61: Время как сеть — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-network: #9d4edd;
+            --gradient-network: linear-gradient(135deg, #9d4edd 0%, #c77dff 50%, #7c5cff 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
+        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(157, 78, 221, 0.15) 0%, transparent 100%); }
+        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-network); }
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-network); margin-bottom: 1rem; }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-network); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-network); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
+        .story-box p { color: var(--text-primary); }
+        .new-part-intro { background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(124, 92, 255, 0.1) 100%); border: 2px solid var(--accent-network); border-radius: 20px; padding: 2.5rem; margin-bottom: 3rem; text-align: center; }
+        .new-part-intro h2 { border: none; font-size: 2rem; margin-bottom: 1rem; }
+        .new-part-intro p { color: var(--text-primary); }
+        .joke-box { background: rgba(255, 107, 157, 0.05); border: 1px solid rgba(255, 107, 157, 0.2); border-radius: 15px; padding: 1.5rem; margin: 2rem 0; }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .joke-box p:last-child { margin-bottom: 0; }
+        .technique-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin: 2rem 0; }
+        .technique-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--accent-network); margin-bottom: 1rem; }
+        .technique-meta { display: flex; gap: 2rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; }
+        ol { list-style: none; counter-reset: step; padding-left: 0; }
+        ol li { counter-increment: step; padding-left: 2rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ol li::before { content: counter(step); position: absolute; left: 0; color: var(--accent-network); font-weight: 600; }
+        ul { list-style: none; padding-left: 0; }
+        ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent-network); }
+        .observe-box { background: rgba(157, 78, 221, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem; font-size: 0.95rem; }
+        .observe-box strong { color: var(--accent-network); }
+        .integration-box { background: linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(124, 92, 255, 0.1) 100%); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .homework-box { background: var(--bg-tertiary); border: 2px dashed var(--accent-gold); border-radius: 15px; padding: 2rem; }
+        .homework-box h3 { color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.3rem; }
+        .key-point { background: rgba(157, 78, 221, 0.1); border: 1px solid rgba(157, 78, 221, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .key-point strong { color: var(--accent-network); }
+        .warning-box { background: rgba(255, 107, 157, 0.1); border: 1px solid rgba(255, 107, 157, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .warning-box strong { color: var(--accent-secondary); }
+        blockquote { border-left: 3px solid var(--accent-network); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
+        .chapter-footer a { color: var(--accent-network); text-decoration: none; transition: all 0.3s; }
+        .chapter-footer a:hover { color: var(--accent-secondary); }
+        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } .technique-meta { flex-direction: column; gap: 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="60.html">← Глава 60</a>
+        <span style="color: var(--text-muted);">Глава 61</span>
+        <a href="62.html">Глава 62 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Часть VIII: Сеть</div>
+        <div class="chapter-number">61</div>
+        <h1 class="chapter-title">Время как сеть</h1>
+        <p class="chapter-subtitle">Прошлое, настоящее, будущее — узлы единой структуры</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="new-part-intro">
+            <h2>Добро пожаловать в Часть VIII: Сеть</h2>
+            <p>Ступень 4. Геометрия — объём. Время перестаёт быть стрелой.</p>
+            <p style="margin-top: 1rem;">На ступени Фокуса вы научились направлять внимание. На ступени Резонанса — принимать отклик. На ступени Потока — растворять границы.</p>
+            <p style="margin-top: 1rem;">Теперь — контакт с собой во времени. Все версии. Одновременно.</p>
+        </div>
+
+        <div class="story-box">
+            <p>Вы-вчера не исчезли. Они живут в вас-сейчас как память. Как привычки. Как шрамы. Как навыки.</p>
+            <p style="margin-top: 1rem;">Вы-завтра уже существуют. В ваших намерениях. В ваших страхах. В ваших надеждах.</p>
+            <p style="margin-top: 1rem;">Время — не река, по которой вы плывёте. Время — сеть, узлы которой связаны друг с другом. И вы — не путник. Вы — вся сеть.</p>
+        </div>
+
+        <section class="section">
+            <h2>Иллюзия линейности</h2>
+
+            <p>Нас учили: прошлое позади, будущее впереди, вы двигаетесь из точки А в точку Б. Стрела времени.</p>
+
+            <p>Эта модель полезна для планирования. Но она неверно описывает опыт.</p>
+
+            <p>В опыте:</p>
+            <ul>
+                <li>Прошлое присутствует сейчас — как память, влияющая на восприятие</li>
+                <li>Будущее присутствует сейчас — как ожидание, формирующее настоящее</li>
+                <li>"Сейчас" не точка — это пересечение множества нитей</li>
+            </ul>
+
+            <p>Вспомните детскую травму. Она "прошла"? Или она здесь — влияет на ваши решения, реакции, отношения?</p>
+
+            <p>Подумайте о важном событии завтра. Оно "ещё не наступило"? Или оно уже здесь — в вашей тревоге, подготовке, предвкушении?</p>
+
+            <div class="key-point">
+                <p><strong>Ключевое понимание:</strong> Линейное время — удобная карта. Но территория — объёмная. Все моменты существуют одновременно в узлах сети.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Вы-вчера в вас-сейчас</h2>
+
+            <p>Кто вы были 10 лет назад? 20? В детстве?</p>
+
+            <p>Те версии не исчезли. Они сжались в узел памяти и живут в вас:</p>
+            <ul>
+                <li><strong>Как привычки.</strong> Почему вы так реагируете? Потому что вы-пятилетний научились это делать.</li>
+                <li><strong>Как навыки.</strong> Где вы этому научились? Там, в точке времени, которую "прошли".</li>
+                <li><strong>Как страхи.</strong> Чего боитесь? Того, что случилось с вами-тогда.</li>
+                <li><strong>Как желания.</strong> О чём мечтаете? Часто — о том, чего не получили вы-раньше.</li>
+            </ul>
+
+            <p>Вы-сейчас — это конфигурация всех ваших прошлых версий. Не "результат" — а живое присутствие.</p>
+
+            <blockquote>Я — не то, что случилось со мной. Я — то, как я несу всё, что случилось.</blockquote>
+        </section>
+
+        <section class="section">
+            <h2>Вы-завтра в вас-сейчас</h2>
+
+            <p>Будущие версии тоже уже здесь.</p>
+
+            <p>Когда вы тревожитесь — вы в контакте с вами-будущим, который (возможно) в беде.</p>
+
+            <p>Когда вы надеетесь — вы в контакте с вами-будущим, который (возможно) счастлив.</p>
+
+            <p>Когда вы планируете — вы буквально создаёте контур для будущей версии.</p>
+
+            <ul>
+                <li><strong>Тревога</strong> = разговор с пугающим вами-потом</li>
+                <li><strong>Надежда</strong> = разговор с радостным вами-потом</li>
+                <li><strong>Намерение</strong> = приглашение для определённого вами-потом</li>
+            </ul>
+
+            <p>Вы-завтра не "ещё не существует". Он существует как потенциал, уже влияющий на настоящее.</p>
+
+            <div class="key-point">
+                <p><strong>Парадокс:</strong> Будущее определяет настоящее не меньше, чем прошлое. Вы действуете из того, чего ещё нет — но что уже присутствует как притяжение.</p>
+            </div>
+        </section>
+
+        <div class="joke-box">
+            <p>— Ты живёшь прошлым или будущим?</p>
+            <p>— Да.</p>
+            <p>— Это не ответ.</p>
+            <p>— Это единственный честный ответ.</p>
+        </div>
+
+        <section class="section">
+            <h2>Сеть, не стрела</h2>
+
+            <p>Представьте паутину. Каждый узел — момент времени. Каждая нить — связь.</p>
+
+            <p>Вы-сейчас — центральный узел. Но он связан:</p>
+            <ul>
+                <li>С вами-вчера (много узлов в "прошлом")</li>
+                <li>С вами-завтра (много узлов в "будущем")</li>
+                <li>С другими людьми (их узлы в их времени)</li>
+                <li>С событиями, местами, предметами</li>
+            </ul>
+
+            <p>Потяните за одну нить — дрогнет вся сеть.</p>
+
+            <p>Измените что-то здесь — изменится и прошлое (его значение, влияние), и будущее (его вероятность, форма).</p>
+
+            <h3>Исцеление травмы — пример работы сети</h3>
+            <p>Когда вы исцеляете травму, вы не "стираете прошлое". Вы меняете связь между узлами. Событие остаётся — но нить к нему становится другой. Напряжённая становится расслабленной. Болезненная — принятой.</p>
+
+            <p>И это меняет всю конфигурацию. Включая вас-сейчас и вас-потом.</p>
+        </section>
+
+        <section class="section">
+            <h2>Контакт между версиями</h2>
+
+            <p>Если версии связаны — с ними можно общаться.</p>
+
+            <p>Это не метафора. Это практика.</p>
+
+            <h3>Связь с прошлым</h3>
+            <ul>
+                <li>Вспомнить себя-тогда</li>
+                <li>Установить внутренний контакт: "Я тебя вижу. Я здесь."</li>
+                <li>Спросить: "Что тебе нужно?"</li>
+                <li>Дать то, что можете дать из сейчас</li>
+            </ul>
+
+            <h3>Связь с будущим</h3>
+            <ul>
+                <li>Представить себя-потом (конкретного, в конкретной ситуации)</li>
+                <li>Спросить: "Что ты хочешь мне сказать?"</li>
+                <li>Слушать. Записывать.</li>
+                <li>Спросить: "Что мне делать сейчас для тебя?"</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Важно:</strong> Это не эзотерика про путешествия во времени. Это работа с тем, как прошлое и будущее уже присутствуют в психике. Контакт — реален. Машина времени — не нужна.</p>
+            </div>
+        </section>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 61.1: Присутствие версий</h3>
+            <div class="technique-meta">
+                <span>Время: 15 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: тихое место, закрытые глаза</span>
+            </div>
+
+            <ol>
+                <li><strong>Сядьте удобно.</strong> Закройте глаза. Несколько глубоких вдохов.</li>
+                <li><strong>Ощутите себя-сейчас.</strong> Тело. Дыхание. Присутствие в этом месте.</li>
+                <li><strong>Вызовите образ себя-10-лет-назад.</strong> Не думайте — почувствуйте. Где он в пространстве вокруг вас? Слева? Справа? Позади? Далеко или близко?</li>
+                <li><strong>Побудьте с этим.</strong> Что между вами? Какая связь? Тёплая? Напряжённая? Разорванная?</li>
+                <li><strong>Теперь вызовите себя-10-лет-вперёд.</strong> Где он? Что между вами?</li>
+                <li><strong>Ощутите всех троих одновременно:</strong> вы-тогда, вы-сейчас, вы-потом. Три узла одной сети.</li>
+                <li><strong>Запишите:</strong> Что открылось? Что удивило?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Расположение в пространстве — не случайно. Если прошлое "далеко" — возможно, вы избегаете контакта. Если будущее "темнó" — возможно, вы боитесь смотреть.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 61.2: Диалог с собой-тогда</h3>
+            <div class="technique-meta">
+                <span>Время: 20 минут</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: тетрадь, готовность к контакту</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите возраст.</strong> Какой вы-тогда хочет внимания? 5 лет? 15? 25? Доверьтесь первому импульсу.</li>
+                <li><strong>Представьте встречу.</strong> Где вы встречаетесь? Как он/она выглядит? Что делает?</li>
+                <li><strong>Скажите:</strong> "Я пришёл из будущего. Я — это ты, повзрослевший. Я тебя вижу."</li>
+                <li><strong>Спросите:</strong> "Что тебе нужно? Что ты хочешь мне сказать?"</li>
+                <li><strong>Слушайте.</strong> Записывайте всё, что приходит. Не редактируйте.</li>
+                <li><strong>Дайте что можете:</strong> поддержку, защиту, объятие, слова, которых не хватало тогда.</li>
+                <li><strong>Попрощайтесь</strong> — но оставьте связь открытой.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Эмоции. Они могут быть сильными. Это нормально. Вы восстанавливаете контакт, который был разорван. Если слишком интенсивно — замедлитесь, подышите.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 61.3: Письмо из будущего</h3>
+            <div class="technique-meta">
+                <span>Время: 15 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: бумага или документ, не редактировать</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите точку в будущем:</strong> 1 год, 5 лет, 10 лет — как чувствуется правильно.</li>
+                <li><strong>Представьте:</strong> вы-там пишет письмо вам-здесь.</li>
+                <li><strong>Начните писать от первого лица</strong> ("Я" — это вы-будущий). Пишите то, что приходит, без цензуры:</li>
+                <ul style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                    <li>Что вы-потом хотите сказать вам-сейчас?</li>
+                    <li>Что важно знать?</li>
+                    <li>О чём предупреждает? К чему поощряет?</li>
+                </ul>
+                <li><strong>Пишите минимум 10 минут.</strong> Не останавливайтесь, даже если кажется ерундой.</li>
+                <li><strong>Прочитайте.</strong> Что резонирует? Что удивляет?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Часто "письмо из будущего" содержит то, что вы уже знаете, но боитесь признать. Будущая версия просто говорит это прямо.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 61.4: Карта временной сети</h3>
+            <div class="technique-meta">
+                <span>Время: 30 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: большой лист бумаги, цветные маркеры</span>
+            </div>
+
+            <ol>
+                <li><strong>В центре листа</strong> — точка "Я-сейчас".</li>
+                <li><strong>Нарисуйте ключевые узлы прошлого:</strong> важные моменты, возрасты, события. Расположите их интуитивно — ближе/дальше, выше/ниже.</li>
+                <li><strong>Нарисуйте узлы будущего:</strong> цели, страхи, надежды, возможные версии.</li>
+                <li><strong>Соедините линиями:</strong> какие связи чувствуете? Какие нити сильные? Какие слабые? Какие болезненные?</li>
+                <li><strong>Цветом отметьте качество связей:</strong> тёплые, напряжённые, разорванные, желанные.</li>
+                <li><strong>Посмотрите на карту целиком.</strong> Что видите? Где "дыры"? Где "узлы напряжения"?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Это диагностическая практика. Карта покажет, где связь с прошлым болезненна (травма), где связь с будущим пугает (тревога), где вы избегаете контакта.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="integration-box">
+                <h3>Интеграция</h3>
+                <p>Ступень Сети — это признание: <strong>вы не точка на прямой, вы — узел в объёме.</strong></p>
+                <p style="margin-top: 1rem;">Каждое "сейчас" содержит все "тогда" и все "потом". Не метафорически — реально, как влияние, как присутствие, как силы, формирующие ваши решения.</p>
+                <p style="margin-top: 1rem;">Работа со временем как с сетью — это не магия. Это честный контакт с тем, как устроена психика. Прошлое не "прошло". Будущее не "ещё не наступило". Всё здесь. Вопрос — какова конфигурация связей.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="homework-box">
+                <h3>Домашнее задание</h3>
+                <ol>
+                    <li><strong>Практика 61.1</strong> — Присутствие версий. Ощутите себя-тогда и себя-потом в пространстве. Запишите наблюдения.</li>
+                    <li><strong>Выберите одну из практик 61.2-61.4</strong> — ту, которая резонирует. Выполните полностью.</li>
+                    <li><strong>В течение дня замечайте:</strong> когда вы в контакте с прошлым? Когда — с будущим? Как это влияет на настоящее?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Глава 62: Травма как разрыв. Когда связь с собой-тогда болезненно нарушена. Как восстановить контакт. Как исцелить нить.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="60.html">← Глава 60: Вход и выход</a>
+        <a href="62.html">Глава 62: Травма как разрыв →</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 69: Что остаётся — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-door: #e8b923;
+            --gradient-door: linear-gradient(135deg, #ffd700 0%, #ff6b9d 50%, #e8b923 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
+        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%); }
+        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-door); }
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-door); margin-bottom: 1rem; }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-door); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-door); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
+        .story-box p { color: var(--text-primary); }
+        .joke-box { background: rgba(255, 107, 157, 0.05); border: 1px solid rgba(255, 107, 157, 0.2); border-radius: 15px; padding: 1.5rem; margin: 2rem 0; }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .joke-box p:last-child { margin-bottom: 0; }
+        ul { list-style: none; padding-left: 0; }
+        ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent-door); }
+        .key-point { background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .key-point strong { color: var(--accent-door); }
+        blockquote { border-left: 3px solid var(--accent-door); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+        .final-box { background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 107, 157, 0.15) 50%, rgba(124, 92, 255, 0.1) 100%); border: 2px solid var(--accent-gold); border-radius: 20px; padding: 2.5rem; margin: 3rem 0; text-align: center; }
+        .final-box h2 { border: none; font-size: 2rem; margin-bottom: 1rem; }
+        .final-box p { color: var(--text-primary); }
+        .summary-box { background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(124, 92, 255, 0.1) 100%); border: 2px solid var(--accent-door); border-radius: 20px; padding: 2.5rem; margin: 3rem 0; }
+        .summary-box h2 { border: none; text-align: center; margin-bottom: 1.5rem; }
+        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
+        .chapter-footer a { color: var(--accent-door); text-decoration: none; transition: all 0.3s; }
+        .chapter-footer a:hover { color: var(--accent-secondary); }
+        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="68.html">← Глава 68</a>
+        <span style="color: var(--text-muted);">Глава 69</span>
+        <a href="../index.html">Содержание →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Эпилог: Дверь</div>
+        <div class="chapter-number">69</div>
+        <h1 class="chapter-title">Что остаётся</h1>
+        <p class="chapter-subtitle">Это не финал — это продолжение</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>Книга заканчивается. Путь — нет.</p>
+            <p style="margin-top: 1rem;">Вы закроете эту страницу и вернётесь к жизни. Той же жизни, с которой начинали. Но, возможно, чуть другими глазами.</p>
+            <p style="margin-top: 1rem;">Это всё, чего можно желать от книги.</p>
+        </div>
+
+        <section class="section">
+            <h2>Техники остаются инструментами</h2>
+
+            <p>250+ техник. Горячий стул. Работа с образом в теле. Сказка как диагностика. Расстановки на столе.</p>
+
+            <p>Всё это — остаётся. И будет работать.</p>
+
+            <p>Но теперь вы знаете: техника — это инструмент. Не истина. Не путь. Не "метод просветления".</p>
+
+            <ul>
+                <li>Молоток забивает гвозди. Не молитесь молотку.</li>
+                <li>Карта показывает маршрут. Не путайте карту с территорией.</li>
+                <li>Техника решает задачу. Не делайте из техники религию.</li>
+            </ul>
+
+            <p>Используйте что нужно. Откладывайте когда не нужно. Не цепляйтесь.</p>
+        </section>
+
+        <section class="section">
+            <h2>Карты остаются картами</h2>
+
+            <p>Пять слоёв сознания. Колыбель. Ступени развития. Сеть Индры.</p>
+
+            <p>Всё это — карты. Полезные карты. Но карты.</p>
+
+            <ul>
+                <li>Карта показывает направление — не создаёт его</li>
+                <li>Карта упрощает реальность — и потому искажает её</li>
+                <li>Карта нужна пока не знаешь местность — потом можно отложить</li>
+            </ul>
+
+            <p>Территория — ваш собственный опыт. Живой, непрерывный, несводимый к моделям.</p>
+
+            <blockquote>Когда модель перестаёт помогать — бросьте модель. Не жертвуйте опытом ради схемы.</blockquote>
+        </section>
+
+        <section class="section">
+            <h2>Вы — не инструменты и не карты</h2>
+
+            <p>Это главное.</p>
+
+            <p>Вы — не набор техник. Не "практикующий фокальную психологию". Не "человек на третьей ступени".</p>
+
+            <p>Вы — тот, кто смотрит. Кто был до всех техник. Кто будет после.</p>
+
+            <p>Техники приходят и уходят. Модели меняются. Карты устаревают.</p>
+
+            <p>То, что смотрит — остаётся.</p>
+
+            <div class="key-point">
+                <p><strong>Центральный тезис книги — в последний раз:</strong></p>
+                <p>Ты — не твои мысли, не твои роли, не твой характер. Ты — тот, кто смотрит.</p>
+            </div>
+        </section>
+
+        <div class="joke-box">
+            <p>— Ты прочитал книгу?</p>
+            <p>— Да.</p>
+            <p>— Что понял?</p>
+            <p>— Что я — не книга.</p>
+            <p>— И всё?</p>
+            <p>— Этого достаточно.</p>
+        </div>
+
+        <section class="section">
+            <h2>Это не финал</h2>
+
+            <p>Книга заканчивается. Ваш путь — нет.</p>
+
+            <p>Завтра будет новый день. Новые ситуации. Новые вызовы. Новые возможности для практики.</p>
+
+            <ul>
+                <li>Каждый момент — возможность для присутствия</li>
+                <li>Каждая встреча — возможность для резонанса</li>
+                <li>Каждое действие — возможность для потока</li>
+                <li>Каждое решение — рябь по всей сети</li>
+            </ul>
+
+            <p>Вы не "закончили обучение". Вы получили несколько инструментов и карт. Теперь — практика. Длиною в жизнь.</p>
+
+            <blockquote>Мастерство — не в том, чтобы дочитать книгу. Мастерство — в том, чтобы жить после того, как книга закрыта.</blockquote>
+        </section>
+
+        <section class="section">
+            <h2>Напутствие</h2>
+
+            <h3>Будьте мягки к себе</h3>
+            <p>Путь не линеен. Будут откаты. Будут дни, когда вы забудете всё, что "поняли". Это нормально. Просто начинайте снова.</p>
+
+            <h3>Практикуйте, не изучайте</h3>
+            <p>Читать о внимании — не то же, что управлять вниманием. Знать модель — не то же, что жить её. Закройте книгу и делайте.</p>
+
+            <h3>Не верьте — проверяйте</h3>
+            <p>Всё, что написано здесь — предложения. Не догмы. Если что-то не работает для вас — отбросьте. Если работает — используйте. Ваш опыт — главный арбитр.</p>
+
+            <h3>Помните о градиенте</h3>
+            <p>Нет "достигших" и "недостигших". Есть градиент. Вы где-то на нём. И все остальные тоже. Не сравнивайте. Просто практикуйте.</p>
+
+            <h3>Доверяйте процессу</h3>
+            <p>Вы не можете "заставить" себя просветлеть. Вы можете только создавать условия. Остальное — само. Посадите семя. Поливайте. Ждите.</p>
+        </section>
+
+        <section class="section">
+            <div class="summary-box">
+                <h2>Весь путь — в одном абзаце</h2>
+
+                <p>Вы — внимание. Всё остальное — наросты на чистом восприятии. Управляя вниманием, вы управляете собой. Направляя внимание, вы формируете реальность. Резонируя с миром, вы получаете отклик. Растворяясь в потоке, вы обнаруживаете — границ не было. Видя сеть, вы понимаете — все версии связаны. Проходя через дверь, вы понимаете — двери не было. И возвращаетесь. К обычной жизни. С новым качеством присутствия.</p>
+
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--accent-door);">Вот и всё. Вот и всё.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="final-box">
+                <h2>Благодарность</h2>
+                <p>Спасибо, что прошли этот путь вместе со мной.</p>
+                <p style="margin-top: 1rem;">Теперь — ваша очередь. Идите. Практикуйте. Живите.</p>
+                <p style="margin-top: 1rem;">И помните: вы — тот, кто смотрит. Это было правдой до этой книги. Это останется правдой после.</p>
+                <p style="margin-top: 2rem; font-style: italic; color: var(--text-muted);">— Денис Даровицкий</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="68.html">← Глава 68: Возвращение</a>
+        <a href="../index.html">Вернуться к содержанию →</a>
+    </footer>
+</body>
+</html>

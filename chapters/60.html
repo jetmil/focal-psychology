@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 60: Вход и выход — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-flow: #00bfff;
+            --gradient-flow: linear-gradient(135deg, #00bfff 0%, #7c5cff 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
+        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(0, 191, 255, 0.15) 0%, transparent 100%); }
+        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-flow); }
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-flow); margin-bottom: 1rem; }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-flow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-flow); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
+        .story-box p { color: var(--text-primary); }
+        .joke-box { background: rgba(255, 107, 157, 0.05); border: 1px solid rgba(255, 107, 157, 0.2); border-radius: 15px; padding: 1.5rem; margin: 2rem 0; }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0; }
+        .technique-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin: 2rem 0; }
+        .technique-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--accent-flow); margin-bottom: 1rem; }
+        .technique-meta { display: flex; gap: 2rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; }
+        ol { list-style: none; counter-reset: step; padding-left: 0; }
+        ol li { counter-increment: step; padding-left: 2rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ol li::before { content: counter(step); position: absolute; left: 0; color: var(--accent-flow); font-weight: 600; }
+        ul { list-style: none; padding-left: 0; }
+        ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent-flow); }
+        .observe-box { background: rgba(0, 191, 255, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem; font-size: 0.95rem; }
+        .observe-box strong { color: var(--accent-flow); }
+        .integration-box { background: linear-gradient(135deg, rgba(0, 191, 255, 0.1) 0%, rgba(124, 92, 255, 0.1) 100%); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .homework-box { background: var(--bg-tertiary); border: 2px dashed var(--accent-gold); border-radius: 15px; padding: 2rem; }
+        .homework-box h3 { color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.3rem; }
+        .key-point { background: rgba(0, 191, 255, 0.1); border: 1px solid rgba(0, 191, 255, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .key-point strong { color: var(--accent-flow); }
+        .warning-box { background: rgba(255, 107, 157, 0.1); border: 1px solid rgba(255, 107, 157, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .warning-box strong { color: var(--accent-secondary); }
+        blockquote { border-left: 3px solid var(--accent-flow); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
+        .chapter-footer a { color: var(--accent-flow); text-decoration: none; transition: all 0.3s; }
+        .chapter-footer a:hover { color: var(--accent-secondary); }
+        .summary-box { background: linear-gradient(135deg, rgba(0, 191, 255, 0.2) 0%, rgba(124, 92, 255, 0.15) 100%); border: 2px solid var(--accent-flow); border-radius: 20px; padding: 2.5rem; margin: 3rem 0; }
+        .summary-box h2 { border: none; text-align: center; margin-bottom: 1.5rem; }
+        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } .technique-meta { flex-direction: column; gap: 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="59.html">← Глава 59</a>
+        <span style="color: var(--text-muted);">Глава 60</span>
+        <a href="61.html">Глава 61 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Часть VII: Поток</div>
+        <div class="chapter-number">60</div>
+        <h1 class="chapter-title">Вход и выход</h1>
+        <p class="chapter-subtitle">Поток — не место жительства, а состояние посещения</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>Мастер не живёт в потоке. Он туда заходит — и выходит. Как в комнату.</p>
+            <p style="margin-top: 1rem;">Жить в потоке — невозможно и не нужно. Нужно — уметь входить когда нужно, выходить когда нужно. Не застревать. Не бояться.</p>
+            <p style="margin-top: 1rem;">Это последняя глава части "Поток". Она про мастерство переходов.</p>
+        </div>
+
+        <section class="section">
+            <h2>Почему переходы важнее состояний</h2>
+
+            <p>Новички гонятся за состояниями. "Хочу быть в потоке". "Хочу достичь просветления". "Хочу чувствовать себя хорошо".</p>
+
+            <p>Мастера думают о переходах. "Могу ли я войти, когда нужно?" "Могу ли я выйти, когда нужно?" "Насколько гибко я перемещаюсь между состояниями?"</p>
+
+            <div class="key-point">
+                <p><strong>Почему:</strong> Состояния временны. Все. Даже самые прекрасные. Если вы умеете только входить — вы застрянете. Если умеете только выходить — вы никогда не побудете.</p>
+                <p style="margin-top: 0.5rem;">Мастерство — в обоих направлениях. И в скорости, с которой вы можете переключаться.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Ритуалы входа</h2>
+
+            <p>Вход в поток можно облегчить. Не гарантировать — но облегчить.</p>
+
+            <h3>Физические триггеры</h3>
+            <ul>
+                <li>Определённое место (рабочий стол, студия, любимое кресло)</li>
+                <li>Определённое время (утро, когда все спят)</li>
+                <li>Определённое действие (чашка чая, музыка, разминка)</li>
+                <li>Определённая одежда (да, это работает)</li>
+            </ul>
+            <p>Тело запоминает ассоциации. Если вы каждый раз перед работой делаете X — со временем X становится триггером рабочего состояния.</p>
+
+            <h3>Ментальные триггеры</h3>
+            <ul>
+                <li>Намерение: "Следующий час — только это"</li>
+                <li>Визуализация: представить себя уже в потоке</li>
+                <li>Дыхание: несколько глубоких вдохов для переключения</li>
+                <li>Отпускание: сознательно отложить всё остальное</li>
+            </ul>
+
+            <h3>Разогрев</h3>
+            <p>Поток не начинается сразу. Первые 10-15 минут — разогрев. Не ждите мгновенного погружения. Начните делать — и позвольте глубине прийти постепенно.</p>
+        </section>
+
+        <section class="section">
+            <h2>Ритуалы выхода</h2>
+
+            <p>Выход из потока — не менее важен. Резкий выход дезориентирует. Плавный — интегрирует.</p>
+
+            <h3>Буфер возврата</h3>
+            <p>Не прыгайте из потока сразу в обычную жизнь. Оставьте 5-10 минут на переход.</p>
+            <ul>
+                <li>Замедлите темп перед окончанием</li>
+                <li>Зафиксируйте, где остановились</li>
+                <li>Несколько вдохов для "возвращения"</li>
+                <li>Лёгкое движение (встать, потянуться)</li>
+            </ul>
+
+            <h3>Завершающий ритуал</h3>
+            <ul>
+                <li>Физическое действие: закрыть ноутбук, положить инструмент, выйти из комнаты</li>
+                <li>Ментальное действие: "На сегодня — всё"</li>
+                <li>Благодарность: "Спасибо за это время" (себе, делу, процессу)</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Зачем:</strong> Без ритуала выхода вы "тащите" поток за собой. Сидите за ужином — а мысли в работе. Ложитесь спать — а голова продолжает. Ритуал создаёт чёткую границу: поток закончился, началась обычная жизнь.</p>
+            </div>
+        </section>
+
+        <div class="joke-box">
+            <p>— Как ты так быстро переключаешься между работой и отдыхом?</p>
+            <p>— Я закрываю ноутбук и говорю: "До завтра, придурки."</p>
+            <p>— Кому говоришь?</p>
+            <p>— Коду. Коллегам. Задачам. Себе-рабочему. Всем сразу.</p>
+        </div>
+
+        <section class="section">
+            <h2>Гибкость переключения</h2>
+
+            <p>Мастерство — не только глубина погружения, но и скорость переключения.</p>
+
+            <p>Ситуации, требующие быстрого выхода:</p>
+            <ul>
+                <li>Срочное дело (ребёнок зовёт, звонок)</li>
+                <li>Физическая потребность (туалет, голод, усталость)</li>
+                <li>Сигнал от тела (боль, дискомфорт)</li>
+                <li>Внешнее прерывание (которое нельзя игнорировать)</li>
+            </ul>
+
+            <p>Если вы не можете быстро выйти — вы заложник потока, а не его хозяин.</p>
+
+            <p>Ситуации, требующие быстрого входа:</p>
+            <ul>
+                <li>Ограниченное время (только час, надо использовать)</li>
+                <li>Дедлайн (нужно сделать сейчас)</li>
+                <li>Возможность (появилось окно, надо не упустить)</li>
+            </ul>
+
+            <p>Если вы не можете быстро войти — вы теряете возможности.</p>
+
+            <div class="key-point">
+                <p><strong>Формула гибкости:</strong></p>
+                <p>Время входа + Время выхода = Ваша "инерция"</p>
+                <p style="margin-top: 0.5rem;">Чем меньше инерция — тем более гибко вы управляете состояниями. Мастер имеет низкую инерцию.</p>
+            </div>
+        </section>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 60.1: Создание ритуала входа</h3>
+            <div class="technique-meta">
+                <span>Время: эксперимент на неделю</span>
+                <span>Сложность: низкая</span>
+                <span>Нужно: деятельность, в которую хотите входить в поток</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите деятельность,</strong> для которой хотите облегчить вход.</li>
+                <li><strong>Придумайте простой ритуал</strong> (2-3 действия). Например: сесть, три вдоха, открыть документ.</li>
+                <li><strong>Каждый раз</strong> перед этой деятельностью — делайте ритуал. Одинаково.</li>
+                <li><strong>Через неделю:</strong> Стало ли легче входить? Что изменилось?</li>
+                <li><strong>Корректируйте</strong> ритуал по необходимости.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Ритуал должен быть простым и выполнимым. Сложный ритуал станет препятствием, а не помощью.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 60.2: Буфер возврата</h3>
+            <div class="technique-meta">
+                <span>Время: 5-10 минут после потока</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: намерение, таймер</span>
+            </div>
+
+            <ol>
+                <li><strong>Заканчивая работу в потоке,</strong> поставьте таймер на 5 минут.</li>
+                <li><strong>Эти 5 минут:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Замедлите темп</li>
+                        <li>Запишите, где остановились (1-2 предложения)</li>
+                        <li>Несколько глубоких вдохов</li>
+                        <li>Физически отойдите от места работы</li>
+                    </ul>
+                </li>
+                <li><strong>Только после этого</strong> — переходите к следующему делу.</li>
+                <li><strong>Замечайте разницу:</strong> Легче ли переключиться с буфером?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Сопротивление. "Зачем эти 5 минут, лучше бы работал." Это голос потока, который не хочет отпускать. Тем важнее практика.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 60.3: Тренировка быстрого выхода</h3>
+            <div class="technique-meta">
+                <span>Время: эксперимент в процессе</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: таймер с сигналом</span>
+            </div>
+
+            <ol>
+                <li><strong>Начните деятельность,</strong> в которой обычно входите в поток.</li>
+                <li><strong>Поставьте таймер</strong> на случайное время (15-25 минут).</li>
+                <li><strong>Когда таймер сработает</strong> — немедленно выйдите. Полностью. Встаньте, отойдите, переключитесь.</li>
+                <li><strong>Замерьте:</strong> Сколько времени занял выход? Как это ощущалось?</li>
+                <li><strong>Вернитесь</strong> к работе (если хотите).</li>
+                <li><strong>Повторяйте</strong> до тех пор, пока выход не станет лёгким.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Первые разы будут неприятными. "Меня вырвали!" Это нормально. Цель — научиться выходить без этого ощущения.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 60.4: Тренировка быстрого входа</h3>
+            <div class="technique-meta">
+                <span>Время: 5 минут</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: деятельность, таймер</span>
+            </div>
+
+            <ol>
+                <li><strong>Дайте себе только 5 минут</strong> на работу. Таймер.</li>
+                <li><strong>Задача:</strong> Войти в поток (или максимально к нему приблизиться) за эти 5 минут.</li>
+                <li><strong>Когда таймер сработает</strong> — стоп. Не продолжайте.</li>
+                <li><strong>Оцените:</strong> Насколько глубоко удалось погрузиться? Что помогало? Что мешало?</li>
+                <li><strong>Повторяйте.</strong> С практикой время входа сокращается.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Это противоположность "дай себе время". Здесь мы тренируем скорость. Обе способности нужны.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="summary-box">
+                <h2>Итоги части VII: Поток</h2>
+
+                <p><strong>Глава 56: Когда берега исчезают</strong><br>
+                Поток — это когда мост исчезает, потому что исчезли берега. Вы и деятельность — одно.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 57: Градиент проживания</strong><br>
+                Жить в градиенте, не нарезая на слои. "Я вижу" → "Видение" → единый процесс.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 58: Поток и контроль</strong><br>
+                Контроль-мастерство vs контроль-напряжение. Отпустить — не значит потерять.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 59: Опасности потока</strong><br>
+                Диссоциация маскируется под поток. Зависимость, bypass, нарциссизм. Как отличить здоровое от патологического.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 60: Вход и выход</strong><br>
+                Мастерство переходов важнее мастерства состояний. Ритуалы входа, буфер выхода, гибкость переключения.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Главная мысль части:</strong><br>
+                Поток — не место жительства. Это состояние посещения. Уметь войти. Уметь выйти. Уметь быть и там, и здесь.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="homework-box">
+                <h3>Финальное задание части VII</h3>
+                <ol>
+                    <li><strong>Создайте свой ритуал входа</strong> для одной важной деятельности. Практикуйте неделю.</li>
+                    <li><strong>Внедрите буфер возврата</strong> после каждой сессии работы.</li>
+                    <li><strong>Проверьте гибкость:</strong> Можете ли вы быстро выйти? Быстро войти?</li>
+                    <li><strong>Интеграция:</strong> Ступени 1-2-3 — как они связаны для вас теперь?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Часть VIII: Сеть. Время перестаёт быть стрелой. Вы-вчера, вы-сегодня, вы-завтра — все связаны. Контакт с собой во времени. Исцеление травмы. Разрешение тревоги. Сеть Индры.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="59.html">← Глава 59: Опасности потока</a>
+        <a href="61.html">Глава 61: Время как сеть →</a>
+    </footer>
+</body>
+</html>

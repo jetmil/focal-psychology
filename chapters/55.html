@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 55: Глухие зоны — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-resonance: #ff8c00;
+            --gradient-resonance: linear-gradient(135deg, #ff8c00 0%, #ff6b9d 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .chapter-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(255, 140, 0, 0.15) 0%, transparent 100%);
+        }
+
+        .chapter-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-resonance); }
+
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-resonance); margin-bottom: 1rem; }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            background: var(--gradient-resonance);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title, h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-resonance); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+
+        .story-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 15px 15px 0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        .story-box p { color: var(--text-primary); }
+
+        .joke-box {
+            background: rgba(255, 107, 157, 0.05);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0; }
+
+        .technique-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .technique-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--accent-resonance);
+            margin-bottom: 1rem;
+        }
+
+        .technique-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        ol {
+            list-style: none;
+            counter-reset: step;
+            padding-left: 0;
+        }
+
+        ol li {
+            counter-increment: step;
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ol li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            color: var(--accent-resonance);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-resonance);
+        }
+
+        .observe-box {
+            background: rgba(255, 140, 0, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .observe-box strong {
+            color: var(--accent-resonance);
+        }
+
+        .integration-box {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework-box {
+            background: var(--bg-tertiary);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .homework-box h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .key-point {
+            background: rgba(255, 140, 0, 0.1);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point strong {
+            color: var(--accent-resonance);
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box strong {
+            color: var(--accent-secondary);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-resonance);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .chapter-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chapter-footer a {
+            color: var(--accent-resonance);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .chapter-footer a:hover {
+            color: var(--accent-secondary);
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 107, 157, 0.15) 100%);
+            border: 2px solid var(--accent-resonance);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .summary-box h2 {
+            border: none;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-header { padding: 6rem 1.5rem 3rem; }
+            .chapter-content { padding: 2rem 1.5rem 4rem; }
+            .chapter-number { font-size: 4rem; }
+            body { font-size: 16px; }
+            .technique-meta { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="54.html">← Глава 54</a>
+        <span style="color: var(--text-muted);">Глава 55</span>
+        <a href="56.html">Глава 56 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Часть VI: Резонанс</div>
+        <div class="chapter-number">55</div>
+        <h1 class="chapter-title">Глухие зоны</h1>
+        <p class="chapter-subtitle">Когда не слышишь отклик — проблема в приёмнике</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>У каждого есть "слепые пятна" — вещи, которых мы не замечаем, хотя они прямо перед глазами.</p>
+            <p style="margin-top: 1rem;">Но есть ещё "глухие зоны" — области жизни, где мы не слышим отклик. Люди говорят — мы не слышим. Мир сигналит — мы не замечаем. Резонанс есть — а мы его не чувствуем.</p>
+            <p style="margin-top: 1rem;">Это не про мир. Это про нас.</p>
+        </div>
+
+        <section class="section">
+            <h2>Что такое глухая зона</h2>
+
+            <p>Представьте радиоприёмник. Он принимает сигналы на определённых частотах. Если частота заблокирована — сигнал не проходит. Даже если передатчик работает отлично.</p>
+
+            <p>Глухая зона — это заблокированная частота в вашем "приёмнике". Область, где вы не способны принять отклик. Мир отвечает — но вы не слышите.</p>
+
+            <div class="key-point">
+                <p><strong>Глухая зона ≠ отсутствие контакта.</strong> Контакт может быть. Мост может работать. Но вы не получаете то, что приходит по мосту. Отправляете — но не принимаете.</p>
+            </div>
+
+            <p>Признаки глухой зоны:</p>
+            <ul>
+                <li>С определёнными людьми/темами/ситуациями контакт "не получается"</li>
+                <li>Вы слышите слова, но не понимаете смысла</li>
+                <li>Люди говорят, что вы "не слышите" — и вы не понимаете, о чём они</li>
+                <li>Определённые эмоции других для вас "невидимы"</li>
+                <li>В каких-то областях жизни — систематические неудачи, которые не объясняются</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Откуда берутся глухие зоны</h2>
+
+            <h3>1. Защита от боли</h3>
+            <p>Самая частая причина. Когда-то резонанс на этой частоте причинял боль. Критика родителей. Отвержение сверстников. Предательство друга. Тело "выучило": эта частота опасна. И заблокировало её.</p>
+            <p>Теперь, когда кто-то "передаёт" на этой частоте, вы просто не слышите. Не потому что не хотите — потому что не можете.</p>
+
+            <h3>2. Неразвитость</h3>
+            <p>Некоторые "частоты" никогда не были включены. Вы выросли в семье, где не говорили о чувствах — и теперь эмоциональный отклик для вас "белый шум". Вы не учились его распознавать.</p>
+
+            <h3>3. Перегрузка</h3>
+            <p>Слишком много сигналов одновременно. Когда приёмник перегружен — он начинает фильтровать. Отсекает "неважное". Проблема в том, что важность определяет не ум — а старые автоматические настройки.</p>
+
+            <h3>4. Идеология</h3>
+            <p>Убеждения, которые блокируют определённые сигналы. "Мужчины не плачут" — и вы не видите слёз у мужчин. "Богатые — плохие" — и вы не слышите ничего хорошего о богатых. Фильтр на уровне смысла.</p>
+        </section>
+
+        <div class="joke-box">
+            <p>Жена мужу:</p>
+            <p>— Ты меня вообще слушаешь?!</p>
+            <p>— Что? А, да-да, конечно.</p>
+            <p>— И что я сказала?</p>
+            <p>— Ты сказала... эээ... что я тебя не слушаю?</p>
+            <p>— Нет! Я сказала, что машина сломалась!</p>
+            <p>— Видишь? Я был прав. Ты говоришь, что я не слушаю.</p>
+        </div>
+
+        <section class="section">
+            <h2>Типичные глухие зоны</h2>
+
+            <h3>К похвале</h3>
+            <p>Классика. Вас хвалят — вы не слышите. Или слышите, но не верите. Или обесцениваете: "Это просто вежливость", "Они не знают, какой я на самом деле".</p>
+            <p>Причина: обычно — детский опыт, где похвала была редкой, условной или непредсказуемой. Мозг выучил: "Похвала ненадёжна. Лучше не слышать."</p>
+
+            <h3>К критике</h3>
+            <p>Обратная сторона. Вас критикуют — вы не слышите. Либо сразу защита ("Они неправы"). Либо отрицание ("Ничего такого не было"). Либо переключение ("А сам-то!").</p>
+            <p>Причина: слишком болезненный опыт критики в прошлом. Единственный способ выжить — не слышать.</p>
+
+            <h3>К определённым эмоциям</h3>
+            <p>Например, к грусти. Кто-то грустит рядом — вы не замечаете. Или раздражаетесь: "Хватит ныть". Или даёте советы вместо сочувствия.</p>
+            <p>Причина: эта эмоция была запрещена в детстве. "Не плачь". "Будь сильным". Вы научились не видеть её — ни в себе, ни в других.</p>
+
+            <h3>К определённым людям</h3>
+            <p>Есть люди, которых вы принципиально "не слышите". Всё, что они говорят, проходит мимо. Или искажается до неузнаваемости.</p>
+            <p>Причина: обычно — перенос. Этот человек напоминает кого-то из прошлого. И вы "слышите" не его — а того, из прошлого.</p>
+
+            <h3>К собственному телу</h3>
+            <p>Тело сигналит — вы не слышите. Устали — не замечаете. Голодны — игнорируете. Болит — "потерплю".</p>
+            <p>Причина: тело было "врагом" или "инструментом", а не партнёром. Его сигналы не имели значения.</p>
+        </section>
+
+        <section class="section">
+            <h2>Как обнаружить глухую зону</h2>
+
+            <p>Проблема в том, что вы не слышите то, что не слышите. По определению. Глухая зона невидима изнутри.</p>
+
+            <p>Но есть косвенные признаки:</p>
+
+            <h3>Повторяющиеся конфликты</h3>
+            <p>Если с разными людьми у вас один и тот же конфликт — дело не в людях. Дело в вас. Что-то в их посыле вы систематически не слышите.</p>
+
+            <h3>Обратная связь от других</h3>
+            <p>"Ты меня не слушаешь". "Ты не понимаешь". "Ты не замечаешь". Если это говорит один человек — может, это его проблема. Если несколько — стоит задуматься.</p>
+
+            <h3>Области систематических неудач</h3>
+            <p>Если в какой-то сфере жизни всё время не получается — возможно, вы не слышите обратную связь от этой сферы. Мир сигналит, что делать иначе — а вы не принимаете сигнал.</p>
+
+            <h3>Эмоциональная реакция "нет, неправда"</h3>
+            <p>Когда в ответ на чью-то обратную связь вы чувствуете не интерес, а раздражение или отрицание — это маркер. Что-то в этом месте заблокировано.</p>
+
+            <div class="warning-box">
+                <p><strong>Парадокс:</strong> Чем глубже глухая зона — тем сильнее сопротивление её обнаружению. "У меня нет глухих зон" — часто означает, что они есть, и большие.</p>
+            </div>
+        </section>
+
+        <div class="joke-box">
+            <p>На приёме у психолога:</p>
+            <p>— Моя жена говорит, что я не умею слушать. Или что-то в этом роде. Я, честно говоря, не очень понял.</p>
+        </div>
+
+        <section class="section">
+            <h2>Что делать с глухими зонами</h2>
+
+            <h3>Шаг 1: Признать, что они есть</h3>
+            <p>Без этого — никак. Пока вы уверены, что слышите всё — вы не можете работать с тем, что не слышите.</p>
+
+            <h3>Шаг 2: Искать обратную связь</h3>
+            <p>Спрашивать близких: "Что, по-твоему, я не слышу/не замечаю?" Это требует смелости. И готовности услышать неприятное.</p>
+
+            <h3>Шаг 3: Замечать собственные реакции</h3>
+            <p>Когда появляется раздражение или отрицание в ответ на чьи-то слова — это сигнал. Возможно, тут глухая зона.</p>
+
+            <h3>Шаг 4: Намеренно "включать" заблокированные частоты</h3>
+            <p>Если вы не слышите похвалу — начните специально её замечать. Записывать. Перечитывать. Не верить — но хотя бы фиксировать.</p>
+
+            <h3>Шаг 5: Исследовать историю</h3>
+            <p>Откуда взялась эта глухота? Когда вы "выключили" эту частоту? Что тогда произошло? Иногда понимание истории помогает снять блок.</p>
+
+            <h3>Шаг 6: Терапия</h3>
+            <p>Глубокие глухие зоны часто связаны с травмой. Их сложно вскрыть самостоятельно. Терапевт — это "переводчик", который помогает услышать то, что вы заблокировали.</p>
+        </section>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 55.1: Поиск глухоты</h3>
+            <div class="technique-meta">
+                <span>Время: 20-30 минут</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: честность, может — близкий человек</span>
+            </div>
+
+            <p>Систематический поиск ваших глухих зон:</p>
+
+            <ol>
+                <li><strong>Вспомните повторяющиеся конфликты.</strong> С кем? По какому поводу? Что вам "не понимают"?</li>
+                <li><strong>Вспомните, что вам говорили несколько человек.</strong> "Ты всегда...", "Ты никогда...". Какие темы повторяются?</li>
+                <li><strong>Вспомните области "невезения".</strong> Где у вас систематически не получается? Что мир может пытаться вам сказать?</li>
+                <li><strong>Спросите близкого человека</strong> (если готовы): "Что, по-твоему, я не слышу / не замечаю / игнорирую?"</li>
+                <li><strong>Запишите все ответы.</strong> Не спорьте, не объясняйте — только фиксируйте.</li>
+                <li><strong>Найдите паттерн.</strong> Что общего? Какая "частота" заблокирована?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Скорее всего появится желание защищаться: "Это неправда", "Они не понимают", "Это их проблема". Заметьте это желание. Оно само по себе — маркер глухой зоны.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 55.2: Журнал похвалы (или критики)</h3>
+            <div class="technique-meta">
+                <span>Время: неделя</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: блокнот или заметки в телефоне</span>
+            </div>
+
+            <p>Практика на "включение" заблокированной частоты:</p>
+
+            <ol>
+                <li><strong>Выберите то, что обычно не слышите:</strong> похвалу, критику, просьбы, благодарности — что-то одно.</li>
+                <li><strong>В течение недели</strong> записывайте каждый случай, когда это происходит. Дословно. Кто сказал, что сказал, когда.</li>
+                <li><strong>Не оценивайте.</strong> Не "они просто вежливы" или "он преувеличивает". Просто факт: это было сказано.</li>
+                <li><strong>В конце каждого дня</strong> перечитывайте записи. Что чувствуете? Что хочется сделать с этим?</li>
+                <li><strong>В конце недели:</strong> Сколько случаев? Это больше или меньше, чем вы ожидали? Что нового вы узнали?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Часто обнаруживается, что "не слышимого" на самом деле много. Вы не глухи — вы фильтруете. Записывание помогает обойти фильтр.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 55.3: Слушать того, кого не слышу</h3>
+            <div class="technique-meta">
+                <span>Время: 15-20 минут разговора</span>
+                <span>Сложность: очень высокая</span>
+                <span>Нужно: человек, которого вы "не слышите"</span>
+            </div>
+
+            <p>Намеренная работа с конкретной глухой зоной:</p>
+
+            <ol>
+                <li><strong>Выберите человека,</strong> с которым контакт "не получается". С кем вы регулярно не понимаете друг друга.</li>
+                <li><strong>Договоритесь о разговоре.</strong> Объясните: "Я хочу научиться лучше тебя слышать. Можешь сказать мне что-то важное, а я буду стараться реально услышать?"</li>
+                <li><strong>Во время разговора:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Не перебивайте</li>
+                        <li>Не готовьте ответ, пока он говорит</li>
+                        <li>Замечайте, когда хочется возразить — и не возражайте</li>
+                        <li>Периодически повторяйте услышанное: "Правильно ли я понял, что...?"</li>
+                    </ul>
+                </li>
+                <li><strong>После разговора:</strong> Что было сложно? Где хотелось "закрыться"? Что нового вы услышали?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Это очень трудная практика. Особенно с людьми, с которыми есть история конфликтов. Но именно там — самый большой потенциал для роста.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 55.4: Археология глухоты</h3>
+            <div class="technique-meta">
+                <span>Время: 20-30 минут</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: время наедине, бумага</span>
+            </div>
+
+            <p>Исследование истории конкретной глухой зоны:</p>
+
+            <ol>
+                <li><strong>Выберите глухую зону,</strong> которую вы обнаружили (например: не слышу похвалу, не слышу критику от мужчин, не замечаю когда кто-то грустит).</li>
+                <li><strong>Вопрос 1:</strong> Когда я впервые "выключил" эту частоту? Что тогда произошло?</li>
+                <li><strong>Вопрос 2:</strong> Какая боль была связана с этой частотой? От чего я защищался?</li>
+                <li><strong>Вопрос 3:</strong> Защита была нужна тогда. Нужна ли она сейчас?</li>
+                <li><strong>Вопрос 4:</strong> Что я теряю, не слыша эту частоту? Какой резонанс мне недоступен?</li>
+                <li><strong>Вопрос 5:</strong> Что будет, если я начну слышать? Что самое страшное может случиться?</li>
+                <li><strong>Запишите ответы.</strong> Перечитайте. Что открылось?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Обычно глухие зоны — это застывшие защиты. Они были полезны когда-то. Но застыли и стали мешать. Понимание истории помогает их отпустить.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="summary-box">
+                <h2>Итоги части VI: Резонанс</h2>
+                <p>Пять глав назад мы начали с простой идеи: внимание — не луч, а мост. Теперь давайте соберём всё вместе.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Глава 51: От луча к мосту</strong><br>
+                Внимание работает в обе стороны. Ты видишь — тебя видят. Ты формируешь объект — объект формирует тебя. Резонанс = двусторонний обмен.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 52: Качество интерфейса</strong><br>
+                Что выносишь на мост — то и резонирует. Муляж даёт поверхностный контакт. Честный интерфейс даёт настоящий. Качество жизни = честность предъявления.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 53: Наслаждение как компас</strong><br>
+                Тело знает раньше ума. Наслаждение — маркер настоящего контакта. Пустота — маркер имитации. Учись читать телесные сигналы.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 54: Резонанс с миром</strong><br>
+                Не только люди. Места, вещи, дела, природа — всё "отвечает". Мир — не декорация, а участник. Качество окружения = качество резонанса.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 55: Глухие зоны</strong><br>
+                Иногда мы не слышим отклик. Не потому что его нет — потому что мы заблокировали приём. Глухие зоны — старые защиты, пережившие свою полезность.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Главная мысль части:</strong><br>
+                Ступень 1 (главы 1-50) — научились направлять внимание (луч).<br>
+                Ступень 2 (главы 51-55) — научились принимать отклик (мост).<br>
+                Теперь готовы к следующему: когда берега моста начинают таять.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="homework-box">
+                <h3>Финальное задание части VI</h3>
+                <p>Соберите всё, чему научились в пяти главах:</p>
+                <ol>
+                    <li><strong>Мост:</strong> Выберите один значимый контакт. Что вы предъявляете? Что получаете в ответ?</li>
+                    <li><strong>Интерфейс:</strong> Насколько честен ваш интерфейс в этом контакте? Что муляж, что настоящее?</li>
+                    <li><strong>Компас:</strong> Что говорит тело после этого контакта? Питает или истощает?</li>
+                    <li><strong>Мир:</strong> Как это место / эта ситуация влияет на качество контакта?</li>
+                    <li><strong>Глухота:</strong> Есть ли что-то, что вы не слышите в этом контакте?</li>
+                </ol>
+                <p style="margin-top: 1rem;">Запишите анализ. Что можно улучшить? Какой первый шаг?</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Часть VII: Поток. Там, где границы между "я" и "другой" начинают таять. Где мост исчезает — потому что исчезают берега. Это следующий уровень. И он требует всего, чему вы научились до сих пор.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="54.html">← Глава 54: Резонанс с миром</a>
+        <a href="56.html">Глава 56: Когда берега исчезают →</a>
+    </footer>
+</body>
+</html>

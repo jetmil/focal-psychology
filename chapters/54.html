@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 54: Резонанс с миром — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-resonance: #ff8c00;
+            --gradient-resonance: linear-gradient(135deg, #ff8c00 0%, #ff6b9d 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .chapter-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(255, 140, 0, 0.15) 0%, transparent 100%);
+        }
+
+        .chapter-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-resonance); }
+
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-resonance); margin-bottom: 1rem; }
+
+        .chapter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            background: var(--gradient-resonance);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title, h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-resonance); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+
+        .story-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 15px 15px 0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        .story-box p { color: var(--text-primary); }
+
+        .joke-box {
+            background: rgba(255, 107, 157, 0.05);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0; }
+
+        .technique-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .technique-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--accent-resonance);
+            margin-bottom: 1rem;
+        }
+
+        .technique-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        ol {
+            list-style: none;
+            counter-reset: step;
+            padding-left: 0;
+        }
+
+        ol li {
+            counter-increment: step;
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ol li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            color: var(--accent-resonance);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-resonance);
+        }
+
+        .observe-box {
+            background: rgba(255, 140, 0, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .observe-box strong {
+            color: var(--accent-resonance);
+        }
+
+        .integration-box {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .homework-box {
+            background: var(--bg-tertiary);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .homework-box h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .key-point {
+            background: rgba(255, 140, 0, 0.1);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point strong {
+            color: var(--accent-resonance);
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box strong {
+            color: var(--accent-secondary);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-resonance);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .chapter-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chapter-footer a {
+            color: var(--accent-resonance);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .chapter-footer a:hover {
+            color: var(--accent-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-header { padding: 6rem 1.5rem 3rem; }
+            .chapter-content { padding: 2rem 1.5rem 4rem; }
+            .chapter-number { font-size: 4rem; }
+            body { font-size: 16px; }
+            .technique-meta { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="53.html">← Глава 53</a>
+        <span style="color: var(--text-muted);">Глава 54</span>
+        <a href="55.html">Глава 55 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Часть VI: Резонанс</div>
+        <div class="chapter-number">54</div>
+        <h1 class="chapter-title">Резонанс с миром</h1>
+        <p class="chapter-subtitle">Мир смотрит на тебя в ответ</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>Есть места, куда хочется возвращаться. Не потому что там красиво или удобно — а потому что там "хорошо". Заходишь — и что-то отпускает. Как будто место тебя узнаёт.</p>
+            <p style="margin-top: 1rem;">И есть места, откуда хочется уйти. Объективно — нормально. Но что-то давит. Как будто место тебя выталкивает.</p>
+            <p style="margin-top: 1rem;">Это не мистика. Это резонанс. Только не с человеком — с пространством.</p>
+        </div>
+
+        <section class="section">
+            <h2>Не только люди</h2>
+
+            <p>В предыдущих главах мы говорили о резонансе между людьми. Мост, по которому идёт обмен. Честный интерфейс. Телесный отклик.</p>
+
+            <p>Но люди — не единственные участники контакта. Мир тоже "отвечает".</p>
+
+            <ul>
+                <li><strong>Места</strong> — комнаты, улицы, города, природные ландшафты</li>
+                <li><strong>Предметы</strong> — вещи, которыми вы пользуетесь, которые вас окружают</li>
+                <li><strong>Занятия</strong> — работа, хобби, практики</li>
+                <li><strong>Тексты</strong> — книги, статьи, письма</li>
+                <li><strong>Музыка</strong> — звуки, ритмы, мелодии</li>
+                <li><strong>Природа</strong> — деревья, вода, камни, небо</li>
+            </ul>
+
+            <p>Всё это — потенциальные партнёры по резонансу.</p>
+
+            <div class="key-point">
+                <p><strong>Мир — не декорация.</strong> Не пассивный фон, на котором разворачивается ваша жизнь. Мир — участник. Он "смотрит" в ответ. И качество вашей жизни зависит от того, замечаете ли вы этот взгляд.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Как это работает</h2>
+
+            <p>Конечно, камень не имеет глаз. Дерево не думает. Комната не чувствует. Но что-то происходит, когда вы направляете на них внимание.</p>
+
+            <h3>Версия материалистическая</h3>
+            <p>Мозг постоянно обрабатывает информацию из окружающей среды. Большая часть — бессознательно. Свет, температура, звуки, запахи, текстуры — всё это влияет на состояние. Когда вы "чувствуете" что место хорошее или плохое — это интегральная оценка множества микросигналов.</p>
+
+            <h3>Версия феноменологическая</h3>
+            <p>Сознание не заперто внутри черепа. Оно всегда направлено на что-то. Нет "чистого сознания" без объекта. Когда вы смотрите на дерево — возникает "сознание-дерева". Это не дерево само по себе и не вы сами по себе. Это контакт. Третья сущность.</p>
+
+            <h3>Версия поэтическая</h3>
+            <p>Мир живой. Не в биологическом смысле — в смысле присутствия. Когда вы действительно смотрите на закат — закат смотрит на вас. Когда вы по-настоящему слушаете музыку — музыка слушает вас. Это не метафора. Это описание опыта.</p>
+
+            <p>Какая версия правильная? Все три. Или ни одна. Важно не объяснение — важен опыт. А опыт такой: мир отвечает.</p>
+        </section>
+
+        <div class="joke-box">
+            <p>— Почему ты разговариваешь со своим кактусом?</p>
+            <p>— А ты думаешь, он не слушает?</p>
+            <p>— Нет!</p>
+            <p>— Вот поэтому он у тебя и засох.</p>
+        </div>
+
+        <section class="section">
+            <h2>Места</h2>
+
+            <p>У каждого места — своя "атмосфера". Мы используем это слово небрежно, но оно точное. Атмосфера — это то, чем вы дышите, находясь там. То, что входит в вас вместе с воздухом.</p>
+
+            <h3>Почему одни места питают, другие истощают</h3>
+            <ul>
+                <li><strong>История места.</strong> Что там происходило. Радость, горе, творчество, насилие — всё оставляет след. Не мистический — практический. Люди, которые были там до вас, формировали пространство.</li>
+                <li><strong>Физические параметры.</strong> Свет, пропорции, материалы, звуки. Низкие потолки давят. Естественный свет освобождает. Острые углы напрягают. Округлые формы успокаивают.</li>
+                <li><strong>Резонанс с вами.</strong> Одно и то же место для разных людей — разное. Кому-то хорошо в лесу, кому-то — на площади. Это не объективное качество места — это качество контакта.</li>
+            </ul>
+
+            <div class="key-point">
+                <p><strong>Практический вывод:</strong> Выбор места — это выбор партнёра по резонансу. Где вы живёте, где работаете, куда ходите — всё это влияет на вас. Не декорации — участники вашей жизни.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Предметы</h2>
+
+            <p>Вещи тоже "смотрят". Любимая чашка, старый свитер, рабочий инструмент — у всего есть "лицо", обращённое к вам.</p>
+
+            <p>Это объясняет феномен, который сложно понять рационально: почему одни вещи становятся "своими", а другие — нет. Почему новый телефон не греет, а старая записная книжка — греет. Почему выбросить хлам так сложно.</p>
+
+            <p>Вещи аккумулируют контакт. Каждое прикосновение, каждое использование — оставляет след. Вещь, с которой у вас история, — уже не просто вещь. Это часть вашей сети.</p>
+
+            <div class="warning-box">
+                <p><strong>Обратная сторона:</strong> Захламлённость — это перегрузка каналов резонанса. Слишком много вещей — слишком много "взглядов". Каждый предмет требует частичку внимания. Даже если вы не смотрите на него — он смотрит на вас.</p>
+            </div>
+
+            <p>Отсюда освобождающий эффект расхламления. Меньше вещей — меньше шума. Те, что остались, — звучат чётче.</p>
+        </section>
+
+        <div class="joke-box">
+            <p>Минималист показывает гостю свою квартиру:</p>
+            <p>— Вот моя мебель: стул и стол.</p>
+            <p>— А где кровать?</p>
+            <p>— Это и есть кровать. Ночью я переворачиваю стол.</p>
+            <p>— А душ?</p>
+            <p>— Выхожу под дождь.</p>
+            <p>— Это же неудобно!</p>
+            <p>— Зато каждый предмет — мой лучший друг.</p>
+        </div>
+
+        <section class="section">
+            <h2>Занятия</h2>
+
+            <p>Дело, которым вы занимаетесь, — тоже партнёр по резонансу.</p>
+
+            <p>Есть занятия, которые вас питают. После них — больше энергии, чем до. Это может быть что угодно: рисование, программирование, готовка, бег, игра на гитаре.</p>
+
+            <p>Есть занятия, которые истощают. После них — меньше энергии. Хочется "отдохнуть от отдыха".</p>
+
+            <p>Разница — не в сложности. Сложное дело может питать. Лёгкое — истощать. Разница — в качестве контакта.</p>
+
+            <blockquote>
+                Когда вы по-настоящему делаете дело — дело делает вас. Это взаимный процесс. Вы формируете текст — текст формирует вас. Вы строите дом — дом строит вас. Вы играете музыку — музыка играет вами.
+            </blockquote>
+
+            <p>Если этого обмена нет — дело становится рутиной. Вы тратите энергию, не получая ничего взамен. Односторонний луч без отклика.</p>
+        </section>
+
+        <section class="section">
+            <h2>Природа</h2>
+
+            <p>Особый случай. Природа "отвечает" иначе, чем созданные человеком вещи и пространства.</p>
+
+            <p>В природе нет человеческой истории (в том смысле, в каком она есть в городе). Нет проекта (в том смысле, в каком он есть в здании). Нет функции (в том смысле, в каком она есть у инструмента).</p>
+
+            <p>Природа просто есть. И это "просто есть" — очень мощный резонанс.</p>
+
+            <div class="key-point">
+                <p><strong>Почему природа восстанавливает:</strong> Она не требует интерфейса. Не нужно "быть кем-то". Можно просто быть. Дерево не ждёт от вас правильных слов. Река не оценивает вашу продуктивность. Небо не спрашивает, чего вы достигли.</p>
+            </div>
+
+            <p>В городе вы постоянно предъявляете интерфейс — даже незнакомцам. В природе можно снять маску. Никто не смотрит (в социальном смысле). Всё смотрит (в смысле резонанса).</p>
+        </section>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 54.1: Диалог с местом</h3>
+            <div class="technique-meta">
+                <span>Время: 15-20 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: любое место</span>
+            </div>
+
+            <p>Осознанный контакт с пространством:</p>
+
+            <ol>
+                <li><strong>Выберите место.</strong> Комната, парк, улица, кафе — любое. Лучше — не слишком знакомое.</li>
+                <li><strong>Придите туда</strong> с намерением "познакомиться". Не использовать место — встретиться с ним.</li>
+                <li><strong>Первые 5 минут:</strong> Просто будьте. Смотрите. Слушайте. Ощущайте кожей. Не анализируйте — воспринимайте.</li>
+                <li><strong>Вопрос 1:</strong> "Что это место 'говорит' мне? Какое сообщение я получаю?"</li>
+                <li><strong>Вопрос 2:</strong> "Что я 'говорю' этому месту? Какую часть себя предъявляю?"</li>
+                <li><strong>Вопрос 3:</strong> "Что между нами? Какой резонанс?"</li>
+                <li><strong>Телесная проверка:</strong> Что чувствую в теле? Расширение или сжатие? Это место питает или истощает?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Ответы приходят не словами, а ощущениями. "Место говорит" — через атмосферу, через то, как вы себя чувствуете в нём. Не придумывайте — замечайте.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 54.2: Ревизия окружения</h3>
+            <div class="technique-meta">
+                <span>Время: 30-40 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: бумага, ваше жильё/офис</span>
+            </div>
+
+            <p>Анализ резонанса с вашим ежедневным окружением:</p>
+
+            <ol>
+                <li><strong>Составьте список</strong> мест, где вы проводите больше всего времени (комнаты, рабочее место, транспорт, кафе...).</li>
+                <li><strong>Для каждого места</strong> оцените по шкале 1-10: насколько это место вас питает?</li>
+                <li><strong>Для мест с низкой оценкой:</strong> Что именно не работает? Что можно изменить?</li>
+                <li><strong>Для мест с высокой оценкой:</strong> Что именно работает? Можно ли это усилить?</li>
+                <li><strong>Составьте список вещей</strong> в вашем основном пространстве (комната, рабочий стол).</li>
+                <li><strong>Для каждой вещи:</strong> Это мой "друг" или "случайный прохожий"? Это питает или захламляет?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Часто обнаруживается, что большую часть времени мы проводим в местах с низким резонансом. И окружены вещами-"случайными прохожими". Это корректируется.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 54.3: Контакт с деревом</h3>
+            <div class="technique-meta">
+                <span>Время: 10 минут</span>
+                <span>Сложность: низкая</span>
+                <span>Нужно: дерево (живое)</span>
+            </div>
+
+            <p>Простая практика на развитие резонанса с природой:</p>
+
+            <ol>
+                <li><strong>Найдите дерево.</strong> Любое. В парке, во дворе, за окном.</li>
+                <li><strong>Подойдите близко.</strong> Если возможно — прикоснитесь к стволу.</li>
+                <li><strong>Смотрите.</strong> Не думайте "это дерево, оно состоит из клеток, это фотосинтез". Просто смотрите. На кору. На листья. На форму.</li>
+                <li><strong>Дышите.</strong> Представьте, что ваше дыхание и "дыхание" дерева связаны. Вы выдыхаете — оно вдыхает. Оно выдыхает — вы вдыхаете.</li>
+                <li><strong>Вопрос:</strong> "Что дерево 'передаёт' мне прямо сейчас?" Не думайте — почувствуйте.</li>
+                <li><strong>Поблагодарите</strong> (внутренне). Это не ритуал — это завершение контакта.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Деревья — отличные "учителя резонанса". Они не судят, не требуют, не торопят. С ними легко практиковать открытое внимание.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 54.4: Резонанс с делом</h3>
+            <div class="technique-meta">
+                <span>Время: в процессе любого дела</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: осознанность</span>
+            </div>
+
+            <p>Превращение любого занятия в двусторонний контакт:</p>
+
+            <ol>
+                <li><strong>Выберите дело,</strong> которое вы делаете регулярно (работа, хобби, бытовые задачи).</li>
+                <li><strong>Перед началом:</strong> Пауза. Вдох. Намерение: "Я буду делать это как контакт, не как рутину".</li>
+                <li><strong>В процессе</strong> периодически спрашивайте себя:
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Что я "даю" этому делу?</li>
+                        <li>Что дело "даёт" мне?</li>
+                        <li>Есть ли обмен или это односторонний процесс?</li>
+                    </ul>
+                </li>
+                <li><strong>Если обмена нет:</strong> Что блокирует? Может, вы не полностью присутствуете? Может, делаете механически?</li>
+                <li><strong>После:</strong> Оцените — больше или меньше энергии? Питает или истощает?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Даже рутинные дела могут стать резонансными, если делать их с присутствием. Мытьё посуды, ходьба, уборка — всё может быть контактом.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2>Почему это важно</h2>
+
+            <p>Резонанс с миром — это не бонус для особо чувствительных. Это базовая потребность.</p>
+
+            <p>Человек, который живёт в пространстве без резонанса, окружён вещами без связи, делает дела без обмена — истощается. Даже если "объективно" всё хорошо. Квартира удобная, работа престижная, вещи качественные. Но нет резонанса — нет питания.</p>
+
+            <p>И наоборот. Человек в простом пространстве, с минимумом вещей, с простым делом — может быть наполненным. Потому что каждый контакт — настоящий.</p>
+
+            <blockquote>
+                Качество жизни — не количество удобств. Это качество резонансов.
+            </blockquote>
+        </section>
+
+        <section class="section">
+            <div class="integration-box">
+                <h3>Связь с предыдущими главами</h3>
+                <p><strong>Главы 51-53:</strong> Резонанс с людьми. Мост. Интерфейс. Телесный компас.</p>
+                <p style="margin-top: 1rem;"><strong>Эта глава:</strong> То же самое — но с миром. Места, вещи, дела, природа — всё это участники контакта. Всё это "смотрит" в ответ.</p>
+                <p style="margin-top: 1rem;"><strong>Общий принцип:</strong> Внимание — не луч в пустоту. Это мост. И мост можно построить не только к людям.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="homework-box">
+                <h3>Домашнее задание</h3>
+                <p>На этой неделе проведите "резонансный аудит" своего окружения:</p>
+                <ol>
+                    <li><strong>Места:</strong> Оцените три места, где проводите больше всего времени. Для каждого: питает или истощает? Что можно изменить?</li>
+                    <li><strong>Вещи:</strong> Выберите 10 предметов на рабочем столе или в комнате. Для каждого: "друг" или "шум"? Можно ли убрать "шум"?</li>
+                    <li><strong>Дела:</strong> Выберите три регулярных занятия. Для каждого: есть ли обмен? Если нет — можно ли это изменить?</li>
+                    <li><strong>Природа:</strong> Найдите 15 минут для контакта с природой (парк, дерево, небо). Просто побудьте. Что меняется после?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Следующая глава — последняя в части "Резонанс". Мы поговорим о "глухих зонах" — местах в вашей жизни, где резонанс не работает. Где вы не слышите отклик. И что с этим делать.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="53.html">← Глава 53: Наслаждение как компас</a>
+        <a href="55.html">Глава 55: Глухие зоны →</a>
+    </footer>
+</body>
+</html>

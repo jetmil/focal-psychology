@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 67: Некуда идти — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-door: #e8b923;
+            --gradient-door: linear-gradient(135deg, #ffd700 0%, #ff6b9d 50%, #e8b923 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
+        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%); }
+        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-door); }
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-door); margin-bottom: 1rem; }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-door); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-door); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
+        .story-box p { color: var(--text-primary); }
+        .joke-box { background: rgba(255, 107, 157, 0.05); border: 1px solid rgba(255, 107, 157, 0.2); border-radius: 15px; padding: 1.5rem; margin: 2rem 0; }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .joke-box p:last-child { margin-bottom: 0; }
+        ul { list-style: none; padding-left: 0; }
+        ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent-door); }
+        .key-point { background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .key-point strong { color: var(--accent-door); }
+        blockquote { border-left: 3px solid var(--accent-door); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+        .integration-box { background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
+        .chapter-footer a { color: var(--accent-door); text-decoration: none; transition: all 0.3s; }
+        .chapter-footer a:hover { color: var(--accent-secondary); }
+        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="66.html">← Глава 66</a>
+        <span style="color: var(--text-muted);">Глава 67</span>
+        <a href="68.html">Глава 68 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Эпилог: Дверь</div>
+        <div class="chapter-number">67</div>
+        <h1 class="chapter-title">Некуда идти</h1>
+        <p class="chapter-subtitle">За дверью — отсутствие того, кто мог бы войти</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>Вы дошли до двери. Протянули руку к ручке. И обнаружили: рука — часть двери. Вы — часть двери. Внутри и снаружи — одно.</p>
+            <p style="margin-top: 1rem;">Некуда входить. Некому входить.</p>
+            <p style="margin-top: 1rem;">И это — не разочарование. Это облегчение.</p>
+        </div>
+
+        <section class="section">
+            <h2>Что за дверью?</h2>
+
+            <p>Классический вопрос духовного искателя: "Что там, за просветлением? Что я обрету?"</p>
+
+            <p>Ответы, которые дают:</p>
+            <ul>
+                <li>"Блаженство" — но это всё ещё переживание кого-то</li>
+                <li>"Мудрость" — но это всё ещё качество кого-то</li>
+                <li>"Свобода" — но от чего? От себя?</li>
+                <li>"Единство с Богом" — но если единство, то где "ты" и где "Бог"?</li>
+            </ul>
+
+            <p>Все эти ответы предполагают: есть "ты", который получит что-то.</p>
+
+            <p>Но за дверью нет ничего, что можно получить. Потому что за дверью нет получателя.</p>
+
+            <div class="key-point">
+                <p><strong>Парадокс:</strong> Просветление — это не приобретение чего-то нового. Это исчезновение того, кто хотел приобрести.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Исчезновение искателя</h2>
+
+            <p>Вся книга была путешествием. Вы — путешественник. Вы шли к чему-то.</p>
+
+            <p>Но последний шаг — не прибытие. Последний шаг — исчезновение того, кто шёл.</p>
+
+            <p>Не физическое. Не буквальное. Исчезновение иллюзии отдельности.</p>
+
+            <blockquote>Пока есть ищущий — есть что искать. Когда ищущий растворяется — искать нечего. Не потому что нашёл. А потому что исчез тот, кому нужно было искать.</blockquote>
+
+            <p>Это не смерть. Это — понимание, что "отдельный я" был конструкцией с самого начала.</p>
+        </section>
+
+        <section class="section">
+            <h2>Внимание без внимающего</h2>
+
+            <p>Вся книга говорила о внимании. Фокальная психология. Управление лучом.</p>
+
+            <p>Но кто управляет?</p>
+
+            <p>Вначале казалось: есть "я", и "я" управляю вниманием.</p>
+
+            <p>Потом: внимание и наблюдатель — одно.</p>
+
+            <p>Теперь: <strong>есть только внимание</strong>. Наблюдатель — тоже часть наблюдаемого. "Я" — тоже объект в поле осознавания.</p>
+
+            <p>Внимание само смотрит. Без того, кто смотрит.</p>
+
+            <div class="key-point">
+                <p><strong>Это звучит абстрактно.</strong> Но это можно пережить. В глубокой медитации. В потоке. В моменты, когда вы "забывали себя" — и было только переживание, без переживающего.</p>
+            </div>
+        </section>
+
+        <div class="joke-box">
+            <p>— Что ты нашёл за дверью?</p>
+            <p>— Ничего.</p>
+            <p>— Совсем ничего?</p>
+            <p>— Даже "ничего" — слишком много. Там нет того, кто мог бы найти "ничего".</p>
+            <p>— Это пугает.</p>
+            <p>— Пугать тоже некого.</p>
+        </div>
+
+        <section class="section">
+            <h2>Наслаждение без наслаждающегося</h2>
+
+            <p>В главе о резонансе мы говорили: наслаждение — маркер подлинного контакта.</p>
+
+            <p>Теперь: наслаждение может быть без того, кто наслаждается.</p>
+
+            <p>Не "мне хорошо". А просто — хорошо. Без центра. Без получателя.</p>
+
+            <p>Это не отстранённость. Наоборот — максимальная близость. Настолько близко, что нет расстояния. Нет того, кто "переживает хорошо". Есть только хорошо.</p>
+
+            <blockquote>Когда нет того, кто получает удовольствие — удовольствие становится бесконечным. Потому что нет границ получателя.</blockquote>
+        </section>
+
+        <section class="section">
+            <h2>Почему это не страшно</h2>
+
+            <p>Звучит пугающе: "исчезновение я". Кажется — смерть.</p>
+
+            <p>Но подумайте:</p>
+
+            <ul>
+                <li>Вы "исчезаете" каждую ночь в глубоком сне — и не страшно</li>
+                <li>Вы "исчезаете" в потоке деятельности — и это называется счастьем</li>
+                <li>Вы "исчезаете" в моменты любви — и это лучшее что есть</li>
+            </ul>
+
+            <p>"Я" — это напряжение. Постоянная работа по поддержанию отдельности.</p>
+
+            <p>Когда напряжение отпускается — не смерть. Облегчение.</p>
+
+            <div class="key-point">
+                <p><strong>Не бойтесь:</strong> То, что исчезает — это иллюзия. То, что остаётся — реальнее чем когда-либо. Просто это нельзя назвать "я".</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Практическое значение</h2>
+
+            <p>Это не значит, что вы перестаёте функционировать.</p>
+
+            <p>Тело продолжает работать. Мысли приходят и уходят. Решения принимаются. Жизнь продолжается.</p>
+
+            <p>Меняется только одно: больше нет страдания от отдельности.</p>
+
+            <ul>
+                <li>Страх смерти уменьшается — потому что "кто" умрёт?</li>
+                <li>Тревога о будущем уменьшается — потому что "кто" тревожится?</li>
+                <li>Обида на прошлое уменьшается — потому что "кого" обидели?</li>
+            </ul>
+
+            <p>Это не отстранённость. Это — присутствие без отягощения собой.</p>
+        </section>
+
+        <section class="section">
+            <div class="integration-box">
+                <h3>Интеграция</h3>
+                <p>Некуда идти — не тупик. Это открытие.</p>
+                <p style="margin-top: 1rem;">Всё путешествие было не к чему-то, а <strong>от</strong> иллюзии отдельности. И когда иллюзия растворяется — оказывается, вы всегда были "там". Не было куда идти, потому что вы никогда не уходили.</p>
+                <p style="margin-top: 1rem;">Следующая глава — о возвращении. Потому что, как ни парадоксально, после "некуда идти" — нужно вернуться.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Глава 68: Возвращение. Просветление — не уход из мира. Это возвращение в мир с новым качеством. Играть в игру, зная что это игра.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="66.html">← Глава 66: Лестница, которой не было</a>
+        <a href="68.html">Глава 68: Возвращение →</a>
+    </footer>
+</body>
+</html>

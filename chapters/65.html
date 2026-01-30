@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 65: Другие в сети — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-network: #9d4edd;
+            --gradient-network: linear-gradient(135deg, #9d4edd 0%, #c77dff 50%, #7c5cff 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
+        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(157, 78, 221, 0.15) 0%, transparent 100%); }
+        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-network); }
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-network); margin-bottom: 1rem; }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-network); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-network); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
+        .story-box p { color: var(--text-primary); }
+        .joke-box { background: rgba(255, 107, 157, 0.05); border: 1px solid rgba(255, 107, 157, 0.2); border-radius: 15px; padding: 1.5rem; margin: 2rem 0; }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .joke-box p:last-child { margin-bottom: 0; }
+        .technique-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin: 2rem 0; }
+        .technique-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--accent-network); margin-bottom: 1rem; }
+        .technique-meta { display: flex; gap: 2rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; }
+        ol { list-style: none; counter-reset: step; padding-left: 0; }
+        ol li { counter-increment: step; padding-left: 2rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ol li::before { content: counter(step); position: absolute; left: 0; color: var(--accent-network); font-weight: 600; }
+        ul { list-style: none; padding-left: 0; }
+        ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent-network); }
+        .observe-box { background: rgba(157, 78, 221, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1rem; font-size: 0.95rem; }
+        .observe-box strong { color: var(--accent-network); }
+        .integration-box { background: linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(124, 92, 255, 0.1) 100%); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .homework-box { background: var(--bg-tertiary); border: 2px dashed var(--accent-gold); border-radius: 15px; padding: 2rem; }
+        .homework-box h3 { color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.3rem; }
+        .key-point { background: rgba(157, 78, 221, 0.1); border: 1px solid rgba(157, 78, 221, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .key-point strong { color: var(--accent-network); }
+        .warning-box { background: rgba(255, 107, 157, 0.1); border: 1px solid rgba(255, 107, 157, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .warning-box strong { color: var(--accent-secondary); }
+        blockquote { border-left: 3px solid var(--accent-network); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+        .summary-box { background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(124, 92, 255, 0.15) 100%); border: 2px solid var(--accent-network); border-radius: 20px; padding: 2.5rem; margin: 3rem 0; }
+        .summary-box h2 { border: none; text-align: center; margin-bottom: 1.5rem; }
+        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
+        .chapter-footer a { color: var(--accent-network); text-decoration: none; transition: all 0.3s; }
+        .chapter-footer a:hover { color: var(--accent-secondary); }
+        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } .technique-meta { flex-direction: column; gap: 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="64.html">← Глава 64</a>
+        <span style="color: var(--text-muted);">Глава 65</span>
+        <a href="66.html">Глава 66 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Часть VIII: Сеть</div>
+        <div class="chapter-number">65</div>
+        <h1 class="chapter-title">Другие в сети</h1>
+        <p class="chapter-subtitle">Люди как узлы, версии во времени, контакт с тем, кого больше нет</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>Мы говорили о вас как о сети: вы-тогда, вы-сейчас, вы-потом — всё связано.</p>
+            <p style="margin-top: 1rem;">Но другие люди — тоже сети. У каждого своё прошлое, настоящее, будущее. Свои узлы, свои нити.</p>
+            <p style="margin-top: 1rem;">И ваши сети переплетаются. Вы связаны не с "человеком" — вы связаны со всеми его версиями во времени. Мать-тогда. Друг-потом. Партнёр-сейчас. Всё это — разные узлы.</p>
+        </div>
+
+        <section class="section">
+            <h2>Другой как сеть</h2>
+
+            <p>Мы привыкли думать о людях как о точках. "Моя мать". "Мой друг". Одна сущность.</p>
+
+            <p>Но человек — это не точка. Это траектория. Облако версий во времени.</p>
+
+            <ul>
+                <li><strong>Мать-когда-ей-было-25</strong> — молодая, растерянная, ещё не знающая</li>
+                <li><strong>Мать-когда-тебе-было-5</strong> — уставшая, пытающаяся, делающая как может</li>
+                <li><strong>Мать-сейчас</strong> — изменившаяся, другая, несущая весь свой путь</li>
+                <li><strong>Мать-потом</strong> — которой, возможно, уже не будет, или будет другой</li>
+            </ul>
+
+            <p>Когда вы говорите "я обижен на мать" — на какую именно? С какой версией конфликт?</p>
+
+            <div class="key-point">
+                <p><strong>Ключевое понимание:</strong> Ваши отношения с человеком — это сеть связей с разными его версиями. Конфликт часто с одной версией, а живёте вы с другой.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Зачем это различать</h2>
+
+            <h3>1. Для прощения</h3>
+            <p>Простить "человека целиком" — часто невозможно. Слишком абстрактно.</p>
+            <p>Простить конкретную версию — мать-в-тот-момент, которая сделала то, что сделала — реальнее.</p>
+            <p>Она была другой тогда. С другими ресурсами. В других обстоятельствах. Это не оправдание — это контекст.</p>
+
+            <h3>2. Для понимания</h3>
+            <p>"Почему он так поступил?" — вопрос к версии-тогда, не к версии-сейчас.</p>
+            <p>Версия-сейчас может не знать ответа. Она тоже изменилась.</p>
+
+            <h3>3. Для горевания</h3>
+            <p>Когда человек меняется — мы теряем прежнюю версию. Это потеря. Её можно оплакать.</p>
+            <p>"Тот друг, который был раньше" — его уже нет. Есть другой человек. Это разные узлы.</p>
+
+            <h3>4. Для контакта с умершими</h3>
+            <p>Когда человек ушёл — его версии всё ещё существуют. В вашей памяти. В сети.</p>
+            <p>Вы можете установить контакт с версией-тогда. Она живёт в вашем узле.</p>
+        </section>
+
+        <div class="joke-box">
+            <p>— Ты простил отца?</p>
+            <p>— Которого?</p>
+            <p>— В смысле?</p>
+            <p>— Того, которому было 30 и он не справлялся? Да. Того, которому 50 и он всё ещё делает вид, что ничего не было? Ещё нет.</p>
+        </div>
+
+        <section class="section">
+            <h2>Контакт с версией другого</h2>
+
+            <p>Вы можете устанавливать контакт не только с человеком-сейчас, но и с его версиями во времени.</p>
+
+            <h3>С прошлой версией:</h3>
+            <ul>
+                <li>Представить его-тогда (возраст, обстоятельства)</li>
+                <li>Установить внутренний контакт</li>
+                <li>Спросить, сказать, услышать</li>
+                <li>Это работает даже с умершими — версия живёт в вашей памяти</li>
+            </ul>
+
+            <h3>С будущей версией:</h3>
+            <ul>
+                <li>Представить его-потом (какой он будет? что с ним случится?)</li>
+                <li>Это полезно для принятия решений: "Как мой ребёнок-взрослый посмотрит на это?"</li>
+                <li>Или для подготовки: "Кем станет этот партнёр через 10 лет? Хочу ли я туда?"</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Важно:</strong> Это не "реальный" контакт с человеком. Это контакт с вашим образом его версии. Но именно этот образ влияет на ваши отношения. Работа с ним — работа с реальностью отношений.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Отношения как сеть сетей</h2>
+
+            <p>Ваши отношения с человеком — это пересечение двух сетей.</p>
+
+            <ul>
+                <li><strong>Вы-тогда + Он-тогда</strong> — как вы познакомились, что было в начале</li>
+                <li><strong>Вы-сейчас + Он-сейчас</strong> — текущее состояние</li>
+                <li><strong>Вы-потом + Он-потом</strong> — куда это идёт</li>
+            </ul>
+
+            <p>Проблемы в отношениях часто возникают из-за путаницы узлов:</p>
+            <ul>
+                <li>Вы обижены на него-тогда, а обвиняете его-сейчас</li>
+                <li>Вы любите его-тогда, а живёте с ним-сейчас (который изменился)</li>
+                <li>Вы боитесь его-потом, а реагируете на него-сейчас</li>
+            </ul>
+
+            <p>Ясность о том, с какой версией какая связь — освобождает.</p>
+
+            <blockquote>Большинство конфликтов — это конфликты с призраками. С версиями, которых уже нет. Или ещё нет. Или которые мы придумали.</blockquote>
+        </section>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 65.1: Разделение версий</h3>
+            <div class="technique-meta">
+                <span>Время: 20 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: бумага, значимый человек для анализа</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите значимого человека</strong> — с кем сложные или важные отношения.</li>
+                <li><strong>Выпишите его версии:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Он-когда-вы-познакомились</li>
+                        <li>Он-в-ключевой-момент (конфликт, важное событие)</li>
+                        <li>Он-сейчас</li>
+                        <li>Он-потом (как вы его представляете)</li>
+                    </ul>
+                </li>
+                <li><strong>Для каждой версии запишите:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Какой он был тогда? Что делал?</li>
+                        <li>Что вы чувствуете к этой версии?</li>
+                        <li>Что незавершено с этой версией?</li>
+                    </ul>
+                </li>
+                <li><strong>Определите:</strong> С какой версией основной конфликт? С какой — основная любовь? Совпадают ли?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Часто обнаруживается, что конфликт — с одной версией, а живёте вы с другой. Это ясность.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 65.2: Контакт с версией родителя</h3>
+            <div class="technique-meta">
+                <span>Время: 20-25 минут</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: тихое место, готовность к эмоциям</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите родителя</strong> (или значимого взрослого из детства).</li>
+                <li><strong>Выберите конкретный момент</strong> — когда произошло что-то важное между вами. Или когда ему было столько лет, сколько вам сейчас.</li>
+                <li><strong>Закройте глаза.</strong> Представьте его — тогда. Молодого. В тех обстоятельствах.</li>
+                <li><strong>Посмотрите на него</strong> не как ребёнок на родителя, а как взрослый на взрослого.</li>
+                <li><strong>Спросите:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>"Как тебе тогда было?"</li>
+                        <li>"Что ты знал? Чего не знал?"</li>
+                        <li>"Почему ты сделал то, что сделал?"</li>
+                    </ul>
+                </li>
+                <li><strong>Слушайте</strong> — ответы могут прийти образами, ощущениями, пониманием.</li>
+                <li><strong>Скажите то, что хотите сказать</strong> — той версии.</li>
+                <li><strong>Вернитесь.</strong> Запишите открытия.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Увидеть родителя как человека-в-обстоятельствах — часто первый шаг к исцелению. Это не оправдание — это понимание.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 65.3: Диалог с умершим</h3>
+            <div class="technique-meta">
+                <span>Время: 20-30 минут</span>
+                <span>Сложность: высокая</span>
+                <span>Нужно: безопасное пространство, готовность к горю</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите человека,</strong> которого больше нет, но с кем осталось незавершённое.</li>
+                <li><strong>Выберите его версию</strong> — когда он был живым. Конкретный возраст, момент.</li>
+                <li><strong>Закройте глаза.</strong> Представьте встречу — в месте, где вам обоим хорошо.</li>
+                <li><strong>Посмотрите на него.</strong> Каким вы его помните? Что видите?</li>
+                <li><strong>Скажите то, что не сказали.</strong> Всё. Не редактируя.</li>
+                <li><strong>Спросите то, что не спросили.</strong> И слушайте — даже если ответы кажутся выдуманными.</li>
+                <li><strong>Позвольте эмоциям.</strong> Горе, любовь, гнев — всему место.</li>
+                <li><strong>Попрощайтесь</strong> — когда почувствуете, что пора. Или не прощайтесь, если хотите оставить связь открытой.</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> "Ответы" умершего — это работа вашей психики. Но это не значит, что они бесполезны. Ваша мудрость говорит голосом того, кого вы любили.</p>
+            </div>
+        </div>
+
+        <div class="technique-card">
+            <h3 class="technique-title">Практика 65.4: Письмо от будущей версии отношений</h3>
+            <div class="technique-meta">
+                <span>Время: 15-20 минут</span>
+                <span>Сложность: средняя</span>
+                <span>Нужно: бумага, текущие важные отношения</span>
+            </div>
+
+            <ol>
+                <li><strong>Выберите отношения,</strong> о будущем которых думаете.</li>
+                <li><strong>Представьте:</strong> прошло 10 лет. Вы-потом пишет вам-сейчас о этих отношениях.</li>
+                <li><strong>Напишите письмо</strong> от лица вас-через-10-лет:
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Как сложились эти отношения?</li>
+                        <li>Что важно было знать тогда?</li>
+                        <li>О чём сожалеете? Чему рады?</li>
+                        <li>Что посоветуете себе-сейчас?</li>
+                    </ul>
+                </li>
+                <li><strong>Пишите от первого лица,</strong> не редактируя. Дайте руке писать.</li>
+                <li><strong>Прочитайте.</strong> Что открылось?</li>
+            </ol>
+
+            <div class="observe-box">
+                <p><strong>На что обратить внимание:</strong> Часто "письмо из будущего" содержит знание, которое уже есть, но которое вы не хотите признавать.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="summary-box">
+                <h2>Итоги части VIII: Сеть</h2>
+
+                <p><strong>Глава 61: Время как сеть</strong><br>
+                Прошлое и будущее не где-то — они здесь, как узлы, связанные с вами-сейчас.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 62: Травма как разрыв</strong><br>
+                Травма — разорванная связь с собой-тогда. Исцеление — восстановление контакта.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 63: Тревога как разрыв</strong><br>
+                Тревога — нарушенный диалог с будущим. Пустота, угроза, хаос. Лечение — реконнект.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 64: Сеть Индры</strong><br>
+                Каждый узел отражает все остальные. Изменение здесь — рябь по всей сети.</p>
+
+                <p style="margin-top: 1rem;"><strong>Глава 65: Другие в сети</strong><br>
+                Люди — не точки, а траектории. Конфликты часто с версиями. Контакт с умершими возможен.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Главная мысль части:</strong><br>
+                Время — не стрела, а сеть. Вы связаны со всеми версиями себя и других. Исцеление — восстановление связей. Изменение — рябь по всей структуре. Вы не изолированы — вы часть бесконечной сети отражений.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="homework-box">
+                <h3>Финальное задание части VIII</h3>
+                <ol>
+                    <li><strong>Карта отношений как сеть:</strong> Выберите одни значимые отношения. Нарисуйте все версии этого человека и ваши связи с каждой. Где напряжение? Где любовь? Где разрыв?</li>
+                    <li><strong>Одна практика контакта:</strong> Выберите 65.2, 65.3 или 65.4 — ту, которая резонирует. Выполните полностью.</li>
+                    <li><strong>Интеграция части:</strong> Как понимание сети меняет ваш взгляд на время, на отношения, на себя?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Эпилог: Дверь. Четыре последние главы. Лестница, которой не было. Некуда идти. Возвращение в мир. И что остаётся, когда карты отложены.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="64.html">← Глава 64: Сеть Индры</a>
+        <a href="66.html">Глава 66: Лестница, которой не было →</a>
+    </footer>
+</body>
+</html>

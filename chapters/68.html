@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 68: Возвращение — Фокальная психология</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #7c5cff;
+            --accent-secondary: #ff6b9d;
+            --accent-tertiary: #00d4aa;
+            --accent-gold: #ffd700;
+            --accent-door: #e8b923;
+            --gradient-door: linear-gradient(135deg, #ffd700 0%, #ff6b9d 50%, #e8b923 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.8; font-size: 18px; }
+        .chapter-header { padding: 8rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%); }
+        .chapter-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .chapter-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .chapter-nav a:hover { color: var(--accent-door); }
+        .part-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-door); margin-bottom: 1rem; }
+        .chapter-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: var(--gradient-door); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.4; line-height: 1; }
+        .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; margin-top: -1rem; margin-bottom: 1rem; }
+        .chapter-subtitle { color: var(--text-secondary); font-size: 1.2rem; font-style: italic; }
+        .chapter-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+        .section { margin-bottom: 4rem; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent-door); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text-primary); margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        strong { color: var(--text-primary); }
+        .story-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-gold); border-radius: 0 15px 15px 0; padding: 2rem; margin-bottom: 2rem; font-style: italic; }
+        .story-box p { color: var(--text-primary); }
+        .joke-box { background: rgba(255, 107, 157, 0.05); border: 1px solid rgba(255, 107, 157, 0.2); border-radius: 15px; padding: 1.5rem; margin: 2rem 0; }
+        .joke-box p { color: var(--text-primary); margin-bottom: 0.5rem; }
+        .joke-box p:last-child { margin-bottom: 0; }
+        ul { list-style: none; padding-left: 0; }
+        ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.75rem; color: var(--text-secondary); }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent-door); }
+        .key-point { background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .key-point strong { color: var(--accent-door); }
+        blockquote { border-left: 3px solid var(--accent-door); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+        .integration-box { background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%); border: 1px solid var(--glass-border); border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .chapter-footer { display: flex; justify-content: space-between; padding: 2rem; border-top: 1px solid var(--glass-border); max-width: 800px; margin: 0 auto; }
+        .chapter-footer a { color: var(--accent-door); text-decoration: none; transition: all 0.3s; }
+        .chapter-footer a:hover { color: var(--accent-secondary); }
+        @media (max-width: 768px) { .chapter-header { padding: 6rem 1.5rem 3rem; } .chapter-content { padding: 2rem 1.5rem 4rem; } .chapter-number { font-size: 4rem; } body { font-size: 16px; } }
+    </style>
+</head>
+<body>
+    <nav class="chapter-nav">
+        <a href="67.html">← Глава 67</a>
+        <span style="color: var(--text-muted);">Глава 68</span>
+        <a href="69.html">Глава 69 →</a>
+    </nav>
+
+    <header class="chapter-header">
+        <div class="part-label">Эпилог: Дверь</div>
+        <div class="chapter-number">68</div>
+        <h1 class="chapter-title">Возвращение</h1>
+        <p class="chapter-subtitle">Играть в игру, зная что это игра</p>
+    </header>
+
+    <main class="chapter-content">
+
+        <div class="story-box">
+            <p>Дзенская пословица: до просветления — руби дрова, носи воду. После просветления — руби дрова, носи воду.</p>
+            <p style="margin-top: 1rem;">Ничего не меняется. И всё меняется.</p>
+            <p style="margin-top: 1rem;">Ты возвращаешься туда, откуда никуда не уходил. Но теперь — с открытыми глазами.</p>
+        </div>
+
+        <section class="section">
+            <h2>Почему нужно вернуться</h2>
+
+            <p>В предыдущей главе мы говорили: некуда идти. Нет того, кто мог бы войти за дверь.</p>
+
+            <p>Но это не конец истории. Это начало новой.</p>
+
+            <p>Просветление — не уход. Просветление — возвращение.</p>
+
+            <ul>
+                <li>Не уход от мира — но новое качество присутствия в мире</li>
+                <li>Не отказ от формы — но понимание природы формы</li>
+                <li>Не исчезновение игры — но понимание что это игра</li>
+            </ul>
+
+            <p>Бодхисаттва в буддизме: тот, кто мог бы уйти в нирвану, но остаётся ради других. Не потому что "должен" — потому что нет разницы между уходом и пребыванием.</p>
+
+            <blockquote>Нирвана и сансара — одно. Просветление не где-то "там". Оно здесь — в этом теле, в этой жизни, в этом дне.</blockquote>
+        </section>
+
+        <section class="section">
+            <h2>Светская тантра</h2>
+
+            <p>В Главе 0 мы упоминали: не "мир — иллюзия, беги", а "мир — игра, играй честно".</p>
+
+            <p>Это путь светской тантры:</p>
+
+            <ul>
+                <li><strong>Мир — не враг.</strong> Форма — не препятствие. Тело — не тюрьма.</li>
+                <li><strong>Мир — игровое поле.</strong> Для чего? Для того, чтобы Бесконечное могло играть само с собой.</li>
+                <li><strong>Играй честно.</strong> Не притворяйся что не играешь. Не делай вид что не знаешь правил.</li>
+                <li><strong>В разгаре игры</strong> — обнаружишь, что игрок и поле — одно.</li>
+            </ul>
+
+            <p>Возвращение — это не "спуск обратно". Это понимание, что верха и низа не было. Была только игра, в которой ты делал вид, что карабкаешься.</p>
+        </section>
+
+        <div class="joke-box">
+            <p>— Что делает просветлённый мастер весь день?</p>
+            <p>— Пьёт чай. Разговаривает с учениками. Стирает носки.</p>
+            <p>— И всё?</p>
+            <p>— А что ещё?</p>
+            <p>— Ну... медитирует? Левитирует? Творит чудеса?</p>
+            <p>— Стирка носков — чудо. Если видишь.</p>
+        </div>
+
+        <section class="section">
+            <h2>Новое качество обыденного</h2>
+
+            <p>После возвращения обычная жизнь не становится "выше" или "особенней". Она остаётся обычной.</p>
+
+            <p>Но меняется качество присутствия в ней:</p>
+
+            <h3>Раньше:</h3>
+            <ul>
+                <li>Мыть посуду — рутина, которую нужно перетерпеть</li>
+                <li>Разговор с соседом — социальная обязанность</li>
+                <li>Рабочий день — способ заработать деньги</li>
+                <li>Тело — машина, которая должна работать</li>
+            </ul>
+
+            <h3>После:</h3>
+            <ul>
+                <li>Мыть посуду — мыть посуду. Вода, руки, тарелка. Присутствие.</li>
+                <li>Разговор с соседом — встреча двух проявлений одного сознания</li>
+                <li>Рабочий день — форма игры. Серьёзная, с последствиями, но игра.</li>
+                <li>Тело — инструмент присутствия. Чудо, которое дышит.</li>
+            </ul>
+
+            <div class="key-point">
+                <p><strong>Разница:</strong> Не в том, ЧТО делаешь. В том, КАК. С каким качеством внимания. С каким пониманием контекста.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Сохранение игры</h2>
+
+            <p>Важно: понимание "это игра" не отменяет правил игры.</p>
+
+            <p>Если вы знаете, что шахматы — игра, это не значит, что нужно смешать фигуры и уйти. Можно продолжать играть. Просто — без страдания от проигрыша и без привязанности к выигрышу.</p>
+
+            <ul>
+                <li><strong>Отношения</strong> — остаются важными. Не потому что "должны", а потому что это способ игры</li>
+                <li><strong>Работа</strong> — остаётся серьёзной. Не потому что это "настоящее", а потому что игра стоит того чтобы играть хорошо</li>
+                <li><strong>Тело</strong> — остаётся ценным. Не потому что это "вы", а потому что это инструмент присутствия</li>
+                <li><strong>Эмоции</strong> — остаются реальными. Не потому что они "настоящие", а потому что это краски игры</li>
+            </ul>
+
+            <blockquote>Ребёнок играет серьёзно. Он знает, что это игра — и всё равно плачет когда проигрывает. Это и есть честная игра.</blockquote>
+        </section>
+
+        <section class="section">
+            <h2>Бог играет сам с собой</h2>
+
+            <p>В Главе 0 мы говорили: тотальное одиночество раскалывается на множество ради разговора.</p>
+
+            <p>Возвращение — это осознание: вы — часть этого разговора. Не отдельный голос — но и не молчание. Вы — способ Вселенной смотреть на себя.</p>
+
+            <p>И когда вы моете посуду — Вселенная моет посуду. Когда вы смеётесь — Вселенная смеётся. Когда вы страдаете — Вселенная переживает страдание.</p>
+
+            <p>Это не делает страдание менее реальным. Это делает его — частью большей истории.</p>
+
+            <div class="key-point">
+                <p><strong>Светская тантра в действии:</strong> Играть в игру всерьёз. Зная что это игра. Не теряя ни серьёзности, ни лёгкости.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Как выглядит возвращение</h2>
+
+            <p>Снаружи — никак особенно.</p>
+
+            <p>Человек после "возвращения" выглядит обычно. Ходит на работу. Платит налоги. Ругается в пробках. Радуется хорошим новостям.</p>
+
+            <p>Отличие — внутри:</p>
+
+            <ul>
+                <li>Меньше борьбы с тем, что есть</li>
+                <li>Больше принятия момента как он есть</li>
+                <li>Меньше страха потери (потому что нечего терять)</li>
+                <li>Больше лёгкости в трудном</li>
+                <li>Меньше привязанности к результату</li>
+                <li>Больше присутствия в процессе</li>
+            </ul>
+
+            <p>Это не сверхчеловек. Это обычный человек, который перестал бороться с тем, что он обычный.</p>
+        </section>
+
+        <section class="section">
+            <div class="integration-box">
+                <h3>Интеграция</h3>
+                <p>Возвращение — не шаг назад. Это завершение круга.</p>
+                <p style="margin-top: 1rem;">Вы начали с обычной жизни. Прошли через техники, модели, практики. Поднялись по ступеням. Обнаружили, что ступеней не было. И вернулись — в ту же обычную жизнь.</p>
+                <p style="margin-top: 1rem;">Но теперь вы знаете: обычная жизнь — это всё что есть. И это достаточно. Более чем достаточно.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Что дальше</h2>
+            <p>Глава 69: Что остаётся. Последняя глава. Техники остаются инструментами. Карты остаются картами. Вы — не инструменты и не карты. И это не финал.</p>
+        </section>
+
+    </main>
+
+    <footer class="chapter-footer">
+        <a href="67.html">← Глава 67: Некуда идти</a>
+        <a href="69.html">Глава 69: Что остаётся →</a>
+    </footer>
+</body>
+</html>
