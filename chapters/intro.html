@@ -225,7 +225,7 @@
     <nav class="chapter-nav">
         <a href="../index.html">← Содержание</a>
         <span style="color: var(--text-muted);">Введение</span>
-        <a href="01.html">Глава 1 →</a>
+        <a href="00-1.html">Глава 0 →</a>
     </nav>
 
     <header class="chapter-header">
@@ -285,14 +285,19 @@
         <section class="section">
             <h2 class="section-title">Структура книги</h2>
 
-            <p>Пятьдесят глав, пять частей:</p>
+            <p>69 глав, девять разделов:</p>
 
             <ul>
+                <li><strong>Глава 0. Карта</strong> — философский фундамент: градиент, не слои; мышление как инструмент</li>
                 <li><strong>Часть I. Природа внимания</strong> — что такое внимание, откуда оно смотрит, как им управлять</li>
                 <li><strong>Часть II. Механика выбора</strong> — как мы принимаем решения, что такое «суперпозиция» и «коллапс»</li>
                 <li><strong>Часть III. Топография сознания</strong> — карта внутренних территорий: 5 слоёв + Колыбель</li>
                 <li><strong>Часть IV. Инструментарий</strong> — конкретные техники для работы с собой</li>
                 <li><strong>Часть V. Мастерство и границы</strong> — этика, ограничения метода, мудрость применения</li>
+                <li><strong>Часть VI. Резонанс</strong> — внимание как двусторонний мост, обратная связь с миром</li>
+                <li><strong>Часть VII. Поток</strong> — растворение границ, градиент проживания</li>
+                <li><strong>Часть VIII. Сеть</strong> — время как сеть, контакт с собой во времени, Сеть Индры</li>
+                <li><strong>Эпилог. Дверь</strong> — лестница, которой не было; возвращение</li>
             </ul>
 
             <p>В каждой главе: история → теория → практика. Истории — чтобы почувствовать. Теория — чтобы понять. Практика — чтобы проверить.</p>
@@ -315,7 +320,7 @@
         <section class="section">
             <h2 class="section-title">Готовы?</h2>
 
-            <p>Тогда — вперёд. Глава 1 ждёт.</p>
+            <p>Тогда — вперёд. Глава 0 ждёт — философский фундамент перед путешествием.</p>
 
             <p>И помните: внимание — это всё, что у вас есть. Куда оно направлено — там происходит ваша жизнь.</p>
 
@@ -325,7 +330,40 @@
 
     <footer class="chapter-footer">
         <a href="../index.html">← Содержание</a>
-        <a href="01.html">Глава 1 →</a>
+        <a href="00-1.html">Глава 0 →</a>
     </footer>
+
+    <a href="../index.html#parts" class="floating-menu-btn" title="Содержание">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+    </a>
+    <style>
+        .floating-menu-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #7c5cff 0%, #ff6b9d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(124, 92, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        .floating-menu-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(124, 92, 255, 0.5);
+        }
+        .floating-menu-btn svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+    </style>
 </body>
 </html>
